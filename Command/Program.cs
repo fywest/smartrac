@@ -24,8 +24,9 @@ namespace Command
             bool uidMirrorFromIC = false;
             string keySource = "File";
             string key = null;
-            byte byte_x = 0x00000001;
+            //byte byte_x = 0x00000001;
 
+            Console.WriteLine("Test command input parameter:".ToUpper());
             Console.WriteLine($"str_url: {url}\n" +
                 $"secureMode: {secureMode}\n" +
                 $"icType: {icType}\n" +
@@ -34,8 +35,8 @@ namespace Command
                 $"uidMirrorFromIC: {uidMirrorFromIC}\n" +
                 $"keySource: {keySource}\n" +
                 $"key: {key}\n");
-            Console.WriteLine(byte_x);
-            Console.WriteLine("0x{0:x}", byte_x);
+           // Console.WriteLine(byte_x);
+            //Console.WriteLine("0x{0:x}", byte_x);
 
         }
 
@@ -143,21 +144,29 @@ namespace Command
                 "0E00B02402280104BD3FCFFF(CRC:CRC:0:-1)|0600B000D572|30|0|0|1|config(0:0)|1|rx(0:0)	# Dynamic lock page 16-23"
             };
 
-            string[] parts = lines[5].Split('|','#');
-            int i = 0;
-            foreach(var s in parts)
+            foreach(var command in lines)
             {
-                i++;
-                if(i==10)
+
+                string[] parts = command.Split('|', '#');
+                int i = 0;
+                Console.WriteLine("test command:".ToUpper());
+                foreach (var s in parts)
                 {
-                    Console.WriteLine($"Description: <{s}>");
+                    i++;
+                    if (i == 10)
+                    {
+                        Console.WriteLine($"Description: <{s}>");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Part[{i}]: <{s}>");
+                    }
+
                 }
-                else
-                {
-                    Console.WriteLine($"Part[{i}]: <{s}>");
-                }
-                
+                Console.WriteLine();
+
             }
+
 
         }
         static void Main(string[] args)
