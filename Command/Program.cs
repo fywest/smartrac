@@ -169,13 +169,178 @@ namespace Command
 
 
         }
+
+        //public static byte[] String2ByteArray(string str)
+        //{
+        //    char[] chars = str.ToArray();
+        //    byte[] bytes = new byte[chars.Length * 2];
+
+        //    for (int i = 0; i < chars.Length; i++)
+        //        Array.Copy(BitConverter.GetBytes(chars[i]), 0, bytes, i * 2, 2);
+
+        //    return bytes;
+        //}
+
+        //public static string ByteArray2String(byte[] bytes)
+        //{
+        //    char[] chars = new char[bytes.Length / 2];
+
+        //    for (int i = 0; i < chars.Length; i++)
+        //        chars[i] = BitConverter.ToChar(bytes, i * 2);
+
+        //    return new string(chars);
+        //}
+
+        static void strByte()
+        {
+            string str = "hello";
+            byte[] data_byte;
+            //data_byte=String2ByteArray(str);
+            //Console.WriteLine(data_byte[0].ToString());
+            byte[] data_byte_unicode = Encoding.Unicode.GetBytes(str);
+            int length_data_byte_unicode = data_byte_unicode.Length;
+            byte[] data_byte_utf8 = Encoding.UTF8.GetBytes(str);
+            int length_data_byte_utf8 = data_byte_utf8.Length;
+            byte[] data_byte_utf32 = Encoding.UTF32.GetBytes(str);
+            int length_data_byte_utf32 = data_byte_utf32.Length;
+            //Console.WriteLine("binary : {0}", data_byte[0]);
+
+            string str_from_byte_utf8 = Encoding.UTF8.GetString(data_byte_utf8);
+            Console.WriteLine($"\n{str_from_byte_utf8}");
+            str_from_byte_utf8 = Encoding.Unicode.GetString(data_byte_utf8);
+            Console.WriteLine($"{str_from_byte_utf8}");
+            str_from_byte_utf8 = Encoding.UTF32.GetString(data_byte_utf8);
+            Console.WriteLine($"{str_from_byte_utf8}");
+
+            string str_from_byte_unicode = Encoding.UTF8.GetString(data_byte_unicode);
+            Console.WriteLine($"\n{str_from_byte_unicode}");
+            str_from_byte_unicode = Encoding.Unicode.GetString(data_byte_unicode);
+            Console.WriteLine($"{str_from_byte_unicode}");
+            str_from_byte_unicode = Encoding.UTF32.GetString(data_byte_unicode);
+            Console.WriteLine($"{str_from_byte_unicode}");
+
+            string str_from_byte_utf32 = Encoding.UTF8.GetString(data_byte_utf32);
+            Console.WriteLine($"\n{str_from_byte_utf32}");
+            str_from_byte_utf32 = Encoding.Unicode.GetString(data_byte_utf32);
+            Console.WriteLine($"{str_from_byte_utf32}");
+            str_from_byte_utf32 = Encoding.UTF32.GetString(data_byte_utf32);
+            Console.WriteLine($"{str_from_byte_utf32}");
+
+
+            //Console.WriteLine("hex : 0x{0:x}", data_byte[0]);
+
+            Console.WriteLine($" \nbyte.max:{byte.MaxValue}  char.max:{(int)char.MaxValue}");
+
+            Console.WriteLine($"{System.Text.Encoding.Default.ToString()}");
+
+        }
+
+        static void byteCharBitwise()
+        {
+
+            byte[] byte_1 = { 0x31, 0x32, 0x33, 0x34 };//1,2,3,4
+            char[] chars_1 = new char[4];
+            chars_1[0] = (char)0b00110000;//(char)0x0030;//'0';
+            chars_1[1] = '1';
+            chars_1[2] = '2';
+            chars_1[3] = '3';
+            byte byte_2 = (byte)chars_1[3];
+            Console.WriteLine($"byte maxvalue:{byte.MaxValue} \n" +
+                $"char maxvalue:{(int)char.MaxValue} \n" +
+                $"chars_1 length:{chars_1.Length} \n" +
+                $"utf8 byte count:{Encoding.UTF8.GetByteCount(chars_1) } \n" +
+                $"size of char:{sizeof(char)} \n" +
+                $"size of byte:{sizeof(byte)}");
+
+            Console.WriteLine($"{Convert.ToString(byte_2, 2)}");
+            Console.WriteLine("{0}", Convert.ToString(byte_2, 2).PadLeft(8, '0'));
+
+            Console.WriteLine($"{Encoding.ASCII.GetString(byte_1)}");
+
+            byte byte_3 = 0b0101_0101;
+            byte byte_4 = 0b1010_1010;
+            byte byte_and = (byte)(byte_3 & byte_4);
+            byte byte_or = (byte)(byte_3 | byte_4);
+            byte byte_not = (byte)(byte_3 ^ byte_4);
+
+            Console.WriteLine("{0}", Convert.ToString(byte_and, 2).PadLeft(8, '0'));
+            Console.WriteLine("{0}", Convert.ToString(byte_or, 2).PadLeft(8, '0'));
+            Console.WriteLine("{0}", Convert.ToString(byte_not, 2).PadLeft(8, '0'));
+
+        }
+
+        static void encode_utf8_MS()
+        {
+            // Create a character array.
+            string gkNumber = Char.ConvertFromUtf32(0x10154);
+            char[] chars = new char[] { 'z', 'a', '\u0306', '\u01FD', '\u03B2',
+                                  gkNumber[0], gkNumber[1] };
+
+            // Get UTF-8 and UTF-16 encoders.
+            Encoding utf8 = Encoding.UTF8;
+            Encoding utf16 = Encoding.Unicode;
+
+            // Display the original characters' code units.
+            Console.WriteLine("Original UTF-16 code units:");
+            byte[] utf16Bytes = utf16.GetBytes(chars);
+            foreach (var utf16Byte in utf16Bytes)
+                Console.Write("{0:X2} ", utf16Byte);
+            Console.WriteLine();
+
+            // Display the number of bytes required to encode the array.
+            int reqBytes = utf8.GetByteCount(chars);
+            Console.WriteLine("\nExact number of bytes required: {0}",
+                          reqBytes);
+
+            // Display the maximum byte count.
+            int maxBytes = utf8.GetMaxByteCount(chars.Length);
+            Console.WriteLine("Maximum number of bytes required: {0}\n",
+                              maxBytes);
+
+            // Encode the array of chars.
+            byte[] utf8Bytes = utf8.GetBytes(chars);
+
+            // Display all the UTF-8-encoded bytes.
+            Console.WriteLine("UTF-8-encoded code units:");
+            foreach (var utf8Byte in utf8Bytes)
+                Console.Write("{0:X2} ", utf8Byte);
+            Console.WriteLine();
+        }
+
+        static void byte_unicode_ascii()
+        {
+            string unicodeString = "This string contains the unicode character Pi (\u03a0)";
+
+            // Create two different encodings.
+            Encoding ascii = Encoding.ASCII;
+            Encoding unicode = Encoding.Unicode;
+
+            // Convert the string into a byte array.
+            byte[] unicodeBytes = unicode.GetBytes(unicodeString);
+
+            // Perform the conversion from one encoding to the other.
+            byte[] asciiBytes = Encoding.Convert(unicode, ascii, unicodeBytes);
+
+            // Convert the new byte[] into a char[] and then into a string.
+            char[] asciiChars = new char[ascii.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
+            ascii.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
+            string asciiString = new string(asciiChars);
+
+            // Display the strings created before and after the conversion.
+            Console.WriteLine("Original string: {0}", unicodeString);
+            Console.WriteLine("Ascii converted string: {0}", asciiString);
+        }
         static void Main(string[] args)
         {
             //test();// byte ,hex ,ascii
-            write_url();
-            testComand();
+            //write_url();
+            //testComand();
+            //strByte();//byte char string
+            //byteCharBitwise();//byte and or not byte char
+            //encode_utf8_MS();//Encoding.UTF8 Property
+            byte_unicode_ascii();//encoding unicode ascii
 
-
+            Console.ReadKey();
         }
     }
 }
