@@ -155,6 +155,7 @@ namespace DataConverter
                         File.Delete(outputFile[0]);
                     }
                 }
+                //only for lowcase in file ext name
                 refFile = filename.Substring(0, filename.LastIndexOf(".csv")) + "_REF.csv";
 
                 //refFile = "REF.csv";
