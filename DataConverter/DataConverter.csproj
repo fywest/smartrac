@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CRC16.cs" />
     <Compile Include="FEIG.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="NDEF.cs" />
     <Compile Include="Ntag.cs" />
     <Compile Include="Converter.cs" />

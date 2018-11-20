@@ -90,22 +90,22 @@ namespace DataConverter
             Modified = false;
         }
 
-        private bool ReadIniFile(string filename)
-        {
-            try
-            {
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format("Error reading from {0}.\r\n\r\n{1}", filename, ex.Message));
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
-            return false;
-        }
+        //private bool ReadIniFile(string filename)
+        //{
+        //    try
+        //    {
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(String.Format("Error reading from {0}.\r\n\r\n{1}", filename, ex.Message));
+        //    }
+        //    finally
+        //    {
+        //        Cursor = Cursors.Default;
+        //    }
+        //    return false;
+        //}
 
         private bool ReadFile(string filename)
         {
