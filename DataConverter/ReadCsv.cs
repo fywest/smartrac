@@ -95,7 +95,7 @@ namespace DataConverter
 
                 using (var reader = new CsvFileReader(filename))
                 {
-                    if (SWTEncoding.in_rows < 0) // dynamic encoding from csv
+                    if (InitFile.in_rows < 0) // dynamic encoding from csv
                     {
                         while (reader.ReadRow(columns))//[0] = "https://parley.mtag.io/nn6r8u"
                         {
@@ -128,7 +128,7 @@ namespace DataConverter
 
                                     cnt++;
                                     row_current = 1;
-                                    SWTEncoding.out_index = 0;
+                                    InitFile.out_index = 0;
                                 }
 
                                 if (!SWTEncoding.cParserFirstLineParsed)
@@ -177,7 +177,7 @@ namespace DataConverter
 
                                     cnt++;
                                     row_current = 1;
-                                    SWTEncoding.out_index = 0;
+                                    InitFile.out_index = 0;
                                 }
 
 

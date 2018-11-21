@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using CsvFile;
+//using CsvFile;
 
 namespace DataConverter
 {
@@ -34,16 +34,17 @@ namespace DataConverter
         public static bool Modified;
 
         public static InitFile Ini;
+        public static ReadCsv readCsv;
+
         public static SWTEncoding swt;
 
-        public static ReadCsv csvFile;
         
 
         public Form1()
         {
             InitializeComponent();
             Ini = new InitFile(InitFile.IniPath);
-            csvFile = new ReadCsv();
+            readCsv = new ReadCsv();
             swt = new SWTEncoding();
            
         }
@@ -51,7 +52,7 @@ namespace DataConverter
         private void Form1_Load(object sender, EventArgs e)
         {
             //InitializeGrid();
-            csvFile.ClearFile();
+            readCsv.ClearFile();
         }
 
         private void ReadConfiguration()
@@ -116,9 +117,9 @@ namespace DataConverter
             {
                 //SWTEncoding.ParseURL();
                 
-                csvFile.ReadFile(FileName);
-                TB_staticURL.Text = csvFile.str_staticURL;
-                TB_commands.Text = csvFile.str_commands;
+                readCsv.ReadFile(FileName);
+                TB_staticURL.Text = readCsv.str_staticURL;
+                TB_commands.Text = readCsv.str_commands;
             }
             else if (SWTEncoding.cUrlType == SWTEncoding.UrlType.StaticURL)
             {
@@ -130,7 +131,7 @@ namespace DataConverter
         private void RandomGen_Click(object sender, EventArgs e)
         {
             ReadConfiguration();
-            csvFile.ReadFile("SLIX2_destroy_password.csv");
+            readCsv.ReadFile("SLIX2_destroy_password.csv");
         }
     }
 }

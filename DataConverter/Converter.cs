@@ -15,18 +15,8 @@ namespace DataConverter
 {
     public class SWTEncoding 
     {
-        public static int in_columns;
-        public static int in_rows;
-        public static string in_reader;
-        public static int in_start_row;
-        public static int in_start_column;
-        public static List<string> in_data;
-        public static List<string> in_types;
-        public static List<string> in_padding;
-        public static List<string> converted_in_data;
-        public static List<string> converted_out_data;
-        public static List<string> ref_data;
-
+        //li iniFile 1
+ 
 
         /* SWT */
         public static bool cSwtRecipeCreation;
@@ -60,14 +50,8 @@ namespace DataConverter
         public static bool cPasswordRandom;
         public static bool cPackRandom;
 
-        public static long out_index=0;
-        public static string out_state;
-        public static string out_batch_id;
-        public static string out_timestamp;
-        public static List<int>[] out_data_index;
-        public static int out_columns = 0;
+        //iniFile 7
 
-        public static int out_op = 0;
 
         public static bool b_uid_mirror, b_cnt_mirror, b_lock_control;
 
@@ -80,15 +64,8 @@ namespace DataConverter
 
         public SWTEncoding()
         {
+            // iniFile 2
             cParserFirstLineParsed = false;
-            in_data  = new List<string>();
-            in_types = new List<string>();
-            in_padding = new List<string>();
-            converted_in_data = new List<string>();
-            ref_data = new List<string>();
-            ProcessInput();
-            ProcessOutput();
-            CreateFormular();
         }
 
         public static string StringToHex(string hexstring)
@@ -152,93 +129,36 @@ namespace DataConverter
 
         public static string WriteHeader()
         {
+            
             string ret = "Index;State;Batch-ID;TimeStamp";
-            for (int i = 0; i < out_columns; i++ )
+            for (int i = 0; i < InitFile.out_columns; i++ )
             {
                 ret += ";Data" + (i + 1).ToString() ;
             }
-            out_index = 0;
+            InitFile.out_index = 0;
             return ret;
         }
 
-        public static void ProcessInput()
-        {
-            string in_data_temp = InitFile.ReadValue("Input", "Names");
-            in_data = in_data_temp.Split(',', ';').ToList();
-            string in_types_temp = InitFile.ReadValue("Input", "Types");
-            in_types = in_types_temp.Split(',', ';').ToList();
-            string in_padding_temp = InitFile.ReadValue("Input", "Padding");
-            in_padding = in_padding_temp.Split(',', ';').ToList();
-            in_columns = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_columns"));
-            in_rows = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_rows"));
-            in_start_row = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_row"));
-            in_start_column = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_column"));
-            in_reader = InitFile.ReadValue("Input", "Reader");
-        }
 
-        public static void ProcessOutput()
-        {
-            out_state = InitFile.ReadValue("Output", "State");
-            out_batch_id = InitFile.ReadValue("Output", "BatchID");
-            out_timestamp = InitFile.ReadValue("Output", "Timestamp");
-
-            string dat = "Data";
-            int num = 1;
-            string da = dat+num.ToString();
-            while(InitFile.ReadValue("Output",da) != "")
-            {
-                out_columns++;
-                num++;
-                da = dat + num.ToString();
-            }
-
-            out_data_index = new List<int>[out_columns];
-            for (int i = 0; i < out_columns; i++)
-            {
-                string tmp = "Data" + System.Convert.ToString(i+1);
-                string tmp2 = InitFile.ReadValue("Output", tmp);
-                out_data_index[i] = new List<int>();
-                //if (tmp2.IndexOf('+') > 0)
-                {
-                    out_op = 1;
-                    string[] tmp3 = tmp2.Split('+');
-                    for (int j = 0; j < tmp3.Length; j++)
-                    {
-                        out_data_index[i].Add(GetInDataIndex(tmp3[j]));
-                    }
-                }
-                /*else
-                {
-                    out_data_index[i].Add(GetInDataIndex(tmp2[j]));
-                }*/
-            }
-                
-        }
-
-        // Find index of out_data[] in in_data[] 
-        public static int GetInDataIndex(string out_str)
-        {
-            for (int i = 0; i < in_data.Count; i++)
-            {
-                if (out_str == in_data[i]) return i;
-            }
-            return -1;
-        }
-
-        // Find index of out_data[] in in_data[]
-        public static void CreateFormular()
-        {
+        // iniFile 3
 
 
-        }
+        // iniFile 4
+       
+
+        // iniFile 5
         
-        static void ConvertFromDecimalToHex(List<string> columns)
-        {
-            for (int i = 0; i < columns.Count; i++)
-            {
-                converted_in_data.Add(System.Convert.ToInt16(columns[i]).ToString("X2"));
-            }
-        }
+        // iniFile 6
+
+        
+
+        //static void ConvertFromDecimalToHex(List<string> columns)
+        //{
+        //    for (int i = 0; i < columns.Count; i++)
+        //    {
+        //        converted_in_data.Add(System.Convert.ToInt16(columns[i]).ToString("X2"));
+        //    }
+        //}
 
         public static string PrepareHexData(string hex, bool padding)
         {
@@ -397,76 +317,76 @@ namespace DataConverter
             pass = GetRandomHexNumber(8);
             column = GetRecordType(column);
 
-            for (int i = 0; i < in_columns; i++)
+            for (int i = 0; i < InitFile.in_columns; i++)
             {
-                if (in_types[i] == "d")
+                if (InitFile.in_types[i] == "d")
                 {
                     temp = System.Convert.ToInt32(column).ToString("X2");
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "s")
+                else if (InitFile.in_types[i] == "s")
                 {
                     temp = "0336D101325504" + StringToHex(column) + StringToHex("?m=");
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "h")
+                else if (InitFile.in_types[i] == "h")
                 {
-                    converted_in_data.Add(column);
+                    InitFile.converted_in_data.Add(column);
                 }
-                else if (in_types[i] == "b49")
+                else if (InitFile.in_types[i] == "b49")
                 {
-                    converted_in_data.Add("abC" + GetRandom49BNumber(9));
+                    InitFile.converted_in_data.Add("abC" + GetRandom49BNumber(9));
                 }
-                else if (in_types[i] == "url")
+                else if (InitFile.in_types[i] == "url")
                 {
                     //temp = "0334D101305503" + StringToHex(columns[i].Substring(columns.IndexOf("//"))) + "FE";
                     temp = "031ED1011A5504" + StringToHex(column) + "FE";
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
 
-                    converted_in_data.Add(hmac);
+                    InitFile.converted_in_data.Add(hmac);
                     // h, password
-                    converted_in_data.Add(pass);
+                    InitFile.converted_in_data.Add(pass);
                     string cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);
                     string cmd2 = FEIG.SendWriteMultiplePagesHmacCommand();
                     // crc16, pack
                     crc = ComputeCRC16(StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
                     temp = LittleEndian(crc).ToString("X4");
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                     // h, authen
-                    converted_in_data.Add(pass);
+                    InitFile.converted_in_data.Add(pass);
 
-                    ref_data.Add(column);
-                    ref_data.Add(hmac);
-                    ref_data.Add(pass);
-                    ref_data.Add(crc_s);
+                    InitFile.ref_data.Add(column);
+                    InitFile.ref_data.Add(hmac);
+                    InitFile.ref_data.Add(pass);
+                    InitFile.ref_data.Add(crc_s);
                 }
-                else if (in_types[i] == "url_fix2")
+                else if (InitFile.in_types[i] == "url_fix2")
                 {
                     temp = StringToHex(column.Substring(column.IndexOf("//"))) + StringToHex("/") + StringToHex(GetRandomHexNumber(4)) + "FE";
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "url_uid_counter")
+                else if (InitFile.in_types[i] == "url_uid_counter")
                 {
                     temp = StringToHex(column) + StringToHex("/") + AddZeroPadding(42) + "FE";
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "url_uid_counter_fix2")
+                else if (InitFile.in_types[i] == "url_uid_counter_fix2")
                 {
                     temp = "0334D101305504" + StringToHex(column) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "crc16")
+                else if (InitFile.in_types[i] == "crc16")
                 {
                     temp = LittleEndian(ComputeCRC16(StringToByteArray(column))).ToString("X4");
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "md5")
+                else if (InitFile.in_types[i] == "md5")
                 {
                     temp = ComputeMD5(StringToByteArray(StringToHex(column)));
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                 }
-                else if (in_types[i] == "standard")
+                else if (InitFile.in_types[i] == "standard")
                 {
                     // url_uid_counter_fix2,h,h,crc16,h
                     // url
@@ -482,7 +402,7 @@ namespace DataConverter
                     ndef_h = PrepareNdefHeader(column);
                     temp = ndef_h + StringToHex(column);
 
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                     if (!SWTEncoding.cParserFirstLineParsed)
                     {
                         FEIG.cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);
@@ -493,7 +413,7 @@ namespace DataConverter
                     break;
                 }
                 // counter solution with 2B random suffix
-                else if (in_types[i] == "counter_solution")
+                else if (InitFile.in_types[i] == "counter_solution")
                 {
                     // url_uid_counter_fix2,h,h,crc16,h
                     // url
@@ -508,12 +428,12 @@ namespace DataConverter
                     //temp = "0103A00C34032DD101295504" + StringToHex(columns[i]) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
                     ndef_h = PrepareNdefHeader(column);
                     temp = ndef_h + StringToHex(column) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
-                    
-                    converted_in_data.Add(temp);
+
+                    InitFile.converted_in_data.Add(temp);
                     // h, hmac
-                    converted_in_data.Add(hmac);
+                    InitFile.converted_in_data.Add(hmac);
                     // h, password
-                    converted_in_data.Add(pass);
+                    InitFile.converted_in_data.Add(pass);
                     if (!SWTEncoding.cParserFirstLineParsed)
                     {
                         FEIG.cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);
@@ -525,17 +445,17 @@ namespace DataConverter
                     crc = ComputeCRC16(StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
                     temp = LittleEndian(crc).ToString("X4");
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                     // h, authen
-                    converted_in_data.Add(pass);
+                    InitFile.converted_in_data.Add(pass);
 
-                    ref_data.Add(column);
-                    ref_data.Add(hmac);
-                    ref_data.Add(pass);
-                    ref_data.Add(crc_s);
+                    InitFile.ref_data.Add(column);
+                    InitFile.ref_data.Add(hmac);
+                    InitFile.ref_data.Add(pass);
+                    InitFile.ref_data.Add(crc_s);
                      break;
                 }
-                else if (in_types[i] == "combo_normal")
+                else if (InitFile.in_types[i] == "combo_normal")
                 {
                     generate_ref = true;
                     // url_uid_counter_fix2,h,h,crc16,h
@@ -546,11 +466,11 @@ namespace DataConverter
                     ndef_h = PrepareNdefHeader(column);
                     temp = ndef_h + StringToHex(column) + "FE";
 
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                     // h, hmac
-                    converted_in_data.Add(hmac);
+                    InitFile.converted_in_data.Add(hmac);
                     // h, password
-                    converted_in_data.Add(pass);
+                    InitFile.converted_in_data.Add(pass);
 
                     if (!SWTEncoding.cParserFirstLineParsed)
                     {
@@ -561,30 +481,30 @@ namespace DataConverter
                     crc = ComputeCRC16(StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
                     temp = LittleEndian(crc).ToString("X4");
-                    converted_in_data.Add(temp);
+                    InitFile.converted_in_data.Add(temp);
                     // h, authen
-                    converted_in_data.Add(pass);
+                    InitFile.converted_in_data.Add(pass);
 
-                    ref_data.Add(column);
-                    ref_data.Add(hmac);
-                    ref_data.Add(pass);
-                    ref_data.Add(crc_s);
+                    InitFile.ref_data.Add(column);
+                    InitFile.ref_data.Add(hmac);
+                    InitFile.ref_data.Add(pass);
+                    InitFile.ref_data.Add(crc_s);
                     break;
                 }
-                else if (in_types[i] == "sic")
+                else if (InitFile.in_types[i] == "sic")
                 {
                     sic = GetRandomHexNumber(8);
                     //generate_ref = true;
-                    converted_in_data.Add(sic);
-                    
-                    ref_data.Add(sic);
+                    InitFile.converted_in_data.Add(sic);
+
+                    InitFile.ref_data.Add(sic);
                     break;
                 }
             }
             if (generate_ref == true)
             {
                 string out_ref;
-                out_ref = ref_data[0] + "," + ref_data[1] + "," + ref_data[2] + "," + ref_data[3];
+                out_ref = InitFile.ref_data[0] + "," + InitFile.ref_data[1] + "," + InitFile.ref_data[2] + "," + InitFile.ref_data[3];
 
                 if (!File.Exists(refFile))
                 {
@@ -602,13 +522,13 @@ namespace DataConverter
                     }
 
                 }
-                ref_data.Clear();
+                InitFile.ref_data.Clear();
 
                 
 
             }
             //ConvertFromDecimalToHex(columns);
-            return ProcessCMD(converted_in_data);
+            return ProcessCMD(InitFile.converted_in_data);
         }
 
         private static string b2s(byte inb)
@@ -635,20 +555,20 @@ namespace DataConverter
             string tmp = "";
             string cmd_data = "";
             //string str_out_index = out_index.ToString();
-            string str_out_status = out_state.ToString();
-            string str_out_batch_id = out_batch_id.ToString();
-            string str_out_timestamp = out_timestamp.ToString();
-            cmd_data = (++out_index).ToString() + ";" + out_state.ToString() + ";" + out_batch_id.ToString() + ";" + out_timestamp.ToString() + ";";
-            for (i = 0; i < out_columns; i++)
+            string str_out_status = InitFile.out_state.ToString();
+            string str_out_batch_id = InitFile.out_batch_id.ToString();
+            string str_out_timestamp = InitFile.out_timestamp.ToString();
+            cmd_data = (++InitFile.out_index).ToString() + ";" + InitFile.out_state.ToString() + ";" + InitFile.out_batch_id.ToString() + ";" + InitFile.out_timestamp.ToString() + ";";
+            for (i = 0; i < InitFile.out_columns; i++)
             {
-                for (j = 0; j < out_data_index[i].Count; j++)
+                for (j = 0; j < InitFile.out_data_index[i].Count; j++)
                 {
-                    tmp += columns[out_data_index[i][j]];
+                    tmp += columns[InitFile.out_data_index[i][j]];
                 }
-                if (in_padding[i] == "y") tmp = PrepareHexData(tmp, true);
+                if (InitFile.in_padding[i] == "y") tmp = PrepareHexData(tmp, true);
                 //converted_out_data.Add(tmp);
                 cmd_data += tmp;
-                if (i < out_columns - 1) cmd_data += ";";
+                if (i < InitFile.out_columns - 1) cmd_data += ";";
                 tmp = "";
 
             }
@@ -658,28 +578,28 @@ namespace DataConverter
                 FEIG.SendWriteMultiplePagesCommand(4, 4, converted_out_data[0]);
                 FEIG.hConverted = true;
             }*/
-            converted_in_data.Clear();
+            InitFile.converted_in_data.Clear();
             return cmd_data;//cmd_data	"1;0;;;
             //0CA00301D1340334045530016C7261706D2E79652E6761746E2F6F693872366E00002F750000000000000000000000000000000031000000FE364436;
             //B4F7F1F439DBEF8AC975A99F54603E0B;F7B7E17B;46B2;7BE1B7F7"
 
         }
         // hardcode
-        public static string PrepareCMD(List<string> columns)
-        {
+        //public static string PrepareCMD(List<string> columns)
+        //{
             
-            string str_out_index = out_index.ToString();
-            string str_out_status = out_state.ToString();
-            string str_out_batch_id = out_batch_id.ToString();
-            string str_out_timestamp = out_timestamp.ToString(); 
-            string data1 = columns[0] + columns[1] + columns[2] + columns[3] + columns[4] + columns[5] + ", ";
-            string data2 = columns[6] + columns[7] + columns[8] + columns[9] + columns[10] + columns[11];
-            out_index++;
-            return str_out_index + ", " + str_out_status + ", " + str_out_batch_id + ", " + str_out_timestamp + ", " + data1 + data2;
-        }
+        //    string str_out_index = out_index.ToString();
+        //    string str_out_status = out_state.ToString();
+        //    string str_out_batch_id = out_batch_id.ToString();
+        //    string str_out_timestamp = out_timestamp.ToString(); 
+        //    string data1 = columns[0] + columns[1] + columns[2] + columns[3] + columns[4] + columns[5] + ", ";
+        //    string data2 = columns[6] + columns[7] + columns[8] + columns[9] + columns[10] + columns[11];
+        //    out_index++;
+        //    return str_out_index + ", " + str_out_status + ", " + str_out_batch_id + ", " + str_out_timestamp + ", " + data1 + data2;
+        //}
 
-        public void HmacGenerator(object sender, EventArgs e)
-        {
+        //public void HmacGenerator(object sender, EventArgs e)
+        //{
             /*
             string hmac, pass, crc, all = "";
             int num = System.Convert.ToInt32(textBox4.Text);
@@ -704,7 +624,7 @@ namespace DataConverter
             SaveFile(all);
             label5.Text = "Done!";
             label5.ForeColor = Color.Green;*/
-        }
+        //}
     }
 
 
