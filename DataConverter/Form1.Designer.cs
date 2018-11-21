@@ -178,7 +178,6 @@
             this.CB_2B_suffix.TabIndex = 6;
             this.CB_2B_suffix.Text = "2B Fix2 suffix";
             this.CB_2B_suffix.UseVisualStyleBackColor = true;
-            this.CB_2B_suffix.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // CB_Counter_mirror
             // 

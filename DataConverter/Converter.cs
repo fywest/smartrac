@@ -659,7 +659,10 @@ namespace DataConverter
                 FEIG.hConverted = true;
             }*/
             converted_in_data.Clear();
-            return cmd_data;
+            return cmd_data;//cmd_data	"1;0;;;
+            //0CA00301D1340334045530016C7261706D2E79652E6761746E2F6F693872366E00002F750000000000000000000000000000000031000000FE364436;
+            //B4F7F1F439DBEF8AC975A99F54603E0B;F7B7E17B;46B2;7BE1B7F7"
+
         }
         // hardcode
         public static string PrepareCMD(List<string> columns)

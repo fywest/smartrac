@@ -109,11 +109,6 @@ namespace DataConverter
 
        
 
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void BT_Convert_Click(object sender, EventArgs e)
         {
             ReadConfiguration();

@@ -97,7 +97,7 @@ namespace DataConverter
                 {
                     if (SWTEncoding.in_rows < 0) // dynamic encoding from csv
                     {
-                        while (reader.ReadRow(columns))
+                        while (reader.ReadRow(columns))//[0] = "https://parley.mtag.io/nn6r8u"
                         {
                             //dataGridView1.Rows.Add(columns.ToArray());
                             // data converting here
@@ -106,7 +106,7 @@ namespace DataConverter
                             if (!File.Exists(outputFile[cnt]))
                             {
                                 // Create a file to write to. 
-                                using (StreamWriter sw = File.CreateText(outputFile[cnt]))
+                                using (StreamWriter sw = File.CreateText(outputFile[cnt]))//[0] = "20170123_SMT_mTAG_ID_10K_SWT__1-1__NotStarted.csv"
                                 {
                                     sw.WriteLine(SWTEncoding.WriteHeader());
                                 }
@@ -119,7 +119,7 @@ namespace DataConverter
                                 //{
 
 
-                                sw.WriteLine(SWTEncoding.Convert(columns[SWTEncoding.cColumnToParse], refFile));
+                                sw.WriteLine(SWTEncoding.Convert(columns[SWTEncoding.cColumnToParse], refFile));//refFile: = "20170123_SMT_mTAG_ID_10K_REF.csv"
                                 //}
                                 row_total++;
                                 row_current++;
@@ -137,10 +137,10 @@ namespace DataConverter
                                     {
                                         // parse first row here
                                         //TB_staticURL.Text = columns[SWTEncoding.cColumnToParse];
-                                        str_staticURL = columns[SWTEncoding.cColumnToParse];
+                                        str_staticURL = columns[SWTEncoding.cColumnToParse];//[0] = "https://parley.mtag.io/nn6r8u"
                                         SWTEncoding.cParserFirstLineParsed = true;
                                         //TB_commands.Text = FEIG.cmd1 + "\r\n" + FEIG.cmd2;
-                                        str_commands = FEIG.cmd1 + "\r\n" + FEIG.cmd2;
+                                        str_commands = FEIG.cmd1 + "\r\n" + FEIG.cmd2;//str_commands = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)\r\n6600B0240A161704(Data2)BD010007161100F400000590(Data3)0000(Data4)(CRC:CRC:0:-1)"
                                     }
                                     else continue;
                                 }
