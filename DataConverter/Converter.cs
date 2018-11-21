@@ -9,7 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
-using System.Security.Cryptography;
+//using System.Security.Cryptography;
+
 
 namespace DataConverter
 {
@@ -32,23 +33,23 @@ namespace DataConverter
         public static NDEF.NdefRecordID cRecordType;
 
         /* NDEF configuration */
-        public static bool cLockTLV;
-        public static bool cMirrorCounter;
-        public static bool cMirrorUID;
-        public static string cNdefTemplate;
+        //public static bool cLockTLV;
+        //public static bool cMirrorCounter;
+        //public static bool cMirrorUID;
+        //public static string cNdefTemplate;
 
         /* Memory configuration */
-        public static bool cPasswordProtection;
-        public static int cPasswordStartAddress;
-        public static int cMemoryLockStatus;
-        public static int cMemoryLockStartPage;
-        public static int cMemoryLockStopPage;
+        //public static bool cPasswordProtection;
+        //public static int cPasswordStartAddress;
+        //public static int cMemoryLockStatus;
+        //public static int cMemoryLockStartPage;
+        //public static int cMemoryLockStopPage;
 
         /* HMAC */
-        public static bool cHmacEnabled;
-        public static bool cHmacRandom;
-        public static bool cPasswordRandom;
-        public static bool cPackRandom;
+        //public static bool cHmacEnabled;
+        //public static bool cHmacRandom;
+        //public static bool cPasswordRandom;
+        //public static bool cPackRandom;
 
         //iniFile 7
 
@@ -68,64 +69,11 @@ namespace DataConverter
             cParserFirstLineParsed = false;
         }
 
-        public static string StringToHex(string hexstring)
-        {
-            var sb = new StringBuilder();
-            foreach (char t in hexstring)
-                sb.Append(System.Convert.ToInt32(t).ToString("X2"));
-            return sb.ToString();
-        }
 
-        public static byte[] StringToByteArray(string hex)
-        {
-            hex = hex.Replace(" ", "");
-            hex = hex.Replace("$", "");
-            if (hex.Length % 2 != 0) return null;
-            return Enumerable.Range(0, hex.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => System.Convert.ToByte(hex.Substring(x, 2), 16))
-                             .ToArray();
-        }
 
-        public static string ByteArrayToString(byte[] b)
-        {
-            string s = "";
-            for (int i = 0; i < b.Length; i++)
-                s += b[i].ToString("X2");
-            return s;
-        }
 
-        static string GetString(byte[] bytes)
-        {
-            char[] chars = new char[bytes.Length / sizeof(char)];
-            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-            return new string(chars);
-        }
 
-        static byte[] GetBytes(string str)
-        {
-            byte[] bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-        }
 
-        static void WriteStringToFile(BinaryWriter bw, string filename, string sa)
-        {
-            //FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            //BinaryWriter bw = new BinaryWriter(fs);
-            bw.Write(sa);
-            //bw.Close();
-            //fs.Close();
-        }
-
-        static void WriteToFile(BinaryWriter bw, string filename, byte[] ba)
-        {
-            //FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            //BinaryWriter bw = new BinaryWriter(fs);
-            bw.Write(ba);
-            //bw.Close();
-            //fs.Close();
-        }
 
         public static string WriteHeader()
         {
@@ -182,80 +130,9 @@ namespace DataConverter
             return little_endian;
         }
 
-        static Random random = new Random();
-        public static string GetRandomHexNumber(int digits)
-        {
-            byte[] buffer = new byte[digits / 2];
-            random.NextBytes(buffer);
-            string result = String.Concat(buffer.Select(x => x.ToString("X2")).ToArray());
-            if (digits % 2 == 0)
-                return result;
-            return result + random.Next(16).ToString("X");
-        }
 
-        static Random random2 = new Random();
-        public static string GetRandom49BNumber(int digits)
-        {
-            string[] base49 = { "b", "s", "J", "Y", "c", "t", "K", "Z", "d", "v", "L", "2",
-            "f", "w", "M", "3", "g", "x", "N", "4", "h", "y", "P", "5", "j", "z", "Q", "6", "k", "B", "R",
-            "7", "m", "C", "S", "8", "n", "D", "T", "9", "p", "F", "V", "q", "G", "W", "r", "H", "X" };
 
-            string ou = "";
-            for (int j = 0; j < digits; j++)
-            {
-                ou += base49[random2.Next(0, 48)];
-            }
 
-            return ou;
-        }
-
-        public static string AddZeroPadding(int digits)
-        {
-            string buffer ="";
-
-            for (int i=0; i< digits; i++)
-            {
-                buffer += "0";
-            }
-            return buffer;
-        }
-
-        public static ushort ComputeCRC16(byte[] DATA)
-        {
-            ushort crc = 0xFFFF;
-            for (int i = 0; i < DATA.Length; i++) // cnt = number of protocol bytes without CRC
-            {
-                crc ^= DATA[i];
-                for (int j = 0; j < 8; j++)
-                {
-                    if (System.Convert.ToBoolean(crc & 0x0001))
-                        crc = (ushort)((crc >> 1) ^ 0x8408);
-                    //crc = (ushort)((crc >> 1) ^ 0x1021);
-                    else
-                        crc = (ushort)(crc >> 1);
-                }
-            }
-            return crc;
-        }
-
-        public static string ComputeMD5(byte[] DATA)
-        {
-            byte[] output;
-
-            using (MD5 md5Hash = MD5.Create())
-            {
-                output = md5Hash.ComputeHash(DATA);
-            }
-            return ByteArrayToString(output);
-        }
-
-        public static ushort LittleEndian(ushort inb)
-        {
-            byte[] b = new byte[2];
-            b[0] = (byte)(((uint)inb >> 8) & 0xFF); ;
-            b[1] = (byte)inb;
-            return BitConverter.ToUInt16(b, 0);
-        }
 
         public static int SearchForURL(List<string> columns)
         {
@@ -313,8 +190,8 @@ namespace DataConverter
                 throw new ArgumentNullException("columns");
             //refFile = "REF.csv";
 
-            hmac = GetRandomHexNumber(32);
-            pass = GetRandomHexNumber(8);
+            hmac = Utility.GetRandomHexNumber(32);
+            pass = Utility.GetRandomHexNumber(8);
             column = GetRecordType(column);
 
             for (int i = 0; i < InitFile.in_columns; i++)
@@ -326,7 +203,8 @@ namespace DataConverter
                 }
                 else if (InitFile.in_types[i] == "s")
                 {
-                    temp = "0336D101325504" + StringToHex(column) + StringToHex("?m=");
+                    
+                    temp = "0336D101325504" + Utility.StringToHex(column) + Utility.StringToHex("?m=");
                     InitFile.converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "h")
@@ -335,12 +213,12 @@ namespace DataConverter
                 }
                 else if (InitFile.in_types[i] == "b49")
                 {
-                    InitFile.converted_in_data.Add("abC" + GetRandom49BNumber(9));
+                    InitFile.converted_in_data.Add("abC" + Utility.GetRandom49BNumber(9));
                 }
                 else if (InitFile.in_types[i] == "url")
                 {
                     //temp = "0334D101305503" + StringToHex(columns[i].Substring(columns.IndexOf("//"))) + "FE";
-                    temp = "031ED1011A5504" + StringToHex(column) + "FE";
+                    temp = "031ED1011A5504" + Utility.StringToHex(column) + "FE";
                     InitFile.converted_in_data.Add(temp);
 
                     InitFile.converted_in_data.Add(hmac);
@@ -349,9 +227,9 @@ namespace DataConverter
                     string cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);
                     string cmd2 = FEIG.SendWriteMultiplePagesHmacCommand();
                     // crc16, pack
-                    crc = ComputeCRC16(StringToByteArray(hmac));
+                    crc = Utility.ComputeCRC16(Utility.StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
-                    temp = LittleEndian(crc).ToString("X4");
+                    temp = Utility.LittleEndian(crc).ToString("X4");
                     InitFile.converted_in_data.Add(temp);
                     // h, authen
                     InitFile.converted_in_data.Add(pass);
@@ -363,27 +241,27 @@ namespace DataConverter
                 }
                 else if (InitFile.in_types[i] == "url_fix2")
                 {
-                    temp = StringToHex(column.Substring(column.IndexOf("//"))) + StringToHex("/") + StringToHex(GetRandomHexNumber(4)) + "FE";
+                    temp = Utility.StringToHex(column.Substring(column.IndexOf("//"))) + Utility.StringToHex("/") + Utility.StringToHex(Utility.GetRandomHexNumber(4)) + "FE";
                     InitFile.converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "url_uid_counter")
                 {
-                    temp = StringToHex(column) + StringToHex("/") + AddZeroPadding(42) + "FE";
+                    temp = Utility.StringToHex(column) + Utility.StringToHex("/") + Utility.AddZeroPadding(42) + "FE";
                     InitFile.converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "url_uid_counter_fix2")
                 {
-                    temp = "0334D101305504" + StringToHex(column) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
+                    temp = "0334D101305504" + Utility.StringToHex(column) + Utility.StringToHex("/") + Utility.AddZeroPadding(42) + Utility.StringToHex(Utility.GetRandomHexNumber(4)) + "FE";
                     InitFile.converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "crc16")
                 {
-                    temp = LittleEndian(ComputeCRC16(StringToByteArray(column))).ToString("X4");
+                    temp = Utility.LittleEndian(Utility.ComputeCRC16(Utility.StringToByteArray(column))).ToString("X4");
                     InitFile.converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "md5")
                 {
-                    temp = ComputeMD5(StringToByteArray(StringToHex(column)));
+                    temp = Utility.ComputeMD5(Utility.StringToByteArray(Utility.StringToHex(column)));
                     InitFile.converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "standard")
@@ -400,7 +278,7 @@ namespace DataConverter
                     //ndef += PrepareNdefHeader(columns[i]);
                     //temp = "0103A00C34032DD101295504" + StringToHex(columns[i]) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
                     ndef_h = PrepareNdefHeader(column);
-                    temp = ndef_h + StringToHex(column);
+                    temp = ndef_h + Utility.StringToHex(column);
 
                     InitFile.converted_in_data.Add(temp);
                     if (!SWTEncoding.cParserFirstLineParsed)
@@ -427,7 +305,7 @@ namespace DataConverter
                     //ndef += PrepareNdefHeader(columns[i]);
                     //temp = "0103A00C34032DD101295504" + StringToHex(columns[i]) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
                     ndef_h = PrepareNdefHeader(column);
-                    temp = ndef_h + StringToHex(column) + StringToHex("/") + AddZeroPadding(42) + StringToHex(GetRandomHexNumber(4)) + "FE";
+                    temp = ndef_h + Utility.StringToHex(column) + Utility.StringToHex("/") + Utility.AddZeroPadding(42) + Utility.StringToHex(Utility.GetRandomHexNumber(4)) + "FE";
 
                     InitFile.converted_in_data.Add(temp);
                     // h, hmac
@@ -442,9 +320,9 @@ namespace DataConverter
                     }
                         
                     // crc16, pack
-                    crc = ComputeCRC16(StringToByteArray(hmac));
+                    crc = Utility.ComputeCRC16(Utility.StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
-                    temp = LittleEndian(crc).ToString("X4");
+                    temp = Utility.LittleEndian(crc).ToString("X4");
                     InitFile.converted_in_data.Add(temp);
                     // h, authen
                     InitFile.converted_in_data.Add(pass);
@@ -464,7 +342,7 @@ namespace DataConverter
                     /////temp = "0103A00C340314D101105504" + StringToHex(column) + "FE";
                     //temp = "032CD101285504" + StringToHex(columns[i]) + "FE";
                     ndef_h = PrepareNdefHeader(column);
-                    temp = ndef_h + StringToHex(column) + "FE";
+                    temp = ndef_h + Utility.StringToHex(column) + "FE";
 
                     InitFile.converted_in_data.Add(temp);
                     // h, hmac
@@ -478,9 +356,9 @@ namespace DataConverter
                      
                     }
                     // crc16, pack
-                    crc = ComputeCRC16(StringToByteArray(hmac));
+                    crc = Utility.ComputeCRC16(Utility.StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
-                    temp = LittleEndian(crc).ToString("X4");
+                    temp = Utility.LittleEndian(crc).ToString("X4");
                     InitFile.converted_in_data.Add(temp);
                     // h, authen
                     InitFile.converted_in_data.Add(pass);
@@ -493,7 +371,7 @@ namespace DataConverter
                 }
                 else if (InitFile.in_types[i] == "sic")
                 {
-                    sic = GetRandomHexNumber(8);
+                    sic = Utility.GetRandomHexNumber(8);
                     //generate_ref = true;
                     InitFile.converted_in_data.Add(sic);
 
