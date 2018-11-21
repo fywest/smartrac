@@ -82,34 +82,7 @@ namespace DataConverter
                 //ReadFile(openFileDialog1.FileName);
            }
         }
-
-
-        /// <summary>
-        /// //////////////////////////////////////////////
-        /// </summary>
-
-
-
-
-        //private bool ReadIniFile(string filename)
-        //{
-        //    try
-        //    {
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(String.Format("Error reading from {0}.\r\n\r\n{1}", filename, ex.Message));
-        //    }
-        //    finally
-        //    {
-        //        Cursor = Cursors.Default;
-        //    }
-        //    return false;
-        //}
-
-       
-
+      
         private void BT_Convert_Click(object sender, EventArgs e)
         {
             ReadConfiguration();

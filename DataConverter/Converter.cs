@@ -9,16 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
-//using System.Security.Cryptography;
 
 
 namespace DataConverter
 {
     public class SWTEncoding 
     {
-        //li iniFile 1
- 
-
         /* SWT */
         public static bool cSwtRecipeCreation;
         public static int cReaderModel;
@@ -31,28 +27,6 @@ namespace DataConverter
         public static int cColumnToParse;
         public static UrlType cUrlType;
         public static NDEF.NdefRecordID cRecordType;
-
-        /* NDEF configuration */
-        //public static bool cLockTLV;
-        //public static bool cMirrorCounter;
-        //public static bool cMirrorUID;
-        //public static string cNdefTemplate;
-
-        /* Memory configuration */
-        //public static bool cPasswordProtection;
-        //public static int cPasswordStartAddress;
-        //public static int cMemoryLockStatus;
-        //public static int cMemoryLockStartPage;
-        //public static int cMemoryLockStopPage;
-
-        /* HMAC */
-        //public static bool cHmacEnabled;
-        //public static bool cHmacRandom;
-        //public static bool cPasswordRandom;
-        //public static bool cPackRandom;
-
-        //iniFile 7
-
 
         public static bool b_uid_mirror, b_cnt_mirror, b_lock_control;
 
@@ -69,12 +43,6 @@ namespace DataConverter
             cParserFirstLineParsed = false;
         }
 
-
-
-
-
-
-
         public static string WriteHeader()
         {
             
@@ -86,27 +54,6 @@ namespace DataConverter
             InitFile.out_index = 0;
             return ret;
         }
-
-
-        // iniFile 3
-
-
-        // iniFile 4
-       
-
-        // iniFile 5
-        
-        // iniFile 6
-
-        
-
-        //static void ConvertFromDecimalToHex(List<string> columns)
-        //{
-        //    for (int i = 0; i < columns.Count; i++)
-        //    {
-        //        converted_in_data.Add(System.Convert.ToInt16(columns[i]).ToString("X2"));
-        //    }
-        //}
 
         public static string PrepareHexData(string hex, bool padding)
         {
@@ -129,9 +76,6 @@ namespace DataConverter
             }
             return little_endian;
         }
-
-
-
 
 
         public static int SearchForURL(List<string> columns)
@@ -173,8 +117,7 @@ namespace DataConverter
             }
             else cRecordType = NDEF.NdefRecordID.Entire_URL;
             NDEF.ndefRecordId = cRecordType;
-            return ret;
-            
+            return ret;          
         }
 
         public static string Convert(string column, string refFile)
@@ -400,9 +343,7 @@ namespace DataConverter
                     }
 
                 }
-                InitFile.ref_data.Clear();
-
-                
+                InitFile.ref_data.Clear();               
 
             }
             //ConvertFromDecimalToHex(columns);
@@ -462,49 +403,5 @@ namespace DataConverter
             //B4F7F1F439DBEF8AC975A99F54603E0B;F7B7E17B;46B2;7BE1B7F7"
 
         }
-        // hardcode
-        //public static string PrepareCMD(List<string> columns)
-        //{
-            
-        //    string str_out_index = out_index.ToString();
-        //    string str_out_status = out_state.ToString();
-        //    string str_out_batch_id = out_batch_id.ToString();
-        //    string str_out_timestamp = out_timestamp.ToString(); 
-        //    string data1 = columns[0] + columns[1] + columns[2] + columns[3] + columns[4] + columns[5] + ", ";
-        //    string data2 = columns[6] + columns[7] + columns[8] + columns[9] + columns[10] + columns[11];
-        //    out_index++;
-        //    return str_out_index + ", " + str_out_status + ", " + str_out_batch_id + ", " + str_out_timestamp + ", " + data1 + data2;
-        //}
-
-        //public void HmacGenerator(object sender, EventArgs e)
-        //{
-            /*
-            string hmac, pass, crc, all = "";
-            int num = System.Convert.ToInt32(textBox4.Text);
-
-            label5.Text = "Generating..";
-            label5.ForeColor = Color.AliceBlue;
-            for (int i = 0; i < num; i++)
-            {
-                hmac = GetRandomHexNumber(144);
-                pass = GetRandomHexNumber(8);
-                crc = LittleEndian(ComputeCRC16(StringToByteArray(hmac))).ToString("X4");
-                if (checkBox1.Checked)
-                {
-                    textBox1.Text += hmac + System.Environment.NewLine;
-                    textBox2.Text += pass + System.Environment.NewLine;
-                    textBox3.Text += crc + System.Environment.NewLine;
-                }
-
-                all += hmac + "," + pass + "," + crc + System.Environment.NewLine;
-            }
-
-            SaveFile(all);
-            label5.Text = "Done!";
-            label5.ForeColor = Color.Green;*/
-        //}
     }
-
-
-
 }

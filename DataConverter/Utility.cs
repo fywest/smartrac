@@ -65,38 +65,6 @@ namespace DataConverter
             return s;
         }
 
-        //static string GetString(byte[] bytes)
-        //{
-        //    char[] chars = new char[bytes.Length / sizeof(char)];
-        //    System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-        //    return new string(chars);
-        //}
-
-        //static byte[] GetBytes(string str)
-        //{
-        //    byte[] bytes = new byte[str.Length * sizeof(char)];
-        //    System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-        //    return bytes;
-        //}
-
-        //static void WriteStringToFile(BinaryWriter bw, string filename, string sa)
-        //{
-        //    //FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-        //    //BinaryWriter bw = new BinaryWriter(fs);
-        //    bw.Write(sa);
-        //    //bw.Close();
-        //    //fs.Close();
-        //}
-
-        //static void WriteToFile(BinaryWriter bw, string filename, byte[] ba)
-        //{
-        //    //FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-        //    //BinaryWriter bw = new BinaryWriter(fs);
-        //    bw.Write(ba);
-        //    //bw.Close();
-        //    //fs.Close();
-        //}
-
 
 
         public static string AddZeroPadding(int digits)
@@ -146,5 +114,149 @@ namespace DataConverter
             b[1] = (byte)inb;
             return BitConverter.ToUInt16(b, 0);
         }
+
+        //no reference member
+        //static string GetString(byte[] bytes)
+        //{
+        //    char[] chars = new char[bytes.Length / sizeof(char)];
+        //    System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+        //    return new string(chars);
+        //}
+
+        //static byte[] GetBytes(string str)
+        //{
+        //    byte[] bytes = new byte[str.Length * sizeof(char)];
+        //    System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+        //    return bytes;
+        //}
+
+        //static void WriteStringToFile(BinaryWriter bw, string filename, string sa)
+        //{
+        //    //FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+        //    //BinaryWriter bw = new BinaryWriter(fs);
+        //    bw.Write(sa);
+        //    //bw.Close();
+        //    //fs.Close();
+        //}
+
+        //static void WriteToFile(BinaryWriter bw, string filename, byte[] ba)
+        //{
+        //    //FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+        //    //BinaryWriter bw = new BinaryWriter(fs);
+        //    bw.Write(ba);
+        //    //bw.Close();
+        //    //fs.Close();
+        //}
+
+        /* NDEF configuration */
+        //public static bool cLockTLV;
+        //public static bool cMirrorCounter;
+        //public static bool cMirrorUID;
+        //public static string cNdefTemplate;
+
+        /* Memory configuration */
+        //public static bool cPasswordProtection;
+        //public static int cPasswordStartAddress;
+        //public static int cMemoryLockStatus;
+        //public static int cMemoryLockStartPage;
+        //public static int cMemoryLockStopPage;
+
+        /* HMAC */
+        //public static bool cHmacEnabled;
+        //public static bool cHmacRandom;
+        //public static bool cPasswordRandom;
+        //public static bool cPackRandom;
+
+        //iniFile 7
+
+        // iniFile 3
+
+
+        // iniFile 4
+
+
+        // iniFile 5
+
+        // iniFile 6
+
+
+
+        //static void ConvertFromDecimalToHex(List<string> columns)
+        //{
+        //    for (int i = 0; i < columns.Count; i++)
+        //    {
+        //        converted_in_data.Add(System.Convert.ToInt16(columns[i]).ToString("X2"));
+        //    }
+        //}
+
+
+
+        // hardcode
+        //public static string PrepareCMD(List<string> columns)
+        //{
+
+        //    string str_out_index = out_index.ToString();
+        //    string str_out_status = out_state.ToString();
+        //    string str_out_batch_id = out_batch_id.ToString();
+        //    string str_out_timestamp = out_timestamp.ToString(); 
+        //    string data1 = columns[0] + columns[1] + columns[2] + columns[3] + columns[4] + columns[5] + ", ";
+        //    string data2 = columns[6] + columns[7] + columns[8] + columns[9] + columns[10] + columns[11];
+        //    out_index++;
+        //    return str_out_index + ", " + str_out_status + ", " + str_out_batch_id + ", " + str_out_timestamp + ", " + data1 + data2;
+        //}
+
+        //public void HmacGenerator(object sender, EventArgs e)
+        //{
+        /*
+        string hmac, pass, crc, all = "";
+        int num = System.Convert.ToInt32(textBox4.Text);
+
+        label5.Text = "Generating..";
+        label5.ForeColor = Color.AliceBlue;
+        for (int i = 0; i < num; i++)
+        {
+            hmac = GetRandomHexNumber(144);
+            pass = GetRandomHexNumber(8);
+            crc = LittleEndian(ComputeCRC16(StringToByteArray(hmac))).ToString("X4");
+            if (checkBox1.Checked)
+            {
+                textBox1.Text += hmac + System.Environment.NewLine;
+                textBox2.Text += pass + System.Environment.NewLine;
+                textBox3.Text += crc + System.Environment.NewLine;
+            }
+
+            all += hmac + "," + pass + "," + crc + System.Environment.NewLine;
+        }
+
+        SaveFile(all);
+        label5.Text = "Done!";
+        label5.ForeColor = Color.Green;*/
+        //}
+
+        //form1
+
+        /// <summary>
+        /// //////////////////////////////////////////////
+        /// </summary>
+
+
+
+
+        //private bool ReadIniFile(string filename)
+        //{
+        //    try
+        //    {
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(String.Format("Error reading from {0}.\r\n\r\n{1}", filename, ex.Message));
+        //    }
+        //    finally
+        //    {
+        //        Cursor = Cursors.Default;
+        //    }
+        //    return false;
+        //}
     }
 }
