@@ -57,11 +57,11 @@ namespace DataConverter
 
         private void ReadConfiguration()
         {
-            MaxIDPerFile = Convert.ToInt32(TB_maxIDSize.Text);
-            if(TB_count.Text != "") TotalID = Convert.ToInt32(TB_count.Text);
-            NDEF.nLockTlv = CB_LockControl_TLV.Checked;
-            NDEF.ndef2BSuffix = CB_2B_suffix.Checked;
-            if (CB_Counter_mirror.Checked && CB_UID_mirror.Checked) Ntag.nMirrorConf = Ntag.MirrorConfMode.UidAndCounterMirror;
+            MaxIDPerFile = Convert.ToInt32(TB_maxIDSize.Text);//MaxIDPerFile = 10000
+            if (TB_count.Text != "") TotalID = Convert.ToInt32(TB_count.Text);//TotalID = 1
+            NDEF.nLockTlv = CB_LockControl_TLV.Checked;//CB_2B_suffix.Checked = true
+            NDEF.ndef2BSuffix = CB_2B_suffix.Checked;//NDEF.ndef2BSuffix = true
+            if (CB_Counter_mirror.Checked && CB_UID_mirror.Checked) Ntag.nMirrorConf = Ntag.MirrorConfMode.UidAndCounterMirror;//Ntag.nMirrorConf = UidAndCounterMirror
             else if (CB_Counter_mirror.Checked && !CB_UID_mirror.Checked) Ntag.nMirrorConf = Ntag.MirrorConfMode.CounterMirror;
             else if (!CB_Counter_mirror.Checked && CB_UID_mirror.Checked) Ntag.nMirrorConf = Ntag.MirrorConfMode.UidMirror;
             else Ntag.nMirrorConf = Ntag.MirrorConfMode.NoMirror;
@@ -90,9 +90,9 @@ namespace DataConverter
             {
                 //SWTEncoding.ParseURL();
                 
-                readCsv.ReadFile(FileName);
-                TB_staticURL.Text = readCsv.str_staticURL;
-                TB_commands.Text = readCsv.str_commands;
+                readCsv.ReadFile(FileName);//FileName = 20170123_SMT_mTAG_ID_10K.csv"
+                TB_staticURL.Text = readCsv.str_staticURL;//readCsv.str_staticURL = "https://parley.mtag.io/nn6r8u"
+                TB_commands.Text = readCsv.str_commands;//readCsv.str_commands = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)\r\n00000590(Data3)0000(Data4)(CRC:CRC:0:-1)"
             }
             else if (SWTEncoding.cUrlType == SWTEncoding.UrlType.StaticURL)
             {

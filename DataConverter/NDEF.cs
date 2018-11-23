@@ -29,46 +29,46 @@ namespace DataConverter
         public static NdefRecordID ndefRecordId;
         public static bool ndef2BSuffix;
 
-        public static int GetNdefLength(string url, byte blockSize)
+        public static int GetNdefLength(string url, byte blockSize)//url = "parley.mtag.io/nn6r8u" blockSize = 4
         {
             int len = 0;
 
-            if (NDEF.nLockTlv) len += 5;
-            len += 7; // NDEF header length
-            len += url.Length;
+            if (NDEF.nLockTlv) len += 5;//len = 5
+            len += 7; // NDEF header length //len = 12
+            len += url.Length;//+21 len = 33
 
-            if (Ntag.nMirrorConf == Ntag.MirrorConfMode.UidAndCounterMirror) len += 21;
+            if (Ntag.nMirrorConf == Ntag.MirrorConfMode.UidAndCounterMirror) len += 21;//len = 54
             else if (Ntag.nMirrorConf == Ntag.MirrorConfMode.UidMirror) len += 14;
             else if (Ntag.nMirrorConf == Ntag.MirrorConfMode.CounterMirror) len += 6;
 
             if (Ntag.nMirrorConf != Ntag.MirrorConfMode.NoMirror)
             {
-                len += 1; //  plus / length
+                len += 1; //  plus / length //len = 55
                 Ntag.nMirrorOffset = len;
-                Ntag.nMirrorPage = (byte)(len / blockSize + 4);
-                Ntag.nMirrorByte = (byte)(len % blockSize);
+                Ntag.nMirrorPage = (byte)(len / blockSize + 4);//Ntag.nMirrorPage = 17
+                Ntag.nMirrorByte = (byte)(len % blockSize);//Ntag.nMirrorByte = 3
 
             }
 
 
-            if (NDEF.ndef2BSuffix) len += 4; // random numbers
-            len += 1; // FE
+            if (NDEF.ndef2BSuffix) len += 4; // random numbers //len = 59
+            len += 1; // FE //len = 60
 
-            int mo = blockSize - (len % blockSize); // fill the block
-            if (mo < blockSize) len += mo;
+            int mo = blockSize - (len % blockSize); // fill the block //mo = 4
+            if (mo < blockSize) len += mo;//len = 60
             return len;
         }
 
-        public static int GetNdefRealLength(string url)
+        public static int GetNdefRealLength(string url)//url = "parley.mtag.io/nn6r8u"
         {
-            ndefPayloadLen = (byte)(url.Length);
+            ndefPayloadLen = (byte)(url.Length);//21
             if (Ntag.nMirrorConf != Ntag.MirrorConfMode.NoMirror)
             {
-                ndefPayloadLen++;
+                ndefPayloadLen++;//22
             }
-                if (Ntag.nMirrorConf == Ntag.MirrorConfMode.UidAndCounterMirror) ndefPayloadLen += 25;
-            ndefPayloadLen += 1; //FE
-            ndefSize = (byte)(ndefPayloadLen + 4);
+                if (Ntag.nMirrorConf == Ntag.MirrorConfMode.UidAndCounterMirror) ndefPayloadLen += 25;//47
+            ndefPayloadLen += 1; //FE //48
+            ndefSize = (byte)(ndefPayloadLen + 4);//52
             return ndefPayloadLen;
         }
     }

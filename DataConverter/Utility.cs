@@ -9,23 +9,23 @@ namespace DataConverter
 {
     public class Utility
     {
-        public static string StringToHex(string hexstring)
+        public static string StringToHex(string hexstring)//hexstring = "parley.mtag.io/nn6r8u"
         {
             var sb = new StringBuilder();
             foreach (char t in hexstring)
                 sb.Append(System.Convert.ToInt32(t).ToString("X2"));
-            return sb.ToString();
+            return sb.ToString();//sb = {7061726C65792E6D7461672E696F2F6E6E36723875}
         }
 
         
-        public static string GetRandomHexNumber(int digits)
+        public static string GetRandomHexNumber(int digits)//4
         {
             Random random = new Random();
             byte[] buffer = new byte[digits / 2];
             random.NextBytes(buffer);
             string result = String.Concat(buffer.Select(x => x.ToString("X2")).ToArray());
             if (digits % 2 == 0)
-                return result;
+                return result;//result = "32C9 " result = "CFD8"
             return result + random.Next(16).ToString("X");
         }
 
@@ -67,7 +67,7 @@ namespace DataConverter
 
 
 
-        public static string AddZeroPadding(int digits)
+        public static string AddZeroPadding(int digits)//42
         {
             string buffer = "";
 
@@ -75,7 +75,7 @@ namespace DataConverter
             {
                 buffer += "0";
             }
-            return buffer;
+            return buffer;//buffer = "000000000000000000000000000000000000000000"
         }
 
         public static ushort ComputeCRC16(byte[] DATA)

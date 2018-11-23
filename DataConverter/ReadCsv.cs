@@ -33,14 +33,14 @@ namespace DataConverter
             int ID_count;
             if (Form1.TotalID > 0)
             {
-                ID_count = Form1.TotalID;
+                ID_count = Form1.TotalID;//Form1.TotalID = 1
             }
             else ID_count = File.ReadAllLines(filename).Length;
 
-            fileNum = ID_count / Form1.MaxIDPerFile;
-            if (ID_count % Form1.MaxIDPerFile != 0) fileNum++;
+            fileNum = ID_count / Form1.MaxIDPerFile;//fileNum = 0
+            if (ID_count % Form1.MaxIDPerFile != 0) fileNum++;//fileNum = 1
 
-            outputFile = new string[fileNum];
+            outputFile = new string[fileNum];//outputFile = {string[1]}
             if (filename.EndsWith(".csv"))
             {
 
@@ -66,14 +66,14 @@ namespace DataConverter
                 else
                 {
                     //outputFile = new string[1];
-                    outputFile[0] = filename.Substring(0, filename.LastIndexOf(".csv")) + "_SWT__1-1__NotStarted.csv";
+                    outputFile[0] = filename.Substring(0, filename.LastIndexOf(".csv")) + "_SWT__1-1__NotStarted.csv";//[0] = "20170123_SMT_mTAG_ID_10K_SWT__1-1__NotStarted.csv"
                     if (File.Exists(outputFile[0]))
                     {
                         File.Delete(outputFile[0]);
                     }
                 }
                 //only for lowcase in file ext name
-                refFile = filename.Substring(0, filename.LastIndexOf(".csv")) + "_REF.csv";
+                refFile = filename.Substring(0, filename.LastIndexOf(".csv")) + "_REF.csv";//refFile = "20170123_SMT_mTAG_ID_10K_REF.csv"
 
                 //refFile = "REF.csv";
             }
@@ -93,7 +93,7 @@ namespace DataConverter
                 List<string> columns = new List<string>();
                 int cnt = 0;
 
-                using (var reader = new CsvFileReader(filename))
+                using (var reader = new CsvFileReader(filename))//reader = {CsvFile.CsvFileReader}
                 {
                     if (InitFile.in_rows < 0) // dynamic encoding from csv
                     {
@@ -108,7 +108,7 @@ namespace DataConverter
                                 // Create a file to write to. 
                                 using (StreamWriter sw = File.CreateText(outputFile[cnt]))//[0] = "20170123_SMT_mTAG_ID_10K_SWT__1-1__NotStarted.csv"
                                 {
-                                    sw.WriteLine(SWTEncoding.WriteHeader());
+                                    sw.WriteLine(SWTEncoding.WriteHeader());//Index;State;Batch-ID;TimeStamp;Data1;Data2;Data3;Data4;Data5 to excel
                                 }
                             }
 
@@ -119,7 +119,8 @@ namespace DataConverter
                                 //{
 
 
-                                sw.WriteLine(SWTEncoding.Convert(columns[SWTEncoding.cColumnToParse], refFile));//refFile: = "20170123_SMT_mTAG_ID_10K_REF.csv"
+                                sw.WriteLine(SWTEncoding.Convert(columns[SWTEncoding.cColumnToParse], refFile));//column[0] = "https://parley.mtag.io/nn6r8u" refFile: = "20170123_SMT_mTAG_ID_10K_REF.csv"
+                                //cmd_data = "1;0;;;0CA00301D1340334045530016C7261706D2E79652E6761746E2F6F693872366E00002F750000000000000000000000000000000035000000FE334144;78C62C66C76DA3FB24CB9A59F6F9E38D;F396B40B;30BE;0BB496F3"
                                 //}
                                 row_total++;
                                 row_current++;
@@ -133,14 +134,17 @@ namespace DataConverter
 
                                 if (!SWTEncoding.cParserFirstLineParsed)
                                 {
-                                    if (SWTEncoding.SearchForURL(columns) >= 0)
+                                    if (SWTEncoding.SearchForURL(columns) >= 0)//[0] = "https://parley.mtag.io/nn6r8u"
                                     {
                                         // parse first row here
                                         //TB_staticURL.Text = columns[SWTEncoding.cColumnToParse];
                                         str_staticURL = columns[SWTEncoding.cColumnToParse];//[0] = "https://parley.mtag.io/nn6r8u"
                                         SWTEncoding.cParserFirstLineParsed = true;
                                         //TB_commands.Text = FEIG.cmd1 + "\r\n" + FEIG.cmd2;
-                                        str_commands = FEIG.cmd1 + "\r\n" + FEIG.cmd2;//str_commands = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)\r\n6600B0240A161704(Data2)BD010007161100F400000590(Data3)0000(Data4)(CRC:CRC:0:-1)"
+                                        str_commands = FEIG.cmd1 + "\r\n" + FEIG.cmd2;
+                                      
+
+                                        //str_commands = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)\r\n6600B0240A161704(Data2)BD010007161100F400000590(Data3)0000(Data4)(CRC:CRC:0:-1)"
                                     }
                                     else continue;
                                 }
