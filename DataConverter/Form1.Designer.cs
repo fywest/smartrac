@@ -51,6 +51,11 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.iCSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nTAG213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rEADERSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fEIGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nDEFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -247,7 +252,10 @@
             // 
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.iCSToolStripMenuItem,
+            this.rEADERSToolStripMenuItem,
+            this.nDEFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(761, 24);
@@ -267,14 +275,14 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // openFileDialog1
             // 
@@ -285,6 +293,40 @@
             // 
             this.saveFileDialog1.DefaultExt = "csv";
             this.saveFileDialog1.Filter = "CSV files|*.csv|All files|*.*";
+            // 
+            // iCSToolStripMenuItem
+            // 
+            this.iCSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nTAG213ToolStripMenuItem});
+            this.iCSToolStripMenuItem.Name = "iCSToolStripMenuItem";
+            this.iCSToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.iCSToolStripMenuItem.Text = "ICS";
+            // 
+            // nTAG213ToolStripMenuItem
+            // 
+            this.nTAG213ToolStripMenuItem.Name = "nTAG213ToolStripMenuItem";
+            this.nTAG213ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nTAG213ToolStripMenuItem.Text = "NTAG213";
+            // 
+            // rEADERSToolStripMenuItem
+            // 
+            this.rEADERSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fEIGToolStripMenuItem});
+            this.rEADERSToolStripMenuItem.Name = "rEADERSToolStripMenuItem";
+            this.rEADERSToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.rEADERSToolStripMenuItem.Text = "READERS";
+            // 
+            // fEIGToolStripMenuItem
+            // 
+            this.fEIGToolStripMenuItem.Name = "fEIGToolStripMenuItem";
+            this.fEIGToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fEIGToolStripMenuItem.Text = "FEIG";
+            // 
+            // nDEFToolStripMenuItem
+            // 
+            this.nDEFToolStripMenuItem.Name = "nDEFToolStripMenuItem";
+            this.nDEFToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.nDEFToolStripMenuItem.Text = "NDEF";
             // 
             // Form1
             // 
@@ -333,6 +375,11 @@
         private System.Windows.Forms.TextBox TB_filename;
         private System.Windows.Forms.Button BT_Convert;
         private System.Windows.Forms.Button RandomGen;
+        private System.Windows.Forms.ToolStripMenuItem iCSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nTAG213ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rEADERSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fEIGToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nDEFToolStripMenuItem;
     }
 }
 
