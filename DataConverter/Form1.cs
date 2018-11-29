@@ -38,7 +38,8 @@ namespace DataConverter
 
         public static SWTEncoding swt;
 
-        
+        public static int current_line = 0;
+        public static int total_line = 0;
 
         public Form1()
         {
@@ -89,7 +90,14 @@ namespace DataConverter
             if (SWTEncoding.cUrlType == SWTEncoding.UrlType.DynamicURL)
             {
                 //SWTEncoding.ParseURL();
-                
+                timer1.Enabled = true;
+
+                current_line = 0;
+                label5.Visible = true;
+                label6.Visible = true;
+                label7.Visible = true;
+
+
                 readCsv.ReadFile(FileName);//FileName = 20170123_SMT_mTAG_ID_10K.csv"
                 TB_staticURL.Text = readCsv.str_staticURL;//readCsv.str_staticURL = "https://parley.mtag.io/nn6r8u"
                 TB_commands.Text = readCsv.str_commands;//readCsv.str_commands = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)\r\n00000590(Data3)0000(Data4)(CRC:CRC:0:-1)"
@@ -105,6 +113,26 @@ namespace DataConverter
         {
             ReadConfiguration();
             readCsv.ReadFile("SLIX2_destroy_password.csv");
+        }
+
+        private void nTAG213ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("NTAG Information");
+            
+        }
+
+        private void iniFIleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(InitFile.strIniFile);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+
+            //MessageBox.Show("hello");
+            label5.Text = current_line.ToString();
+            label7.Text = total_line.ToString();
         }
     }
 }

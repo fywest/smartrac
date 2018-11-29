@@ -18,6 +18,31 @@ namespace DataConverter
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
+
+        //li iniFile 1
+        public static int in_columns;
+        public static int in_rows;
+        public static string in_reader;
+        public static int in_start_row;
+        public static int in_start_column;
+        public static List<string> in_data;
+        public static List<string> in_types;
+        public static List<string> in_padding;
+
+
+        //iniFile 7
+        public static long out_index = 0;
+        public static string out_state;
+        public static string out_batch_id;
+        public static string out_timestamp;
+        public static int out_columns = 0;
+        public static int out_op = 0;
+
+        public static string strIniFile = "";
+
+        //output for SWTEncoding
+        public static List<int>[] out_data_index;
+
         public InitFile(string path)
         {
             // iniFile 2
@@ -25,8 +50,7 @@ namespace DataConverter
             in_data = new List<string>();
             in_types = new List<string>();
             in_padding = new List<string>();
-            converted_in_data = new List<string>();
-            ref_data = new List<string>();
+
             ProcessInput();
             ProcessOutput();
             CreateFormular();
@@ -39,52 +63,39 @@ namespace DataConverter
             return temp.ToString();
         }
 
-        //li iniFile 1
-        public static int in_columns;
-        public static int in_rows;
-        public static string in_reader;
-        public static int in_start_row;
-        public static int in_start_column;
-        public static List<string> in_data;
-        public static List<string> in_types;
-        public static List<string> in_padding;
-        public static List<string> converted_in_data;
-        public static List<string> converted_out_data;
-        public static List<string> ref_data;
-
-        //iniFile 7
-        public static long out_index = 0;
-        public static string out_state;
-        public static string out_batch_id;
-        public static string out_timestamp;
-        public static List<int>[] out_data_index;
-        public static int out_columns = 0;
-
-        public static int out_op = 0;
-
         // iniFile 3
         public static void ProcessInput()
         {
-            string in_data_temp = InitFile.ReadValue("Input", "Names");
+            string in_data_temp = InitFile.ReadValue("Input", "Names");//in_data_temp = "url,hmac,password,pack,authen"
             in_data = in_data_temp.Split(',', ';').ToList();
-            string in_types_temp = InitFile.ReadValue("Input", "Types");
+            string in_types_temp = InitFile.ReadValue("Input", "Types");//in_types_temp = "combo_normal"
             in_types = in_types_temp.Split(',', ';').ToList();
-            string in_padding_temp = InitFile.ReadValue("Input", "Padding");
+            string in_padding_temp = InitFile.ReadValue("Input", "Padding");//in_padding_temp = "y,y,y,n,n"
             in_padding = in_padding_temp.Split(',', ';').ToList();
-            in_columns = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_columns"));
-            in_rows = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_rows"));
-            in_start_row = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_row"));
-            in_start_column = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_column"));
-            in_reader = InitFile.ReadValue("Input", "Reader");
+            in_columns = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_columns"));//in_columns = 5
+            in_rows = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_rows"));//in_rows = -1
+            in_start_row = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_row"));//in_start_row = 1
+            in_start_column = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_column"));//in_start_column = 1
+            in_reader = InitFile.ReadValue("Input", "Reader");//in_reader = "FEIG"
+
+            strIniFile= ($"[Input]\n" +
+                $"Reader: '{in_reader}'\n" +
+                $"Start_row: '{in_start_row}'\n" +
+                $"Start_column: '{in_start_column}'\n" +
+                $"Num_columns: '{in_columns}'\n" +
+                $"Num_rows: '{in_rows}'\n" +
+                $"Names: '{in_data_temp}'\n" +
+                $"Types: '{in_types_temp}'\n" +
+                $"Padding: '{in_padding_temp}'");
         }
 
 
         // iniFile 4
         public static void ProcessOutput()
         {
-            out_state = InitFile.ReadValue("Output", "State");
-            out_batch_id = InitFile.ReadValue("Output", "BatchID");
-            out_timestamp = InitFile.ReadValue("Output", "Timestamp");
+            out_state = InitFile.ReadValue("Output", "State");//out_state = "0"
+            out_batch_id = InitFile.ReadValue("Output", "BatchID");//out_batch_id = ""
+            out_timestamp = InitFile.ReadValue("Output", "Timestamp");//out_timestamp = ""
 
             string dat = "Data";
             int num = 1;
@@ -116,6 +127,10 @@ namespace DataConverter
                     out_data_index[i].Add(GetInDataIndex(tmp2[j]));
                 }*/
             }
+            strIniFile += ($"\n\n[Output]\n" +
+            $"State: '{out_state}'\n" +
+            $"BatchID: '{out_batch_id}'\n" +
+            $"Timestamp: '{out_timestamp}'\n");
 
         }
 

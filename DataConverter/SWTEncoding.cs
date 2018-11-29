@@ -30,6 +30,10 @@ namespace DataConverter
 
         public static bool b_uid_mirror, b_cnt_mirror, b_lock_control;
 
+        //iniFile
+        public static List<string> converted_in_data;
+        public static List<string> ref_data;
+
         public enum UrlType
         {
             StaticURL = 0,
@@ -41,6 +45,8 @@ namespace DataConverter
         {
             // iniFile 2
             cParserFirstLineParsed = false;
+            converted_in_data = new List<string>();
+            ref_data = new List<string>();
         }
 
         public static string WriteHeader()
@@ -142,70 +148,70 @@ namespace DataConverter
                 if (InitFile.in_types[i] == "d")
                 {
                     temp = System.Convert.ToInt32(column).ToString("X2");
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "s")
                 {
                     
                     temp = "0336D101325504" + Utility.StringToHex(column) + Utility.StringToHex("?m=");
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "h")
                 {
-                    InitFile.converted_in_data.Add(column);
+                    converted_in_data.Add(column);
                 }
                 else if (InitFile.in_types[i] == "b49")
                 {
-                    InitFile.converted_in_data.Add("abC" + Utility.GetRandom49BNumber(9));
+                    converted_in_data.Add("abC" + Utility.GetRandom49BNumber(9));
                 }
                 else if (InitFile.in_types[i] == "url")
                 {
                     //temp = "0334D101305503" + StringToHex(columns[i].Substring(columns.IndexOf("//"))) + "FE";
                     temp = "031ED1011A5504" + Utility.StringToHex(column) + "FE";
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
 
-                    InitFile.converted_in_data.Add(hmac);
+                    converted_in_data.Add(hmac);
                     // h, password
-                    InitFile.converted_in_data.Add(pass);
+                    converted_in_data.Add(pass);
                     string cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);
                     string cmd2 = FEIG.SendWriteMultiplePagesHmacCommand();
                     // crc16, pack
                     crc = Utility.ComputeCRC16(Utility.StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
                     temp = Utility.LittleEndian(crc).ToString("X4");
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                     // h, authen
-                    InitFile.converted_in_data.Add(pass);
+                    converted_in_data.Add(pass);
 
-                    InitFile.ref_data.Add(column);
-                    InitFile.ref_data.Add(hmac);
-                    InitFile.ref_data.Add(pass);
-                    InitFile.ref_data.Add(crc_s);
+                    ref_data.Add(column);
+                    ref_data.Add(hmac);
+                    ref_data.Add(pass);
+                    ref_data.Add(crc_s);
                 }
                 else if (InitFile.in_types[i] == "url_fix2")
                 {
                     temp = Utility.StringToHex(column.Substring(column.IndexOf("//"))) + Utility.StringToHex("/") + Utility.StringToHex(Utility.GetRandomHexNumber(4)) + "FE";
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "url_uid_counter")
                 {
                     temp = Utility.StringToHex(column) + Utility.StringToHex("/") + Utility.AddZeroPadding(42) + "FE";
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "url_uid_counter_fix2")
                 {
                     temp = "0334D101305504" + Utility.StringToHex(column) + Utility.StringToHex("/") + Utility.AddZeroPadding(42) + Utility.StringToHex(Utility.GetRandomHexNumber(4)) + "FE";
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "crc16")
                 {
                     temp = Utility.LittleEndian(Utility.ComputeCRC16(Utility.StringToByteArray(column))).ToString("X4");
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "md5")
                 {
                     temp = Utility.ComputeMD5(Utility.StringToByteArray(Utility.StringToHex(column)));
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                 }
                 else if (InitFile.in_types[i] == "standard")
                 {
@@ -223,7 +229,7 @@ namespace DataConverter
                     ndef_h = PrepareNdefHeader(column);
                     temp = ndef_h + Utility.StringToHex(column);
 
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                     if (!SWTEncoding.cParserFirstLineParsed)
                     {
                         FEIG.cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);
@@ -251,11 +257,11 @@ namespace DataConverter
                     temp = ndef_h + Utility.StringToHex(column) + Utility.StringToHex("/") + Utility.AddZeroPadding(42) + Utility.StringToHex(Utility.GetRandomHexNumber(4)) + "FE";
                     //ndef_h = "0103A00C340334D101305504"+"2F"+"000000000000000000000000000000000000000000"+"CFD8"+"FE"
                     //temp temp = "0103A00C340334D1013055047061726C65792E6D7461672E696F2F6E6E367238752F00000000000000000000000000000000000000000043464438FE"
-                    InitFile.converted_in_data.Add(temp);//temp = "0103A00C340334D1013055047061726C65792E6D7461672E696F2F6E6E367238752F00000000000000000000000000000000000000000035444133FE"
+                    converted_in_data.Add(temp);//temp = "0103A00C340334D1013055047061726C65792E6D7461672E696F2F6E6E367238752F00000000000000000000000000000000000000000035444133FE"
                     // h, hmac
-                    InitFile.converted_in_data.Add(hmac);//hmac = "8CA73387DDAFC1BBB186E1FE2DDDC2D7"
+                    converted_in_data.Add(hmac);//hmac = "8CA73387DDAFC1BBB186E1FE2DDDC2D7"
                     // h, password
-                    InitFile.converted_in_data.Add(pass);//pass = "44DC34BA"
+                    converted_in_data.Add(pass);//pass = "44DC34BA"
                     if (!SWTEncoding.cParserFirstLineParsed)
                     {
                         FEIG.cmd1 = FEIG.SendWriteMultiplePagesNdefCommand(4, 4, column);//FEIG.cmd1 = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)"
@@ -267,14 +273,14 @@ namespace DataConverter
                     crc = Utility.ComputeCRC16(Utility.StringToByteArray(hmac));//16105
                     crc_s = crc.ToString("X4");//crc_s = "3EE9" (decimal to hex)
                     temp = Utility.LittleEndian(crc).ToString("X4");//temp = "E93E" (decimal to hex for littleEndian)
-                    InitFile.converted_in_data.Add(temp);//E93E
+                    converted_in_data.Add(temp);//E93E
                     // h, authen
-                    InitFile.converted_in_data.Add(pass);//pass = "44DC34BA"
+                    converted_in_data.Add(pass);//pass = "44DC34BA"
 
-                    InitFile.ref_data.Add(column);//column = "parley.mtag.io/nn6r8u"
-                    InitFile.ref_data.Add(hmac);//hmac = "8CA73387DDAFC1BBB186E1FE2DDDC2D7"
-                    InitFile.ref_data.Add(pass);//pass = "44DC34BA"
-                    InitFile.ref_data.Add(crc_s);//crc_s = "3EE9"
+                    ref_data.Add(column);//column = "parley.mtag.io/nn6r8u"
+                    ref_data.Add(hmac);//hmac = "8CA73387DDAFC1BBB186E1FE2DDDC2D7"
+                    ref_data.Add(pass);//pass = "44DC34BA"
+                    ref_data.Add(crc_s);//crc_s = "3EE9"
                     break;
                 }
                 else if (InitFile.in_types[i] == "combo_normal")
@@ -288,11 +294,11 @@ namespace DataConverter
                     ndef_h = PrepareNdefHeader(column);
                     temp = ndef_h + Utility.StringToHex(column) + "FE";
 
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                     // h, hmac
-                    InitFile.converted_in_data.Add(hmac);
+                    converted_in_data.Add(hmac);
                     // h, password
-                    InitFile.converted_in_data.Add(pass);
+                    converted_in_data.Add(pass);
 
                     if (!SWTEncoding.cParserFirstLineParsed)
                     {
@@ -303,30 +309,30 @@ namespace DataConverter
                     crc = Utility.ComputeCRC16(Utility.StringToByteArray(hmac));
                     crc_s = crc.ToString("X4");
                     temp = Utility.LittleEndian(crc).ToString("X4");
-                    InitFile.converted_in_data.Add(temp);
+                    converted_in_data.Add(temp);
                     // h, authen
-                    InitFile.converted_in_data.Add(pass);
+                    converted_in_data.Add(pass);
 
-                    InitFile.ref_data.Add(column);
-                    InitFile.ref_data.Add(hmac);
-                    InitFile.ref_data.Add(pass);
-                    InitFile.ref_data.Add(crc_s);
+                    ref_data.Add(column);
+                    ref_data.Add(hmac);
+                    ref_data.Add(pass);
+                    ref_data.Add(crc_s);
                     break;
                 }
                 else if (InitFile.in_types[i] == "sic")
                 {
                     sic = Utility.GetRandomHexNumber(8);
                     //generate_ref = true;
-                    InitFile.converted_in_data.Add(sic);
+                    converted_in_data.Add(sic);
 
-                    InitFile.ref_data.Add(sic);
+                    ref_data.Add(sic);
                     break;
                 }
             }
             if (generate_ref == true)
             {
                 string out_ref;
-                out_ref = InitFile.ref_data[0] + "," + InitFile.ref_data[1] + "," + InitFile.ref_data[2] + "," + InitFile.ref_data[3];
+                out_ref = ref_data[0] + "," + ref_data[1] + "," + ref_data[2] + "," + ref_data[3];
                 //out_ref = "parley.mtag.io/nn6r8u,8CA73387DDAFC1BBB186E1FE2DDDC2D7,44DC34BA,3EE9"
                 if (!File.Exists(refFile))
                 {
@@ -344,11 +350,11 @@ namespace DataConverter
                     }
 
                 }
-                InitFile.ref_data.Clear();               
+                ref_data.Clear();               
 
             }
             //ConvertFromDecimalToHex(columns);
-            return ProcessCMD(InitFile.converted_in_data);
+            return ProcessCMD(converted_in_data);
             //cmd_data = "1;0;;;0CA00301D1340334045530016C7261706D2E79652E6761746E2F6F693872366E00002F750000000000000000000000000000000035000000FE334144;78C62C66C76DA3FB24CB9A59F6F9E38D;F396B40B;30BE;0BB496F3"
         }
 
@@ -408,7 +414,7 @@ namespace DataConverter
                 FEIG.SendWriteMultiplePagesCommand(4, 4, converted_out_data[0]);
                 FEIG.hConverted = true;
             }*/
-            InitFile.converted_in_data.Clear();
+            converted_in_data.Clear();
             return cmd_data;//cmd_data	"1;0;;;
             //cmd_data = "1;0;;;0CA00301D1340334045530016C7261706D2E79652E6761746E2F6F693872366E00002F750000000000000000000000000000000043000000FE384446;8733A78CBBC1AFDDFEE186B1D7C2DD2D;BA34DC44;E93E;44DC34BA"
 

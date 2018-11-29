@@ -37,6 +37,8 @@ namespace DataConverter
             }
             else ID_count = File.ReadAllLines(filename).Length;
 
+            Form1.total_line = File.ReadAllLines(filename).Length;
+
             fileNum = ID_count / Form1.MaxIDPerFile;//fileNum = 0
             if (ID_count % Form1.MaxIDPerFile != 0) fileNum++;//fileNum = 1
 
@@ -124,6 +126,10 @@ namespace DataConverter
                                 //}
                                 row_total++;
                                 row_current++;
+
+                                Form1.current_line = row_current-1;
+                                
+                                
                                 if (row_current > Form1.MaxIDPerFile)
                                 {
 

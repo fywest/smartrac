@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.RandomGen = new System.Windows.Forms.Button();
             this.BT_Convert = new System.Windows.Forms.Button();
@@ -49,13 +50,18 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.iCSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nTAG213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rEADERSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fEIGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nDEFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.iniFIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -67,6 +73,9 @@
             // 
             // toolStripContainer1.ContentPanel
             // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.label7);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.label6);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.label5);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.RandomGen);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.BT_Convert);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.label4);
@@ -266,7 +275,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.iniFIleToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -284,16 +294,6 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.DefaultExt = "csv";
-            this.openFileDialog1.Filter = "CSV files|*.csv|All files|*.*";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "csv";
-            this.saveFileDialog1.Filter = "CSV files|*.csv|All files|*.*";
-            // 
             // iCSToolStripMenuItem
             // 
             this.iCSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -307,6 +307,7 @@
             this.nTAG213ToolStripMenuItem.Name = "nTAG213ToolStripMenuItem";
             this.nTAG213ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nTAG213ToolStripMenuItem.Text = "NTAG213";
+            this.nTAG213ToolStripMenuItem.Click += new System.EventHandler(this.nTAG213ToolStripMenuItem_Click);
             // 
             // rEADERSToolStripMenuItem
             // 
@@ -319,7 +320,7 @@
             // fEIGToolStripMenuItem
             // 
             this.fEIGToolStripMenuItem.Name = "fEIGToolStripMenuItem";
-            this.fEIGToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fEIGToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.fEIGToolStripMenuItem.Text = "FEIG";
             // 
             // nDEFToolStripMenuItem
@@ -327,6 +328,57 @@
             this.nDEFToolStripMenuItem.Name = "nDEFToolStripMenuItem";
             this.nDEFToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.nDEFToolStripMenuItem.Text = "NDEF";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "csv";
+            this.openFileDialog1.Filter = "CSV files|*.csv|All files|*.*";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "csv";
+            this.saveFileDialog1.Filter = "CSV files|*.csv|All files|*.*";
+            // 
+            // iniFIleToolStripMenuItem
+            // 
+            this.iniFIleToolStripMenuItem.Name = "iniFIleToolStripMenuItem";
+            this.iniFIleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iniFIleToolStripMenuItem.Text = "IniFIle";
+            this.iniFIleToolStripMenuItem.Click += new System.EventHandler(this.iniFIleToolStripMenuItem_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(443, 141);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "current";
+            this.label5.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(484, 141);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(12, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "/";
+            this.label6.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(502, 141);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(27, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "total";
+            this.label7.Visible = false;
             // 
             // Form1
             // 
@@ -380,6 +432,11 @@
         private System.Windows.Forms.ToolStripMenuItem rEADERSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fEIGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nDEFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iniFIleToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }
 
