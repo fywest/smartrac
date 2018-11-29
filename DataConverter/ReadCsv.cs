@@ -22,10 +22,11 @@ namespace DataConverter
             Form1.Modified = false;
         }
 
-        public bool ReadFile(string filename)
+        public bool ReadFile()
         {
             //lidev
             //Cursor = Cursors.WaitCursor;
+            string filename = Form1.FileName;
             string[] outputFile;
             int fileNum;
             string refFile = "";
