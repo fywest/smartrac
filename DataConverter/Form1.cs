@@ -167,9 +167,13 @@ namespace DataConverter
             //this.progressBar1.Value = e.ProgressPercentage;
             this.progressBar1.Minimum = 0;
             this.progressBar1.Maximum = total_line;
-            this.progressBar1.Value = current_line;
+            this.progressBar1.Value = current_line; //e.ProgressPercentage;
             //int percent = (int)(e.ProgressPercentage / percentValue);
-            this.label8.Text = "converting...";// + Convert.ToString(percent) + "%";
+            string message = e.UserState.ToString();
+            int pos = message.LastIndexOf('/');
+            int len = message.Length - pos-1;
+            string message_sub = message.Substring(pos+1, len);
+            this.label8.Text = message_sub;// "converting...";// + Convert.ToString(percent) + "%";
 
             TB_staticURL.Text = str_staticURL;//readCsv.str_staticURL = "https://parley.mtag.io/nn6r8u"
             TB_commands.Text = str_commands;//readCsv.str_commands = "4600B0240A040F04(Data1)(CRC:CRC:0:-1)\r\n00000590(Data3)0000(Data4)(CRC:CRC:0:-1)"
@@ -316,8 +320,8 @@ namespace DataConverter
 
                                 Form1.current_line = row_current - 1;
                                 //*************
-                                
-                                bkWorker.ReportProgress(row_current);
+                                string message = columns[SWTEncoding.cColumnToParse];
+                                bkWorker.ReportProgress(row_current,message);
 
                                 // wait for refresh UI
                                 //System.Threading.Thread.Sleep(1);
