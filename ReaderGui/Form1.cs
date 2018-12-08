@@ -12,9 +12,181 @@ namespace ReaderGui
 {
     public partial class Form1 : Form
     {
+        string[] ICsList;
+
+        List<string> readerList=new List<string>();
+        List<Command> commandList = new List<Command>();
+        List<Feig> feigList = new List<Feig>();
+        
         public Form1()
         {
+            
             InitializeComponent();
+            ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
+
+            Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213", "YYYY");
+            Feig feig1 = new Feig("CPR40", "ISO14443B", "NTAG210", "NTAG210", "XXXX");
+            Feig feig2 = new Feig("CPR99", "ISO14443B", "NTAG213", "NTAG210", "XXXX");
+            feigList.Add(feig);
+            feigList.Add(feig1);
+            feigList.Add(feig2);
+
+            checkedListBox1.Items.AddRange(ICsList);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //foreach(var item in feigList)
+            //{
+            //    MessageBox.Show(item.showinfo());
+            //}
+
+
+
+            // Display in a message box all the items that are checked.
+
+            // First show the index and check state of all selected items.
+            //foreach (int indexChecked in checkedListBox1.CheckedIndices)
+            //{
+            //    // The indexChecked variable contains the index of the item.
+            //    MessageBox.Show("Index#: " + indexChecked.ToString() + ", is checked. Checked state is:" +
+            //                    checkedListBox1.GetItemCheckState(indexChecked).ToString() + ".");
+            //}
+
+            // Next show the object title and check state for each item selected.
+            //foreach (object itemChecked in checkedListBox1.CheckedItems)
+            //{
+
+            //    // Use the IndexOf method to get the index of an item.
+            //    MessageBox.Show("Item with title: \"" + itemChecked.ToString() +
+            //                    "\", is checked. Checked state is: " +
+            //                    checkedListBox1.GetItemCheckState(checkedListBox1.Items.IndexOf(itemChecked)).ToString() + ".");
+            //}
+
+            //foreach (object itemChecked in checkedListBox1.CheckedItems)
+            //{
+            //    ReaderList.Add(itemChecked.ToString());
+            //}
+            foreach(var item in readerList)
+            {
+                MessageBox.Show(item);
+            }
+            
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //MessageBox.Show("hi");
+            if (e.NewValue == CheckState.Checked)
+            {
+                foreach (int i in checkedListBox1.CheckedIndices)
+                {
+                    checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
+                }
+                
+                string selectedIC = checkedListBox1.SelectedItem.ToString();
+                //MessageBox.Show(selectedIC);
+                addReaderList(selectedIC);
+                
+
+            }
+
+
+        }
+        private void addReaderList(string selectedIC)
+        {
+            string str = selectedIC;////"NTAG213";
+            readerList.Clear();
+            checkedListBox2.Items.Clear();
+            checkedListBox3.Items.Clear();
+            textBox1.Clear();
+            foreach(var reader in feigList)
+            {
+                if(reader.ICs==str)
+                {
+                    readerList.Add(reader.model);
+                }
+            }
+            if(readerList.Count>0)
+            {
+                string[] str_array = readerList.Select(i => i.ToString()).ToArray();
+                checkedListBox2.Items.AddRange(str_array);
+            }
+        }
+
+        private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+    
+            if (e.NewValue == CheckState.Checked)
+            {
+                foreach (int i in checkedListBox2.CheckedIndices)
+                {
+                    checkedListBox2.SetItemCheckState(i, CheckState.Unchecked);
+                }
+
+                string selectedReader = checkedListBox2.SelectedItem.ToString();
+                //MessageBox.Show(selectedReader);
+                addCommandList(selectedReader);
+                
+
+
+            }
+
+        }
+
+        private void addCommandList(string selectedReader)
+        {
+            string str = selectedReader;////"NTAG213";
+            commandList.Clear();
+            checkedListBox3.Items.Clear();
+            foreach (var reader in feigList)
+            {
+                if (reader.model == str)
+                {
+                    Command item;
+                    item.icName = reader.command.icName;
+                    item.content = reader.command.content;
+                    commandList.Add(item);
+                }
+            }
+            if (commandList.Count > 0)
+            {
+                string[] str_array = commandList.Select(i => i.icName.ToString()).ToArray();
+                checkedListBox3.Items.AddRange(str_array);
+            }
+        }
+
+        private void checkedListBox3_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                foreach (int i in checkedListBox3.CheckedIndices)
+                {
+                    checkedListBox3.SetItemCheckState(i, CheckState.Unchecked);
+                }
+
+                string commandIC = checkedListBox3.SelectedItem.ToString();
+                //MessageBox.Show(CommandIC);
+                addCommandContent(commandIC);
+                
+
+
+
+            }
+
+        }
+
+        private void addCommandContent(string commandIC)
+        {
+            string str = commandIC;
+            foreach(var item in commandList)
+            {
+                if(item.icName==str)
+                {
+                    //MessageBox.Show(item.content);
+                    textBox1.Text = item.content;
+                }
+            }
         }
     }
 }
