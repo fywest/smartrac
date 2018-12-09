@@ -39,7 +39,7 @@ Setup commands = "XXXX"
 
 
 [CPR74 class]
-Supported protocols = "ISO14443A","ISO14443B","ISO14443A-4","SRI","Mifare Classic","MyD","ISO15693"
+Supported protocols = "ISO14443A","ISO14443B","ISO14443A-4","SRI","Mifare Classic"´,"MyD","ISO15693"
 Supported ICs = "NTAG213","NTAG210","SIC43NT","SLIX2"
 Setup commands = "NTAG213","NTAG210","SIC43NT" : "YYYY"
 Setup commands = "SLIX2": 

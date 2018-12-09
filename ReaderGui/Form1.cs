@@ -27,21 +27,45 @@ namespace ReaderGui
             Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213", "YYYY");
             Feig feig1 = new Feig("CPR40", "ISO14443B", "NTAG210", "NTAG210", "XXXX");
             Feig feig2 = new Feig("CPR99", "ISO14443B", "NTAG213", "NTAG210", "XXXX");
+
+            string temp = "\"NTAG213\",\"NTAG210\",\"SIC43NT\",\"SLIX2\"";
+            Feig feig3 = new Feig("CPR99",temp, "NTAG213", "NTAG210", "ZZZZ");
             feigList.Add(feig);
             feigList.Add(feig1);
             feigList.Add(feig2);
-
+            feigList.Add(feig3);
+        
             checkedListBox1.Items.AddRange(ICsList);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //foreach(var item in feigList)
+            //foreach (var item in feigList)
             //{
             //    MessageBox.Show(item.showinfo());
             //}
 
+            //read file
+            ReadFeig ini = new ReadFeig();
 
+            string[] allKeys=ini.ReadIniAllKeys("CPR40 class");
+            MessageBox.Show(string.Join("\n",allKeys));
+
+            string protocols=ini.ReadValue("CPR40 class", "Supported protocols");
+            string ICs= ini.ReadValue("CPR40 class", "Supported ICs");
+            string Commands= ini.ReadValue("CPR40 class", "Setup commands");
+
+
+
+            List<string> protocols_List=strToList(protocols);
+            List<string> ICs_List = strToList(ICs);
+
+            MessageBox.Show("h");
+
+
+            //byte[] byte_protocols=ini.IniReadValues("CPR40 class", "Supported protocols");
+            //var str = System.Text.Encoding.Default.GetString(byte_protocols);
+            //MessageBox.Show(str);
 
             // Display in a message box all the items that are checked.
 
@@ -67,11 +91,21 @@ namespace ReaderGui
             //{
             //    ReaderList.Add(itemChecked.ToString());
             //}
-            foreach(var item in readerList)
+            foreach (var item in readerList)
             {
                 MessageBox.Show(item);
             }
             
+        }
+
+        private List<string> strToList(string protocols)
+        {
+            string protocols_new = protocols.Replace("\"", "");
+            List<string> protocols_List = new List<string>();
+            protocols_List = protocols_new.Split(',', ';').ToList();
+            string str_in_data = string.Join("\n", protocols_List.ToArray());
+            MessageBox.Show(str_in_data);
+            return protocols_List;
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
