@@ -48,8 +48,28 @@ namespace ReaderGui
             //read file
             ReadFeig ini = new ReadFeig();
 
-            string[] allKeys=ini.ReadIniAllKeys("CPR40 class");
-            MessageBox.Show(string.Join("\n",allKeys));
+            string[] allSectionNames = ini.INIGetAllSectionNames();
+            MessageBox.Show(string.Join("\n", allSectionNames));
+
+            string[] allItems=ini.INIGetAllItems("CPR40 class");
+            MessageBox.Show(string.Join("\n",allItems));
+
+            string[] allItemkeys = ini.INIGetAllItemKeys("CPR40 class");
+            MessageBox.Show(string.Join("\n", allItemkeys));
+
+            string allValue = "";
+            foreach(var section in allSectionNames)
+            {
+                allValue += "\nSection: "+section + "\n";
+                string[] itemKeys = ini.INIGetAllItemKeys(section);
+                foreach (var key in itemKeys)
+                {
+                    allValue += "\nKey: " + key + "\n";
+                    string value = ini.ReadValue(section, key);
+                    allValue += value+"\n";
+                }
+            }
+            MessageBox.Show(allValue);
 
             string protocols=ini.ReadValue("CPR40 class", "Supported protocols");
             string ICs= ini.ReadValue("CPR40 class", "Supported ICs");
