@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,41 +47,51 @@ namespace ReaderGui
             //}
 
             //read file
-            ReadFeig ini = new ReadFeig();
+            string path= Path.Combine(Application.StartupPath, "HF_reader_FEIG2_noquote_reader.ini");
+            ReadFeig ini = new ReadFeig(path);
 
             string[] allSectionNames = ini.INIGetAllSectionNames();
+         
             MessageBox.Show(string.Join("\n", allSectionNames));
 
-            string[] allItems=ini.INIGetAllItems("CPR40 class");
-            MessageBox.Show(string.Join("\n",allItems));
+            string[] allItems_cpr40 = ini.INIGetAllItems("CPR40 class");
+            MessageBox.Show(string.Join("\n", allItems_cpr40));
 
-            string[] allItemkeys = ini.INIGetAllItemKeys("CPR40 class");
-            MessageBox.Show(string.Join("\n", allItemkeys));
+            string[] allItemkeys_cpr74 = ini.INIGetAllItemKeys("CPR74 class");
+            MessageBox.Show(string.Join("\n", allItemkeys_cpr74));
 
-            string allValue = "";
-            foreach(var section in allSectionNames)
-            {
-                allValue += "\nSection: "+section + "\n";
-                string[] itemKeys = ini.INIGetAllItemKeys(section);
-                foreach (var key in itemKeys)
-                {
-                    allValue += "\nKey: " + key + "\n";
-                    string value = ini.ReadValue(section, key);
-                    allValue += value+"\n";
-                }
-            }
-            MessageBox.Show(allValue);
+            string[] allItems_cpr74=ini.INIGetAllItems("CPR74 class");
+            MessageBox.Show(string.Join("\n",allItems_cpr74));
 
-            string protocols=ini.ReadValue("CPR40 class", "Supported protocols");
-            string ICs= ini.ReadValue("CPR40 class", "Supported ICs");
-            string Commands= ini.ReadValue("CPR40 class", "Setup commands");
+
+
+            //string[] allItemkeys = ini.INIGetAllItemKeys("CPR40 class");
+            //MessageBox.Show(string.Join("\n", allItemkeys));
+
+            //string allValue = "";
+            //foreach(var section in allSectionNames)
+            //{
+            //    allValue += "\nSection: "+section + "\n";
+            //    string[] itemKeys = ini.INIGetAllItemKeys(section);
+            //    foreach (var key in itemKeys)
+            //    {
+            //        allValue += "\nKey: " + key + "\n";
+            //        string value = ini.INIGetStringValue(section, key,null);
+            //        allValue += value+"\n";
+            //    }
+            //}
+            //MessageBox.Show(allValue);
+
+            string protocols=ini.INIGetStringValue("CPR40 class", "Supported protocols", null);
+            string ICs= ini.INIGetStringValue("CPR40 class", "Supported ICs", null);
+            string Commands= ini.INIGetStringValue("CPR40 class", "Setup commands", null);
 
 
 
             List<string> protocols_List=strToList(protocols);
             List<string> ICs_List = strToList(ICs);
 
-            MessageBox.Show("h");
+            //MessageBox.Show("h");
 
 
             //byte[] byte_protocols=ini.IniReadValues("CPR40 class", "Supported protocols");
@@ -124,7 +135,7 @@ namespace ReaderGui
             List<string> protocols_List = new List<string>();
             protocols_List = protocols_new.Split(',', ';').ToList();
             string str_in_data = string.Join("\n", protocols_List.ToArray());
-            MessageBox.Show(str_in_data);
+            //MessageBox.Show(str_in_data);
             return protocols_List;
         }
 

@@ -13,17 +13,15 @@ namespace ReaderGui
     {
         public string path; //IniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2.ini");
 
-        [DllImport("kernel32")]
-        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
-        [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        //[DllImport("kernel32")]
+        //private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        //[DllImport("kernel32")]
+        //private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
-        [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section, string key, string defVal, Byte[] retVal, int size, string filePath);
+        //[DllImport("kernel32")]
+        //private static extern int GetPrivateProfileString(string section, string key, string defVal, Byte[] retVal, int size, string filePath);
 
-        //dd
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-        private static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, [In, Out] char[] lpReturnedString, uint nSize, string lpFileName);
+        //**************************************************************
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         private static extern uint GetPrivateProfileSection(string lpAppName, IntPtr lpReturnedString, uint nSize, string lpFileName);
@@ -32,32 +30,63 @@ namespace ReaderGui
         private static extern uint GetPrivateProfileSectionNames(IntPtr lpszReturnBuffer, uint nSize, string lpFileName);
 
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        private static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, [In, Out] char[] lpReturnedString, uint nSize, string lpFileName);
 
-        public ReadFeig()
+        //另一种声明方式,使用 StringBuilder 作为缓冲区类型的缺点是不能接受\0字符，会将\0及其后的字符截断,
+        //所以对于lpAppName或lpKeyName为null的情况就不适用
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        private static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, uint nSize, string lpFileName);
+
+        //再一种声明，使用string作为缓冲区的类型同char[]
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        private static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, string lpReturnedString, uint nSize, string lpFileName);
+        
+
+        public ReadFeig(string path)
         {
-            this.path = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_noquote.ini"); ;
- 
-
-            ProcessInput();
+            this.path = path; 
 
         }
 
-        public string ReadValue(string Section, string Key)
-        {
-            StringBuilder temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(Section, Key, "", temp, 255, path);
-            return temp.ToString();
-        }
+        //public string[] ReadIniAllKeys(string section)
+        //{
+        //    UInt32 MAX_BUFFER = 32767;
 
-        public byte[] IniReadValues(string section, string key)
-        {
-            byte[] temp = new byte[255];
+        //    string[] items = new string[0];
 
-            int i = GetPrivateProfileString(section, key, "", temp, 255, path);
-            return temp;
-        }
+        //    IntPtr pReturnedString = Marshal.AllocCoTaskMem((int)MAX_BUFFER * sizeof(char));
 
+        //    UInt32 bytesReturned = GetPrivateProfileSection(section, pReturnedString, MAX_BUFFER, path);
 
+        //    if (!(bytesReturned == MAX_BUFFER - 2) || (bytesReturned == 0))
+        //    {
+        //        string returnedString = Marshal.PtrToStringAuto(pReturnedString, (int)bytesReturned);
+
+        //        items = returnedString.Split(new char[] { '\0' }, StringSplitOptions.RemoveEmptyEntries);
+        //    }
+
+        //    Marshal.FreeCoTaskMem(pReturnedString);
+
+        //    return items;
+        //}
+
+        //public string ReadValue(string Section, string Key)
+        //{
+        //    StringBuilder temp = new StringBuilder(255);
+        //    int i = GetPrivateProfileString(Section, Key, "", temp, 255, path);
+        //    return temp.ToString();
+        //}
+
+        //public byte[] IniReadValues(string section, string key)
+        //{
+        //    byte[] temp = new byte[255];
+
+        //    int i = GetPrivateProfileString(section, key, "", temp, 255, path);
+        //    return temp;
+        //}
+        
+        //*****************
         public string[] INIGetAllSectionNames()
         {
             uint MAX_BUFFER = 32767;    //默认为32767
@@ -129,55 +158,34 @@ namespace ReaderGui
 
             return value;
         }
-          
-        
-        public string[] ReadIniAllKeys(string section)
+
+
+        public string INIGetStringValue(string section, string key, string defaultValue)
         {
-            UInt32 MAX_BUFFER = 32767;
+            string value = defaultValue;
+            const int SIZE = 1024 * 10;
 
-            string[] items = new string[0];
-
-            IntPtr pReturnedString = Marshal.AllocCoTaskMem((int)MAX_BUFFER * sizeof(char));
-
-            UInt32 bytesReturned = GetPrivateProfileSection(section, pReturnedString, MAX_BUFFER, path);
-
-            if (!(bytesReturned == MAX_BUFFER - 2) || (bytesReturned == 0))
+            if (string.IsNullOrEmpty(section))
             {
-                string returnedString = Marshal.PtrToStringAuto(pReturnedString, (int)bytesReturned);
-
-                items = returnedString.Split(new char[] { '\0' }, StringSplitOptions.RemoveEmptyEntries);
+                throw new ArgumentException("必须指定节点名称", "section");
             }
 
-            Marshal.FreeCoTaskMem(pReturnedString);
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("必须指定键名称(key)", "key");
+            }
 
-            return items;
+            StringBuilder sb = new StringBuilder(SIZE);
+            uint bytesReturned = GetPrivateProfileString(section, key, defaultValue, sb, SIZE, path);
+
+            if (bytesReturned != 0)
+            {
+                value = sb.ToString();
+            }
+            sb = null;
+
+            return value;
         }
- 
-   
 
-            public static void ProcessInput()
-        {
-            //string in_data_temp = InitFile.ReadValue("Input", "Names");//in_data_temp = "url,hmac,password,pack,authen"
-            //in_data = in_data_temp.Split(',', ';').ToList();
-            //string in_types_temp = InitFile.ReadValue("Input", "Types");//in_types_temp = "combo_normal"
-            //in_types = in_types_temp.Split(',', ';').ToList();
-            //string in_padding_temp = InitFile.ReadValue("Input", "Padding");//in_padding_temp = "y,y,y,n,n"
-            //in_padding = in_padding_temp.Split(',', ';').ToList();
-            //in_columns = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_columns"));//in_columns = 5
-            //in_rows = System.Convert.ToInt32(InitFile.ReadValue("Input", "Num_rows"));//in_rows = -1
-            //in_start_row = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_row"));//in_start_row = 1
-            //in_start_column = System.Convert.ToInt32(InitFile.ReadValue("Input", "Start_column"));//in_start_column = 1
-            //in_reader = InitFile.ReadValue("Input", "Reader");//in_reader = "FEIG"
-
-            //strIniFile = ($"[Input]\n" +
-            //    $"Reader: '{in_reader}'\n" +
-            //    $"Start_row: '{in_start_row}'\n" +
-            //    $"Start_column: '{in_start_column}'\n" +
-            //    $"Num_columns: '{in_columns}'\n" +
-            //    $"Num_rows: '{in_rows}'\n" +
-            //    $"Names: '{in_data_temp}'\n" +
-            //    $"Types: '{in_types_temp}'\n" +
-            //    $"Padding: '{in_padding_temp}'");
-        }
     }
 }
