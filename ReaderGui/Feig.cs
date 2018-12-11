@@ -16,20 +16,16 @@ namespace ReaderGui
         public string model;
         public string[] protocols;
         public string[] ICs;
-        public Command command;
-        public Command command1;
+        public List<Command> command;
 
-        public Feig(string model_name,string protocols_name,string ICs_name,string command,string command1)
+
+        public Feig(string model_name,string protocols_name,string ICs_name,string command)
         {
             this.model = model_name;
             //this.protocols = protocols_name;
             this.protocols = getValues(protocols_name);
             this.ICs = getValues(ICs_name);
             this.command= getCommand(command);
-            if(command1!=null)
-            {
-                this.command1 = getCommand(command1);
-            }
             
         }
 
@@ -42,16 +38,24 @@ namespace ReaderGui
             return strList;
         }
 
-        private Command getCommand(string command)
+        private List<Command> getCommand(string command)
         {
 
             //string phrase = "The quick brown fox jumps over the lazy dog.";
             //string[] words = phrase.Split(' ');
-            Command temp;
-            string[] strList = command.Split(':');
-            temp.icName = strList[0];
-            temp.content = strList[1];
-            return temp;
+            List<Command> command_list=new List<Command>();
+
+            string[] commands = command.Split(';');
+            foreach(var command_item in commands)
+            {
+                Command temp;
+                string[] strList = command_item.Split(':');
+                temp.icName = strList[0];
+                temp.content = strList[1];
+                command_list.Add(temp);
+            }
+
+            return command_list;
         }
         public string showinfo()
         {
@@ -61,7 +65,7 @@ namespace ReaderGui
                 str_protocols += item+ ",";
 
             }
-            string info = model + "\n" + str_protocols + "\n" + ICs + "\n" + command.icName + "\n" + command.content;
+            string info = model + "\n" + str_protocols + "\n" + ICs + "\n";
             return info;
         }
     }

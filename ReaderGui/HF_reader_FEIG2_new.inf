@@ -1,4 +1,4 @@
-$CPR74_class-SetupCommands1-SLIX2$
+$CPR74_class-SetupCommands-SLIX2$
 Product	Product.Reader2.SetUp.Commands.CMD.1	SerialBaudRate:9600|500|0|1|0#Set Baud Rate to cRIO FPGA board
 Product	Product.Reader2.SetUp.Commands.CMD.2	FF 00 04(CRC:CCITT:1:-1)||1000|1000|0|1|TX1(0:0)|1|RX1(0:0)#Boot Firmware
 Product	Product.Reader2.SetUp.Commands.CMD.3	FF 04 06 00 07 08 00 (CRC:CCITT:1:-1)||200|200|0|1|TX1(0:0)|1|RX1(0:0)# Set Baud Rate = 460800
@@ -12,4 +12,19 @@ Product	Product.Reader2.SetUp.Commands.CMD.10	FF 02 94 05 DC (CRC:CCITT:1:-1)|FF
 Product	Product.Reader2.SetUp.Commands.CMD.11	FF 02 93 00 05 (CRC:CCITT:1:-1)|FF 00 93 00 00 37 1A|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Set Protocol GEN2
 Product	Product.Reader2.SetUp.Commands.CMD.12	FF 01 98 00 (CRC:CCITT:1:-1)|FF 00 98 00 00 86 71|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Set power mode = FULL
 Product	Product.Reader2.SetUp.Commands.CMD.13	FF 02 91 01 01 (CRC:CCITT:1:-1)|FF 00 91 00 00 17 58|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Monostatic Port 1
+$END$
+
+$CPR99_class-SetupCommands-SIC43NT$
+Product	Product.Reader2.SetUp.Commands.CMD.1	SerialBaudRate:9600|500|0|1|0#Set Baud Rate to cRIO FPGA board
+Product	Product.Reader2.SetUp.Commands.CMD.2	FF 00 04(CRC:CCITT:1:-1)||1000|1000|0|1|TX1(0:0)|1|RX1(0:0)#Boot Firmware
+Product	Product.Reader2.SetUp.Commands.CMD.3	FF 04 06 00 07 08 00 (CRC:CCITT:1:-1)||200|200|0|1|TX1(0:0)|1|RX1(0:0)# Set Baud Rate = 460800
+Product	Product.Reader2.SetUp.Commands.CMD.4	SerialBaudRate:460800|500|0|1|0#Set Baud Rate to cRIO FPGA board
+Product	Product.Reader2.SetUp.Commands.CMD.5	FF 01 97 01 (CRC:CCITT:1:-1)|FF 00 97 00 00 77 9E|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Read Program version
+Product	Product.Reader2.SetUp.Commands.CMD.6	FF 01 97 FF (CRC:CCITT:1:-1)|FF 00 97 00 00 77 9E|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Set "Open Region" (Basic command)
+$END$
+
+$CPR99_class-SetupCommands-NTAG213,NTAG210$
+Product	Product.Reader2.SetUp.Commands.CMD.1	SerialBaudRate:9600|500|0|1|0#Set Baud Rate to cRIO FPGA board
+Product	Product.Reader2.SetUp.Commands.CMD.2	FF 00 04(CRC:CCITT:1:-1)||1000|1000|0|1|TX1(0:0)|1|RX1(0:0)#Boot Firmware
+Product	Product.Reader2.SetUp.Commands.CMD.3	FF 04 06 00 07 08 00 (CRC:CCITT:1:-1)||200|200|0|1|TX1(0:0)|1|RX1(0:0)# Set Baud Rate = 460800
 $END$

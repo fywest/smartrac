@@ -13,7 +13,7 @@ namespace ReaderGui
 {
     public partial class Form1 : Form
     {
-        string[] ICsList;
+        //string[] ICsList;
 
         List<string> readerList=new List<string>();
         List<Command> commandList = new List<Command>();
@@ -26,7 +26,7 @@ namespace ReaderGui
         {
             
             InitializeComponent();
-            ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
+            //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
 
             path = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
             readFeig = new ReadFeig(path);
@@ -34,7 +34,7 @@ namespace ReaderGui
             //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
             //feigList.Add(feig);
 
-            checkedListBox1.Items.AddRange(ICsList);
+            checkedListBox1.Items.AddRange(readFeig.getICsList());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -162,15 +162,13 @@ namespace ReaderGui
             {
                 if (feig.model.Contains(str))
                 {
-                    Command item;
-                    item.icName = feig.command.icName;
-                    item.content = feig.command.content;
-                    commandList.Add(item);
-                    if(feig.command1.icName!=null)
+                    foreach(var command in feig.command)
                     {
-                        item.icName = feig.command1.icName;
-                        item.content = feig.command1.content;
+                        Command item;
+                        item.icName = command.icName;
+                        item.content = command.content;
                         commandList.Add(item);
+
                     }
                 }
             }
@@ -178,6 +176,18 @@ namespace ReaderGui
             {
                 string[] str_array = commandList.Select(i => i.icName.ToString()).ToArray();
                 checkedListBox3.Items.AddRange(str_array);
+                //int index = 0;
+                //foreach(var item in checkedListBox3.Items)
+                //{
+                //    if(item.ToString()==checkedListBox1.SelectedItem.ToString())
+                //    {
+                        
+                //        string commandIC = item.ToString();
+                //        addCommandContent(commandIC);
+
+                //    }
+                //    index++;
+                //}
             }
         }
 
@@ -213,8 +223,8 @@ namespace ReaderGui
                     if(item.content.Contains("$FILE$"))
                     {
                         Inf inf = new Inf();
-                        string keyword = "";
-                        content = inf.getContent("CPR74_class-SetupCommands1-SLIX2");
+                        string keyword = checkedListBox2.SelectedItem.ToString()+ "-SetupCommands-" + checkedListBox3.SelectedItem.ToString();
+                        content = inf.getContent(keyword);// ("CPR74_class-SetupCommands1-SLIX2");
                     }
                     else
                     {

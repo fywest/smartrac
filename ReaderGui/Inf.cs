@@ -46,6 +46,7 @@ namespace ReaderGui
                 {
                     break;
                 }
+                s = infRead.ReadLine();
             }
 
             infRead.Close();
