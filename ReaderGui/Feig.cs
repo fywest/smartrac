@@ -15,25 +15,43 @@ namespace ReaderGui
     {
         public string model;
         public string[] protocols;
-        public string ICs;
+        public string[] ICs;
         public Command command;
+        public Command command1;
 
-        public Feig(string model_name,string protocols_name,string ICs_name,string command_icName,string command_content)
+        public Feig(string model_name,string protocols_name,string ICs_name,string command,string command1)
         {
             this.model = model_name;
             //this.protocols = protocols_name;
-            this.protocols = getProtocols(protocols_name);
-            this.ICs = ICs_name;
-            this.command.icName = command_icName;
-            this.command.content = command_content;
+            this.protocols = getValues(protocols_name);
+            this.ICs = getValues(ICs_name);
+            this.command= getCommand(command);
+            if(command1!=null)
+            {
+                this.command1 = getCommand(command1);
+            }
+            
         }
-        private string[] getProtocols(string protocols)
+
+        private string[] getValues(string strValue)
         {
 
             //string phrase = "The quick brown fox jumps over the lazy dog.";
             //string[] words = phrase.Split(' ');
-            string[] strList=protocols.Split(',');
+            string[] strList=strValue.Split(',');
             return strList;
+        }
+
+        private Command getCommand(string command)
+        {
+
+            //string phrase = "The quick brown fox jumps over the lazy dog.";
+            //string[] words = phrase.Split(' ');
+            Command temp;
+            string[] strList = command.Split(':');
+            temp.icName = strList[0];
+            temp.content = strList[1];
+            return temp;
         }
         public string showinfo()
         {

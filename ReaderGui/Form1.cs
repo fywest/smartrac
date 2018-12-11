@@ -17,111 +17,62 @@ namespace ReaderGui
 
         List<string> readerList=new List<string>();
         List<Command> commandList = new List<Command>();
-        List<Feig> feigList = new List<Feig>();
-        
+
+        string path;
+
+        ReadFeig readFeig;
+
         public Form1()
         {
             
             InitializeComponent();
             ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
 
-            Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213", "YYYY");
-            Feig feig1 = new Feig("CPR40", "ISO14443B", "NTAG210", "NTAG210", "XXXX");
-            Feig feig2 = new Feig("CPR99", "ISO14443B", "NTAG213", "NTAG210", "XXXX");
+            path = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
+            readFeig = new ReadFeig(path);
 
-            string temp = "\"NTAG213\",\"NTAG210\",\"SIC43NT\",\"SLIX2\"";
-            Feig feig3 = new Feig("CPR99",temp, "NTAG213", "NTAG210", "ZZZZ");
-            feigList.Add(feig);
-            feigList.Add(feig1);
-            feigList.Add(feig2);
-            feigList.Add(feig3);
-        
+            //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
+            //feigList.Add(feig);
+
             checkedListBox1.Items.AddRange(ICsList);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //foreach (var item in feigList)
-            //{
-            //    MessageBox.Show(item.showinfo());
-            //}
+            //read inf file
+            Inf inf = new Inf();
+            string inf_temp=inf.getContent("CPR74_class-SetupCommands1-SLIX2");
+            MessageBox.Show(inf_temp);
+            //read ini file
+            string path= Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
 
-            //read file
-            string path= Path.Combine(Application.StartupPath, "HF_reader_FEIG2_noquote_reader.ini");
-            ReadFeig ini = new ReadFeig(path);
+            ReadFeig readFeig = new ReadFeig(path);
+
+            Ini ini = new Ini(path);
 
             string[] allSectionNames = ini.INIGetAllSectionNames();
          
             MessageBox.Show(string.Join("\n", allSectionNames));
 
-            string[] allItems_cpr40 = ini.INIGetAllItems("CPR40 class");
+            string[] allItems_cpr40 = ini.INIGetAllItems("CPR40_class");
             MessageBox.Show(string.Join("\n", allItems_cpr40));
 
-            string[] allItemkeys_cpr74 = ini.INIGetAllItemKeys("CPR74 class");
+            string[] allItemkeys_cpr74 = ini.INIGetAllItemKeys("CPR74_class");
             MessageBox.Show(string.Join("\n", allItemkeys_cpr74));
 
-            string[] allItems_cpr74=ini.INIGetAllItems("CPR74 class");
+            string[] allItems_cpr74=ini.INIGetAllItems("CPR74_class");
             MessageBox.Show(string.Join("\n",allItems_cpr74));
 
 
-
-            //string[] allItemkeys = ini.INIGetAllItemKeys("CPR40 class");
-            //MessageBox.Show(string.Join("\n", allItemkeys));
-
-            //string allValue = "";
-            //foreach(var section in allSectionNames)
-            //{
-            //    allValue += "\nSection: "+section + "\n";
-            //    string[] itemKeys = ini.INIGetAllItemKeys(section);
-            //    foreach (var key in itemKeys)
-            //    {
-            //        allValue += "\nKey: " + key + "\n";
-            //        string value = ini.INIGetStringValue(section, key,null);
-            //        allValue += value+"\n";
-            //    }
-            //}
-            //MessageBox.Show(allValue);
-
-            string protocols=ini.INIGetStringValue("CPR40 class", "Supported protocols", null);
-            string ICs= ini.INIGetStringValue("CPR40 class", "Supported ICs", null);
-            string Commands= ini.INIGetStringValue("CPR40 class", "Setup commands", null);
+            string protocols=ini.INIGetStringValue("CPR40_class", "SupportedProtocols", null);
+            string ICs= ini.INIGetStringValue("CPR40_class", "SupportedICs", null);
+            string Commands= ini.INIGetStringValue("CPR40_class", "SetupCommands", null);
 
 
 
             List<string> protocols_List=strToList(protocols);
             List<string> ICs_List = strToList(ICs);
 
-            //MessageBox.Show("h");
-
-
-            //byte[] byte_protocols=ini.IniReadValues("CPR40 class", "Supported protocols");
-            //var str = System.Text.Encoding.Default.GetString(byte_protocols);
-            //MessageBox.Show(str);
-
-            // Display in a message box all the items that are checked.
-
-            // First show the index and check state of all selected items.
-            //foreach (int indexChecked in checkedListBox1.CheckedIndices)
-            //{
-            //    // The indexChecked variable contains the index of the item.
-            //    MessageBox.Show("Index#: " + indexChecked.ToString() + ", is checked. Checked state is:" +
-            //                    checkedListBox1.GetItemCheckState(indexChecked).ToString() + ".");
-            //}
-
-            // Next show the object title and check state for each item selected.
-            //foreach (object itemChecked in checkedListBox1.CheckedItems)
-            //{
-
-            //    // Use the IndexOf method to get the index of an item.
-            //    MessageBox.Show("Item with title: \"" + itemChecked.ToString() +
-            //                    "\", is checked. Checked state is: " +
-            //                    checkedListBox1.GetItemCheckState(checkedListBox1.Items.IndexOf(itemChecked)).ToString() + ".");
-            //}
-
-            //foreach (object itemChecked in checkedListBox1.CheckedItems)
-            //{
-            //    ReaderList.Add(itemChecked.ToString());
-            //}
             foreach (var item in readerList)
             {
                 MessageBox.Show(item);
@@ -165,14 +116,16 @@ namespace ReaderGui
             checkedListBox2.Items.Clear();
             checkedListBox3.Items.Clear();
             textBox1.Clear();
-            foreach(var reader in feigList)
+
+            foreach (var feig in readFeig.feigList)
             {
-                if(reader.ICs==str)
+                if (feig.ICs.Contains(str))
                 {
-                    readerList.Add(reader.model);
+                    readerList.Add(feig.model);
                 }
             }
-            if(readerList.Count>0)
+
+            if (readerList.Count>0)
             {
                 string[] str_array = readerList.Select(i => i.ToString()).ToArray();
                 checkedListBox2.Items.AddRange(str_array);
@@ -201,17 +154,24 @@ namespace ReaderGui
 
         private void addCommandList(string selectedReader)
         {
-            string str = selectedReader;////"NTAG213";
+            string str = selectedReader;////"CPR40";
             commandList.Clear();
             checkedListBox3.Items.Clear();
-            foreach (var reader in feigList)
+
+            foreach (var feig in readFeig.feigList)
             {
-                if (reader.model == str)
+                if (feig.model.Contains(str))
                 {
                     Command item;
-                    item.icName = reader.command.icName;
-                    item.content = reader.command.content;
+                    item.icName = feig.command.icName;
+                    item.content = feig.command.content;
                     commandList.Add(item);
+                    if(feig.command1.icName!=null)
+                    {
+                        item.icName = feig.command1.icName;
+                        item.content = feig.command1.content;
+                        commandList.Add(item);
+                    }
                 }
             }
             if (commandList.Count > 0)
@@ -249,7 +209,18 @@ namespace ReaderGui
                 if(item.icName==str)
                 {
                     //MessageBox.Show(item.content);
-                    textBox1.Text = item.content;
+                    string content="";
+                    if(item.content.Contains("$FILE$"))
+                    {
+                        Inf inf = new Inf();
+                        string keyword = "";
+                        content = inf.getContent("CPR74_class-SetupCommands1-SLIX2");
+                    }
+                    else
+                    {
+                        content = item.content;
+                    }
+                    textBox1.Text = content;
                 }
             }
         }
