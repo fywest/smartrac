@@ -145,7 +145,20 @@ namespace ReaderGui
                 string selectedReader = checkedListBox2.SelectedItem.ToString();
                 //MessageBox.Show(selectedReader);
                 addCommandList(selectedReader);
-                
+
+                int index = 0;
+                foreach (var item in checkedListBox3.Items)
+                {
+                    if (item.ToString().Contains(checkedListBox1.SelectedItem.ToString()))
+                    {
+
+                        //checkedListBox3.Update();
+                        checkedListBox3.SetSelected(index, true);
+                        checkedListBox3.SetItemCheckState(index, CheckState.Checked);
+                        break;
+                    }
+                    index++;
+                }
 
 
             }
@@ -176,18 +189,9 @@ namespace ReaderGui
             {
                 string[] str_array = commandList.Select(i => i.icName.ToString()).ToArray();
                 checkedListBox3.Items.AddRange(str_array);
-                //int index = 0;
-                //foreach(var item in checkedListBox3.Items)
-                //{
-                //    if(item.ToString()==checkedListBox1.SelectedItem.ToString())
-                //    {
-                        
-                //        string commandIC = item.ToString();
-                //        addCommandContent(commandIC);
 
-                //    }
-                //    index++;
-                //}
+
+
             }
         }
 
@@ -200,13 +204,15 @@ namespace ReaderGui
                     checkedListBox3.SetItemCheckState(i, CheckState.Unchecked);
                 }
 
+
                 string commandIC = checkedListBox3.SelectedItem.ToString();
                 //MessageBox.Show(CommandIC);
                 addCommandContent(commandIC);
                 
-
-
-
+            }
+            else if(e.NewValue == CheckState.Unchecked)
+            {
+                textBox1.Clear();
             }
 
         }
