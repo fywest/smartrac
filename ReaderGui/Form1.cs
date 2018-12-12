@@ -43,44 +43,9 @@ namespace ReaderGui
         private void button1_Click(object sender, EventArgs e)
         {
             saveCommand();
-            ////read inf file
-            //Inf inf = new Inf();
-            //string inf_temp=inf.getContent("CPR74_class-SetupCommands1-SLIX2");
-            //MessageBox.Show(inf_temp);
-            ////read ini file
-            //string path= Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
 
-            //ReadFeig readFeig = new ReadFeig(path);
-
-            //Ini ini = new Ini(path);
-
-            //string[] allSectionNames = ini.INIGetAllSectionNames();
-         
-            //MessageBox.Show(string.Join("\n", allSectionNames));
-
-            //string[] allItems_cpr40 = ini.INIGetAllItems("CPR40_class");
-            //MessageBox.Show(string.Join("\n", allItems_cpr40));
-
-            //string[] allItemkeys_cpr74 = ini.INIGetAllItemKeys("CPR74_class");
-            //MessageBox.Show(string.Join("\n", allItemkeys_cpr74));
-
-            //string[] allItems_cpr74=ini.INIGetAllItems("CPR74_class");
-            //MessageBox.Show(string.Join("\n",allItems_cpr74));
-
-
-            //string protocols=ini.INIGetStringValue("CPR40_class", "SupportedProtocols", null);
-            //string ICs= ini.INIGetStringValue("CPR40_class", "SupportedICs", null);
-            //string Commands= ini.INIGetStringValue("CPR40_class", "SetupCommands", null);
-
-
-
-            //List<string> protocols_List=strToList(protocols);
-            //List<string> ICs_List = strToList(ICs);
-
-            //foreach (var item in readerList)
-            //{
-            //    MessageBox.Show(item);
-            //}
+            label5.Text = outName + " saved suceessful";
+   
             
         }
 
@@ -230,6 +195,7 @@ namespace ReaderGui
                 {
                     //MessageBox.Show(item.content);
                     string keyword = checkedListBox2.SelectedItem.ToString() + "-SetupCommands-" + checkedListBox3.SelectedItem.ToString();
+                    outName = keyword + ".txt";
                     string content="";
                     if(item.content.Contains("$FILE$"))
                     {
@@ -237,15 +203,18 @@ namespace ReaderGui
                         
                         content = inf.getContent(keyword);// ("CPR74_class-SetupCommands1-SLIX2");
                         outCommand=inf.output_command;
-                        outName = keyword + ".txt";
+
                     }
                     else
                     {
                         content = item.content;
+                        outCommand = content;
                     }
                     //textBox1.Font=new Font(textBox1.Font.Name,6,textBox1.Font.Style);
                     label4.Text = "Command: "+keyword;
                     textBox1.Text = content;
+ 
+
                 }
             }
         }
@@ -262,6 +231,22 @@ namespace ReaderGui
             txtWrite.WriteLine(outCommand);
             txtWrite.Close();
             txtOut.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                label4.Text = "Command: ";
+                label5.Text = "Status";
+                button1.Visible = false;
+                label5.Visible= false;
+            }
+            else
+            {
+                button1.Visible = true;
+                label5.Visible = true;
+            }
         }
     }
 }
