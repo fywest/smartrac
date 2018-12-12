@@ -11,8 +11,14 @@ namespace ReaderGui
     class Inf
     {
         string infPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.inf");
+        string txtPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.txt");
+
+        public string output_command;
         FileStream inf;
         StreamReader infRead;
+        FileStream txtOut;
+        StreamWriter txtWrite;
+
         public Inf()
         {
 
@@ -21,10 +27,11 @@ namespace ReaderGui
         public string getContent(string commandName)
         {
             string temp="";
+           
             inf = new FileStream(infPath, FileMode.Open, FileAccess.Read);
             infRead = new StreamReader(inf, System.Text.Encoding.Default);
 
-            int cnt = 0;
+            output_command ="";
             string s = infRead.ReadLine();
             bool done = false;
             while(s!=null)
@@ -34,6 +41,8 @@ namespace ReaderGui
                     s = infRead.ReadLine();
                     while (!s.Contains("$END$"))
                     {
+                        output_command += s;
+                        output_command += "\r";
                         temp += s;
                         temp += "\r\n";
                         s = infRead.ReadLine();
@@ -51,10 +60,17 @@ namespace ReaderGui
 
             infRead.Close();
             inf.Close();
-            return temp;
+            return temp;           
 
-            
+        }
 
+        public void saveCommand()
+        {
+            txtOut = new FileStream(txtPath, FileMode.Create, FileAccess.Write);
+            txtWrite = new StreamWriter(txtOut, System.Text.Encoding.Default);
+            txtWrite.WriteLine(output_command);
+            txtWrite.Close();
+            txtOut.Close();
         }
 
     }
