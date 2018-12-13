@@ -54,6 +54,7 @@ namespace ReaderGui
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             //MessageBox.Show("hi");
+
             if (e.NewValue == CheckState.Checked)
             {
                 foreach (int i in checkedListBox1.CheckedIndices)
@@ -272,13 +273,50 @@ namespace ReaderGui
             //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
 
             //iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
+            if(string.IsNullOrEmpty(infPath))
+            {
+                infPath = iniPath.Replace(".ini", ".inf");
+                label7.Text = "Default Command File: " + infPath;
+            }
 
             readFeig = new ReadFeig(iniPath);
 
             //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
             //feigList.Add(feig);
+            if(readFeig.feigList.Count==0)
+            {
+                MessageBox.Show("please open configuration files!");
+            }
+            else
+            {
+                button2.Visible = false;
+                checkedListBox1.Items.Clear();
+                checkedListBox1.Items.AddRange(readFeig.getICsList());
+            }
 
-            checkedListBox1.Items.AddRange(readFeig.getICsList());
+        }
+
+        private void label6_TextChanged(object sender, EventArgs e)
+        {
+            button2.Visible = true;
+        }
+
+        private void label7_TextChanged(object sender, EventArgs e)
+        {
+            button2.Visible = true;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 a = new AboutBox1();
+           
+            if (FormWindowState.Minimized == WindowState || this.Visible == false)
+                a.StartPosition = FormStartPosition.CenterScreen;
+            else
+                a.StartPosition = FormStartPosition.CenterParent;
+            
+            a.ShowDialog();
+            
         }
     }
 }
