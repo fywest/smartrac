@@ -10,7 +10,7 @@ namespace ReaderGui
 {
     class Inf
     {
-        string infPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.inf");
+        string infPath;// = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.inf");
         string txtPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.txt");
 
         public string output_command;
@@ -19,9 +19,9 @@ namespace ReaderGui
         FileStream txtOut;
         StreamWriter txtWrite;
 
-        public Inf()
+        public Inf(string infpath)
         {
-
+            infPath = infpath;
         }
 
         public string getContent(string commandName)

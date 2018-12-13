@@ -18,7 +18,8 @@ namespace ReaderGui
         List<string> readerList=new List<string>();
         List<Command> commandList = new List<Command>();
 
-        string path;
+        string iniPath;
+        string infPath;
         string outCommand;
         string outName;
 
@@ -29,22 +30,13 @@ namespace ReaderGui
         {
             
             InitializeComponent();
-            //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
-
-            path = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
-            readFeig = new ReadFeig(path);
-
-            //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
-            //feigList.Add(feig);
-
-            checkedListBox1.Items.AddRange(readFeig.getICsList());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             saveCommand();
 
-            label5.Text = outName + " saved suceessful";
+            label5.Text = outName + " saved suceessfully";
    
             
         }
@@ -199,7 +191,7 @@ namespace ReaderGui
                     string content="";
                     if(item.content.Contains("$FILE$"))
                     {
-                        Inf inf = new Inf();
+                        Inf inf = new Inf(infPath);
                         
                         content = inf.getContent(keyword);// ("CPR74_class-SetupCommands1-SLIX2");
                         outCommand=inf.output_command;
@@ -247,6 +239,46 @@ namespace ReaderGui
                 button1.Visible = true;
                 label5.Visible = true;
             }
+        }
+
+        private void openReadIniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            openFileDialog1.Filter = "Reader config Files|*.ini";
+            openFileDialog1.Title = "Select a Feig ini File";
+
+            if (openFileDialog1.ShowDialog(this)==DialogResult.OK)
+            {
+                iniPath = openFileDialog1.FileName;
+                label6.Text = "Feig Config File: " + iniPath;
+            }
+        }
+
+        private void openCommandInfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Command config Files|*.inf";
+            openFileDialog1.Title = "Select a Command inf File";
+
+            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                infPath = openFileDialog1.FileName;
+                label7.Text = "Command File: " + infPath;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
+
+            //iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
+
+            readFeig = new ReadFeig(iniPath);
+
+            //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
+            //feigList.Add(feig);
+
+            checkedListBox1.Items.AddRange(readFeig.getICsList());
         }
     }
 }
