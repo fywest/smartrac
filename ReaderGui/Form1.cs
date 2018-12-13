@@ -251,7 +251,7 @@ namespace ReaderGui
             if (openFileDialog1.ShowDialog(this)==DialogResult.OK)
             {
                 iniPath = openFileDialog1.FileName;
-                label6.Text = "Feig Config File: " + iniPath;
+                label6.Text = "Reader Config File : " + iniPath;
             }
         }
 
@@ -263,7 +263,7 @@ namespace ReaderGui
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 infPath = openFileDialog1.FileName;
-                label7.Text = "Command File: " + infPath;
+                label7.Text = "Command Config File: " + infPath;
             }
         }
 
@@ -276,7 +276,7 @@ namespace ReaderGui
             if(string.IsNullOrEmpty(infPath))
             {
                 infPath = iniPath.Replace(".ini", ".inf");
-                label7.Text = "Default Command File: " + infPath;
+                label7.Text = "DefaultCommand File: " + infPath;
             }
 
             readFeig = new ReadFeig(iniPath);
@@ -285,12 +285,12 @@ namespace ReaderGui
             //feigList.Add(feig);
             if(readFeig.feigList.Count==0)
             {
-                MessageBox.Show("please open configuration files!");
+                MessageBox.Show("please check configuration files!");
             }
             else
             {
                 button2.Visible = false;
-                checkedListBox1.Items.Clear();
+                
                 checkedListBox1.Items.AddRange(readFeig.getICsList());
             }
 
@@ -299,11 +299,34 @@ namespace ReaderGui
         private void label6_TextChanged(object sender, EventArgs e)
         {
             button2.Visible = true;
+            clearAllBox();
         }
 
         private void label7_TextChanged(object sender, EventArgs e)
         {
             button2.Visible = true;
+            clearAllBox();
+
+        }
+
+        private void clearAllBox()
+        {
+            if(checkedListBox1.Items.Count>0)
+            {
+                checkedListBox1.Items.Clear();
+            }
+            if (checkedListBox2.Items.Count > 0)
+            {
+                checkedListBox2.Items.Clear();
+            }
+            if (checkedListBox3.Items.Count > 0)
+            {
+                checkedListBox3.Items.Clear();
+            }
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                textBox1.Clear();
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -317,6 +340,11 @@ namespace ReaderGui
             
             a.ShowDialog();
             
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
