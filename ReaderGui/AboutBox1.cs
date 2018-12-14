@@ -19,7 +19,7 @@ namespace ReaderGui
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = "SMARTRAC";// AssemblyCompany;
-            this.textBoxDescription.Text = "This a application for production test.\r\nThis is trainee project created by Li Li.";//AssemblyDescription;
+            this.textBoxDescription.Text = AssemblyDescription;
         }
 
         #region Assembly Attribute Accessors

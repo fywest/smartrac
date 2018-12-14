@@ -12,11 +12,13 @@ namespace ReaderGui
         public List<Feig> feigList;
         public Ini ini;
         public List<string> ICsNameList;
+        //public String[] SupportedModels;
 
         public ReadFeig(string inipath)
         {
             ini = new Ini(inipath);
             ICsNameList = new List<string>();
+            //SupportedModels = getSupportedModels();
             feigList = getAllFeig();
             
         }
@@ -27,47 +29,58 @@ namespace ReaderGui
             return feig;
         }
 
+        public string[] getSupportedModels()
+        {
+            string model_value = ini.INIGetStringValue("Base_class", "SupportedModels", null);
+            string[] models = model_value.Split(',');
+
+            return models;
+        }
         public List<Feig> getAllFeig()
         {
             List<Feig> feigList_temp = new List<Feig>();
 
             string[] allSectionNames = ini.INIGetAllSectionNames();
-            foreach(var section in allSectionNames)
+            string[] models = getSupportedModels();
+            string models_class;
+            models_class = string.Join("_class,", models)+"_class";
+            foreach (var section in allSectionNames)
             {
-                if(section.Contains("CPR"))
-                {
-                    string[] itemKeys = ini.INIGetAllItemKeys(section);
-                    string protocols="", ICs="", commands="";
-                    foreach (var key in itemKeys)
+             
+                    if (models_class.Contains(section))
                     {
-                        string value = ini.INIGetStringValue(section, key, null);
-                        if(key.Contains("Protocols"))
-                        { protocols = value; }
-                        else if (key.Contains("ICs"))
+                        string[] itemKeys = ini.INIGetAllItemKeys(section);
+                        string protocols = "", ICs = "", commands = "";
+                        foreach (var key in itemKeys)
                         {
-                            ICs = value;
-                            string[] strList = ICs.Split(',');
-                            foreach(var item in strList)
+                            string value = ini.INIGetStringValue(section, key, null);
+                            if (key.Contains("Protocols"))
+                            { protocols = value; }
+                            else if (key.Contains("ICs"))
                             {
-                                string strTemp= item.Trim();
-
-                                if(!ICsNameList.Contains(strTemp))
+                                ICs = value;
+                                string[] strList = ICs.Split(',');
+                                foreach (var item in strList)
                                 {
-                                    ICsNameList.Add(strTemp);
+                                    string strTemp = item.Trim();
+
+                                    if (!ICsNameList.Contains(strTemp))
+                                    {
+                                        ICsNameList.Add(strTemp);
+                                    }
                                 }
                             }
+                            else if (key.Contains("Commands"))
+                            { commands = value; }
+
                         }
-                        else if (key.Contains("Commands"))
-                        { commands = value; }
+                        Feig temp = new Feig(section, protocols, ICs, commands);
 
+                        feigList_temp.Add(temp);
                     }
-                    Feig temp = new Feig(section,protocols, ICs, commands);
-
-                    feigList_temp.Add(temp);
                 }
 
-            }
-
+           
             //addFeig to List
             return feigList_temp;
         }
