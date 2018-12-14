@@ -37,8 +37,9 @@ namespace ReaderGui
             saveCommand();
 
             label5.Text = outName + " saved suceessfully";
-   
-            
+
+            button1.Visible = false;
+
         }
 
         private List<string> strToList(string protocols)
