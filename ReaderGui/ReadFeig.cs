@@ -31,7 +31,7 @@ namespace ReaderGui
 
         public string[] getSupportedModels()
         {
-            string model_value = ini.INIGetStringValue("Base_class", "SupportedModels", null);
+            string model_value = ini.INIGetStringValue("Base_class", "SupportedModels");//, null);
             string[] models = model_value.Split(',');
 
             return models;
@@ -53,7 +53,7 @@ namespace ReaderGui
                         string protocols = "", ICs = "", commands = "";
                         foreach (var key in itemKeys)
                         {
-                            string value = ini.INIGetStringValue(section, key, null);
+                        string value = ini.INIGetStringValue(section, key);//, null);
                             if (key.Contains("Protocols"))
                             { protocols = value; }
                             else if (key.Contains("ICs"))

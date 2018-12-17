@@ -112,8 +112,9 @@ namespace ReaderGui
         }
 
 
-        public string INIGetStringValue(string section, string key, string defaultValue)
+        public string INIGetStringValue(string section, string key)//, string defaultValue)
         {
+            string defaultValue = null;
             string value = defaultValue;
             const int SIZE = 1024 * 10;
 
