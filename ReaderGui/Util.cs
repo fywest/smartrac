@@ -43,6 +43,11 @@ namespace ReaderGui
             string str_in_data = string.Join("\n", str_array);
             return str_in_data;
         }
+        public static string StrArrayToStr(string[] str_array, string separator)
+        {
+            string str_in_data = string.Join(separator, str_array);
+            return str_in_data;
+        }
     }
 
 }

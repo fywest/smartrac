@@ -11,6 +11,7 @@ namespace ReaderGui
     {
         public List<Feig> feigList;
         public Ini ini;
+        public Inf inf;
         public List<string> ICsNameList;
         public List<string> ModelList;
         //public String[] SupportedModels;
@@ -25,6 +26,17 @@ namespace ReaderGui
             
         }
 
+        public ReadFeig(string inipath,string infpath)
+        {
+            ini = new Ini(inipath);
+            inf = new Inf(infpath);
+            ICsNameList = new List<string>();
+            ModelList = getModelList();
+            //SupportedModels = getSupportedModels();
+            feigList = getAllFeig();
+
+        }
+
         public Feig addFeig(string section, string keyProtocols, string keyICs, string keyCommand)
         {
             Feig feig = new Feig(section,keyProtocols,keyICs,keyCommand);
@@ -33,7 +45,7 @@ namespace ReaderGui
 
         public string[] getSupportedModels()
         {
-            string model_value = ini.INIGetStringValue("Base_class", "SupportedModels");//, null);
+            string model_value = ini.INIGetStringValue("Base", "SupportedModels");//, null);
             string[] models = model_value.Split(',');
             List<string> parts = model_value.Split(',').Select(p => p.Trim()).ToList();
             return models;
@@ -41,7 +53,7 @@ namespace ReaderGui
 
         public List<string> getModelList()
         {
-            string model_value = ini.INIGetStringValue("Base_class", "SupportedModels");//, null);
+            string model_value = ini.INIGetStringValue("Base", "SupportedModels");//, null);
            
             List<string> parts = model_value.Split(',').Select(p => p.Trim()).ToList();
             return  parts;
@@ -53,7 +65,7 @@ namespace ReaderGui
             string[] allSectionNames = ini.INIGetAllSectionNames();
             string[] models = getSupportedModels();
             string models_class;
-            models_class = string.Join("_class,", models)+"_class";
+            models_class = string.Join(",", models);
             foreach (var section in allSectionNames)
             {
              
