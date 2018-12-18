@@ -18,8 +18,8 @@ namespace ReaderGui
         List<string> readerList=new List<string>();
         List<Command> commandList = new List<Command>();
 
-        string iniPath;
-        string infPath;
+        public static string iniPath;
+        public static string infPath;
         string outCommand;
         string outName;
 
@@ -42,15 +42,7 @@ namespace ReaderGui
 
         }
 
-        private List<string> strToList(string protocols)
-        {
-            string protocols_new = protocols.Replace("\"", "");
-            List<string> protocols_List = new List<string>();
-            protocols_List = protocols_new.Split(',', ';').ToList();
-            string str_in_data = string.Join("\n", protocols_List.ToArray());
-            //MessageBox.Show(str_in_data);
-            return protocols_List;
-        }
+
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -346,6 +338,13 @@ namespace ReaderGui
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void readerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            //form2.ShowDialog();
+            form2.Show();
         }
     }
 }

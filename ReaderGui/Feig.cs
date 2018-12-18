@@ -18,7 +18,10 @@ namespace ReaderGui
         public string[] ICs;
         public List<Command> command;
 
+        public Feig()
+        {
 
+        }
         public Feig(string model_name,string protocols_name,string ICs_name,string command)
         {
             this.model = model_name;

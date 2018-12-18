@@ -12,12 +12,14 @@ namespace ReaderGui
         public List<Feig> feigList;
         public Ini ini;
         public List<string> ICsNameList;
+        public List<string> ModelList;
         //public String[] SupportedModels;
 
         public ReadFeig(string inipath)
         {
             ini = new Ini(inipath);
             ICsNameList = new List<string>();
+            ModelList = getModelList();
             //SupportedModels = getSupportedModels();
             feigList = getAllFeig();
             
@@ -33,8 +35,16 @@ namespace ReaderGui
         {
             string model_value = ini.INIGetStringValue("Base_class", "SupportedModels");//, null);
             string[] models = model_value.Split(',');
-
+            List<string> parts = model_value.Split(',').Select(p => p.Trim()).ToList();
             return models;
+        }
+
+        public List<string> getModelList()
+        {
+            string model_value = ini.INIGetStringValue("Base_class", "SupportedModels");//, null);
+           
+            List<string> parts = model_value.Split(',').Select(p => p.Trim()).ToList();
+            return  parts;
         }
         public List<Feig> getAllFeig()
         {
