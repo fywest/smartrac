@@ -31,7 +31,17 @@ namespace ReaderGui
         //再一种声明，使用string作为缓冲区的类型同char[]
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         private static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, string lpReturnedString, uint nSize, string lpFileName);
-        
+
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
+
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]     //可以没有此行
+        private static extern bool WritePrivateProfileSection(string lpAppName, string lpString, string lpFileName);
+
 
         public Ini(string path)
         {
@@ -139,6 +149,84 @@ namespace ReaderGui
 
             return value;
         }
+
+
+        public bool INIWriteValue(string section, string key, string value)
+        {
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("必须指定键名称", "key");
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentException("值不能为null", "value");
+            }
+
+            return WritePrivateProfileString(section, key, value, path);
+
+        }
+
+
+
+        public bool INIWriteItems(string section, string items)
+        {
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            if (string.IsNullOrEmpty(items))
+            {
+                throw new ArgumentException("必须指定键值对", "items");
+            }
+
+            return WritePrivateProfileSection(section, items, path);
+        }
+
+
+        public bool INIDeleteKey(string section, string key)
+        {
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("必须指定键名称", "key");
+            }
+
+            return WritePrivateProfileString(section, key, null, path);
+        }
+
+
+        public bool INIDeleteSection(string section)
+        {
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            return WritePrivateProfileString(section, null, null, path);
+        }
+
+
+        public bool INIEmptySection(string section)
+        {
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            return WritePrivateProfileSection(section, string.Empty, path);
+        }
+
 
     }
 }

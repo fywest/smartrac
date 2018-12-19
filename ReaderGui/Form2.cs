@@ -15,7 +15,7 @@ namespace ReaderGui
     {
         ReadFeig readFeig;
         Feig feig;
-        string inipath;
+        string iniPath;
         string infPath;
 
         List<string> str_commandContent = new List<string>();
@@ -23,13 +23,19 @@ namespace ReaderGui
         public Form2()
         {
             InitializeComponent();
-            if(string.IsNullOrEmpty(Form1.iniPath))
+            if (string.IsNullOrEmpty(Form1.iniPath))
             {
-                inipath = Path.Combine(Application.StartupPath,"HF_reader_FEIG2_new.ini");
-                infPath = inipath.Replace(".ini", ".inf");
+                iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_configuration_ver2.ini");
+                infPath = iniPath.Replace(".ini", ".inf");
                 //Form1.iniPath = inipath;// @"C:\Users\fywes\git_fywest\smartrac\ReaderGui\bin\Debug\HF_reader_FEIG2_configuration.ini";
             }
-            readFeig = new ReadFeig(inipath,infPath);
+            else
+            {
+                iniPath = Form1.iniPath;
+                infPath = Form1.infPath;
+            }
+            readFeig = new ReadFeig(iniPath,infPath);
+
             
             InitListBox1();
         }
@@ -66,13 +72,12 @@ namespace ReaderGui
             string str_commandList = commandListToStr(feig);
             textBox1.Text = Util.StrArrayToStr(feig.protocols,",")+"\r\n"+ Util.StrArrayToStr(feig.ICs,",") + "\r\n" + str_commandList;
 
-            if(str_commandContent.Count == 1)
+            if(str_commandContent.Count >= 1)
             {
                 textBox2.Text = str_commandContent[0];
             }
-           else if(str_commandContent.Count == 2)
+           if(str_commandContent.Count == 2)
             {
-                textBox2.Text = str_commandContent[0];
                 textBox3.Text = str_commandContent[1];
             }
 
@@ -126,6 +131,51 @@ namespace ReaderGui
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            testIni();
+            //readFeig.ini.INIWriteValue("t1", "h1", "r1");
+        }
+
+        private void testIni()
+        {
+            string iniWritePath = Path.Combine(Application.StartupPath, "test.ini");
+            //readFeig.ini.INIWriteValue("t1", "h1", "r1");
+
+            string file = iniWritePath;
+            Ini iniTest = new Ini(file);
+            //写入/更新键值
+            iniTest.INIWriteValue("Desktop", "Color", "Red");
+            iniTest.INIWriteValue("Desktop", "Width", "3270");
+
+            iniTest.INIWriteValue("Toolbar", "Items", "Save,Delete,Open");
+            iniTest.INIWriteValue("Toolbar", "Dock", "True");
+
+            //写入一批键值
+            iniTest.INIWriteItems("Menu", "File=文件\0View=视图\0Edit=编辑");
+
+            //获取文件中所有的节点
+            string[] sections = iniTest.INIGetAllSectionNames();
+
+            //获取指定节点中的所有项
+            string[] items = iniTest.INIGetAllItems("Menu");
+
+            //获取指定节点中所有的键
+            string[] keys = iniTest.INIGetAllItemKeys("Menu");
+
+            //获取指定KEY的值
+            string value = iniTest.INIGetStringValue("Desktop", "color");
+
+            //删除指定的KEY
+            iniTest.INIDeleteKey("desktop", "color");
+
+            //删除指定的节点
+            iniTest.INIDeleteSection("desktop");
+
+            //清空指定的节点
+            iniTest.INIEmptySection("toolbar");
         }
     }
 }

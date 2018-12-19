@@ -11,7 +11,9 @@ namespace ReaderGui
     class Inf
     {
         string infPath;// = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.inf");
-        string txtPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.txt");
+        string txtPath;// = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.txt");
+
+        List<Command> commandList;
 
         public string output_command;
         FileStream inf;
@@ -22,6 +24,52 @@ namespace ReaderGui
         public Inf(string infpath)
         {
             infPath = infpath;
+            commandList = new List<Command>();
+            getCommandList();
+            saveCommandList("temp.inf");//in debug folder
+        }
+
+        public void getCommandList()
+        {
+   
+
+            Command command_tmp;
+            inf = new FileStream(infPath, FileMode.Open, FileAccess.Read);
+            infRead = new StreamReader(inf, System.Text.Encoding.Default);
+
+            string s = infRead.ReadLine();
+            int len;
+            
+            while (s != null)
+            {
+                
+                len = s.Length;
+                if (len > 0 && s.Contains("$FILE$"))//s[0].Equals('$')&&s[len-1].Equals('$'))
+                {
+                    command_tmp.icName = s.Substring(6,len-6);//remove $
+                    s = infRead.ReadLine();
+                    string lines = "";
+                    while (!s.Contains("$END$"))
+                    {
+                        lines += s;
+                        lines += "\r";
+
+                        s = infRead.ReadLine();
+
+
+                    }
+                    command_tmp.content = lines;
+                    commandList.Add(command_tmp);
+                   
+ 
+                }
+
+                s = infRead.ReadLine();
+            }
+
+            infRead.Close();
+            inf.Close();
+            
         }
 
         public string getContent(string commandName)
@@ -64,11 +112,27 @@ namespace ReaderGui
 
         }
 
-        public void saveCommand()
+        public void saveCommand(Command command)
         {
             txtOut = new FileStream(txtPath, FileMode.Create, FileAccess.Write);
             txtWrite = new StreamWriter(txtOut, System.Text.Encoding.Default);
-            txtWrite.WriteLine(output_command);
+            txtWrite.WriteLine(command.icName);
+            txtWrite.WriteLine(command.content);
+            txtWrite.Close();
+            txtOut.Close();
+        }
+        public void saveCommandList(string tempPath)
+        {
+            
+            string txtPath = Path.Combine(Application.StartupPath, tempPath);
+            txtOut = new FileStream(txtPath, FileMode.Create, FileAccess.Write);
+            txtWrite = new StreamWriter(txtOut, System.Text.Encoding.Default);
+            foreach(Command command in commandList)
+            {
+                txtWrite.WriteLine("$FILE$"+command.icName);
+                txtWrite.WriteLine(command.content);
+            }
+           
             txtWrite.Close();
             txtOut.Close();
         }
