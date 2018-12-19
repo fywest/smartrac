@@ -18,7 +18,13 @@ namespace ReaderGui
         string iniPath;
         string infPath;
 
+        string str_conf_section;
+        string str_conf_protocols;
+        string str_conf_ICs;
+        string str_conf_command;
         List<string> str_commandContent = new List<string>();
+        List<string> str_commandKeywords = new List<string>();
+
 
         public Form2()
         {
@@ -69,15 +75,29 @@ namespace ReaderGui
 
             //string[] str_lines=readFeig.ini.INIGetAllItems(feig.model+"_class");
             //string str_command= commandToStr(feig.command[0]);
-            string str_commandList = commandListToStr(feig);
-            textBox1.Text = Util.StrArrayToStr(feig.protocols,",")+"\r\n"+ Util.StrArrayToStr(feig.ICs,",") + "\r\n" + str_commandList;
+            
 
-            if(str_commandContent.Count >= 1)
+            textBox6.Text = selectModel;
+            str_conf_section = selectModel;
+
+            textBox1.Text = Util.StrArrayToStr(feig.protocols, ",");
+            str_conf_protocols= Util.StrArrayToStr(feig.protocols, ",");
+
+            textBox4.Text = Util.StrArrayToStr(feig.ICs, ",");
+            str_conf_ICs= Util.StrArrayToStr(feig.ICs, ",");
+
+            string str_commandList = commandListToStr(feig);
+            textBox5.Text = str_commandList;
+            str_conf_command = str_commandList;
+
+            if (str_commandContent.Count >= 1)
             {
+                label3.Text = str_commandKeywords[0];
                 textBox2.Text = str_commandContent[0];
             }
            if(str_commandContent.Count == 2)
             {
+                label4.Text = str_commandKeywords[1];
                 textBox3.Text = str_commandContent[1];
             }
 
@@ -108,9 +128,12 @@ namespace ReaderGui
                 str_command.Add(commandToStr(temp));
                 if(temp.content.Contains("$FILE$"))
                 {
+                    
                     string keyword = feig.model+ "-SetupCommands-" + temp.icName;
-                    string str_content = readFeig.inf.getContent(keyword);
+                    //string str_content = readFeig.inf.getContent(keyword);
+                    string str_content = readFeig.inf.getContentFromList(keyword);
                     str_commandContent.Add(str_content);
+                    str_commandKeywords.Add(keyword);
                 }
             }
 
@@ -128,15 +151,21 @@ namespace ReaderGui
         private void contentClear()
         {
             str_commandContent.Clear();
+            str_commandKeywords.Clear();
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
+            label3.Text = "Command Name";
+            label4.Text = "Command Name";
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            testIni();
+            //testIni();
             //readFeig.ini.INIWriteValue("t1", "h1", "r1");
+            string str_configuration = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}", str_conf_section, str_conf_protocols, str_conf_ICs, str_conf_command,str_commandKeywords[0],str_commandContent[0]);
+            MessageBox.Show(str_configuration);
         }
 
         private void testIni()

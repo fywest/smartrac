@@ -52,7 +52,7 @@ namespace ReaderGui
                     while (!s.Contains("$END$"))
                     {
                         lines += s;
-                        lines += "\r";
+                        lines += "\r\n";
 
                         s = infRead.ReadLine();
 
@@ -72,6 +72,18 @@ namespace ReaderGui
             
         }
 
+        public string getContentFromList(string commandKeyword)
+        {
+            foreach(var item in commandList)
+            {
+                if(item.icName.Contains(commandKeyword))
+                {
+                    return item.content;
+                }
+            }
+
+            return null;
+        }
         public string getContent(string commandName)
         {
             string temp="";
