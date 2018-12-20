@@ -141,10 +141,9 @@ namespace ReaderGui
             txtWrite = new StreamWriter(txtOut, System.Text.Encoding.Default);
 
 
-            txtWrite.WriteLine("\n$FILE$" + command.icName);
+            txtWrite.WriteLine("$FILE$" + command.icName);
             txtWrite.WriteLine(command.content);
-            txtWrite.WriteLine("$END$\n");
-            txtWrite.WriteLine();
+            txtWrite.WriteLine("$END$");
 
             txtWrite.Close();
             txtOut.Close();

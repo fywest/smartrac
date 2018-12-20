@@ -22,6 +22,8 @@ namespace ReaderGui
         string str_conf_protocols;
         string str_conf_ICs;
         string str_conf_command;
+        string str_command_1;
+        string str_command_2;
         List<string> str_commandContent = new List<string>();
         List<string> str_commandKeywords = new List<string>();
 
@@ -48,8 +50,27 @@ namespace ReaderGui
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string str = Util.ListToStr(readFeig.ICsNameList);
-            MessageBox.Show(str);
+            string temp_section = listBox1.GetItemText(listBox1.SelectedItem);//"CPR88";
+            addSectionToConfFile(temp_section);
+            List<Command> commandList = new List<Command>();
+            Feig feig = new Feig();
+            commandList = feig.getCommand(str_conf_command);
+            int index = 0;
+            foreach (Command item in commandList)
+            {
+
+                if (item.content.Contains("$FILE$"))
+                {
+                    //MessageBox.Show("hi");
+                    index++;
+                    string keyword = temp_section + "-SetupCommands-" + item.icName;
+                    replaceCommandToCommandFile(keyword, index);
+
+                }
+            }
+
+
+            initList();
         }
 
         private void InitListBox1()
@@ -58,11 +79,17 @@ namespace ReaderGui
             listBox1.BeginUpdate();
             //for (int x = 1; x <= 50; x++)
             //{
+            if(listBox1.Items.Count>0)
+            {
+                listBox1.Items.Clear();
+
+            }
             foreach(var item in Util.ListToStrArray(readFeig.ModelList))
                 listBox1.Items.Add(item);
             //}
 
             listBox1.EndUpdate();
+            listBox1.SetSelected(0, true);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,24 +194,42 @@ namespace ReaderGui
             //string str_configuration = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}", str_conf_section, str_conf_protocols, str_conf_ICs, str_conf_command,str_commandKeywords[0],str_commandContent[0]);
             //MessageBox.Show(str_configuration);
 
-            string temp_section="CPR88";
-            addSectionToConfFile(temp_section);
-            List<Command> commandList = new List<Command>();
-            Feig feig = new Feig();
-            commandList = feig.getCommand(str_conf_command);
-            foreach(Command item in commandList)
+            string temp_section = str_conf_section;//"CPR88";
+
+            string str_base_models = readFeig.ini.INIGetStringValue("Base", "SupportedModels");
+            string[] str_base_models_arr = str_base_models.Split(',');
+            int pos = Array.IndexOf(str_base_models_arr, temp_section);
+            if (pos < 0)//(!str_base_models.Contains(str_section))
             {
-                if(item.content.Contains("$FILE$"))
+                readFeig.ini.INIWriteValue("Base", "SupportedModels", str_base_models + "," + temp_section);
+
+                addSectionToConfFile(temp_section);
+                List<Command> commandList = new List<Command>();
+                Feig feig = new Feig();
+                commandList = feig.getCommand(str_conf_command);
+                int index = 0;
+                foreach (Command item in commandList)
                 {
-                    //MessageBox.Show("hi");
-                    
-                    string keyword = temp_section + "-SetupCommands-" + item.icName;
-                    addCommandToCommandFile(keyword);
-                   
+
+                    if (item.content.Contains("$FILE$"))
+                    {
+                        //MessageBox.Show("hi");
+                        index++;
+                        string keyword = temp_section + "-SetupCommands-" + item.icName;
+                        addCommandToCommandFile(keyword, index);
+
+                    }
                 }
+
+
+                initList();
+
             }
-            readFeig.inf.getCommandList();
-            
+            else
+            {
+                MessageBox.Show(temp_section + " alreay exist in supportedModels");
+            }
+
 
 
         }
@@ -192,17 +237,14 @@ namespace ReaderGui
         private void addSectionToConfFile(string str_section)
         {
             //string str_section = str_conf_section + "88";
-            if(string.IsNullOrEmpty(str_conf_protocols))
+
+            
+
+            if (string.IsNullOrEmpty(str_conf_protocols))
             {
                 MessageBox.Show("some value is empty.Please check");
             }
-            string str_base_models = readFeig.ini.INIGetStringValue("Base", "SupportedModels");
-            if (!str_base_models.Contains(str_section))
-            {
-                readFeig.ini.INIWriteValue("Base", "SupportedModels", str_base_models+","+str_section);
-            }
-
-           
+            
             readFeig.ini.INIWriteValue(str_section, "SupportedProtocols", str_conf_protocols);
             readFeig.ini.INIWriteValue(str_section, "SupportedICs", str_conf_ICs);
             readFeig.ini.INIWriteValue(str_section, "SetupCommands", str_conf_command);
@@ -250,10 +292,10 @@ namespace ReaderGui
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
-            
 
-            string temp_section = "CPR88";
+
+
+            string temp_section = listBox1.GetItemText(listBox1.SelectedItem); // "CPR88";
             Feig feig = new Feig();
             foreach(Feig item in readFeig.feigList)
             {
@@ -272,10 +314,13 @@ namespace ReaderGui
 
                     string keyword = temp_section + "-SetupCommands-" + item.icName;
                     removeCommandToCommandFile(keyword);
-                    readFeig.inf.getCommandList();
+                    
                 }
             }
+            
+            
             removeSectionFromConfFile(temp_section);
+            initList();
         }
 
         private void removeSectionFromConfFile(string str_section)
@@ -292,11 +337,20 @@ namespace ReaderGui
             }
         }
 
-        private void addCommandToCommandFile(string keyword)
+        private void addCommandToCommandFile(string keyword,int index)
         {
             Command temp_cmd;
             temp_cmd.icName = keyword;
-            temp_cmd.content = "content:"+keyword;
+            temp_cmd.content="";
+            if(index==1)
+            {
+                temp_cmd.content = str_command_1.Trim();
+            }
+            if(index==2)
+            {
+                temp_cmd.content = str_command_2.Trim();
+            }
+            
             readFeig.inf.saveCommandExtentToCmdFile(temp_cmd);
         }
 
@@ -306,6 +360,79 @@ namespace ReaderGui
             temp_cmd.icName = keyword;
             temp_cmd.content = "content:" + keyword;
             readFeig.inf.removeCommandFromCmdFile(temp_cmd);
+        }
+
+        private void replaceCommandToCommandFile(string keyword,int index)
+        {
+            Command temp_cmd;
+            temp_cmd.icName = keyword;
+            temp_cmd.content = "";
+            if (index == 1)
+            {
+                temp_cmd.content = str_command_1.Trim();
+            }
+            if (index == 2)
+            {
+                temp_cmd.content = str_command_2.Trim();
+            }
+
+            readFeig.inf.removeCommandFromCmdFile(temp_cmd);
+            readFeig.inf.saveCommandExtentToCmdFile(temp_cmd);
+        }
+
+        private void initList()
+        {
+            //readFeig.inf.getCommandList();
+            //readFeig.getModelList();
+            //readFeig.getAllFeig();
+            //InitListBox1();
+
+            readFeig = new ReadFeig(iniPath, infPath);
+
+
+            InitListBox1();
+        }
+
+        private void clearText()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            clearText();
+            str_conf_section = textBox6.Text.ToString();
+ 
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            str_conf_protocols = textBox1.Text.ToString();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            str_conf_ICs = textBox4.Text.ToString();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            str_conf_command = textBox5.Text.ToString();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            str_command_1 = textBox2.Text.ToString();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            str_command_2 = textBox3.Text.ToString();
         }
     }
 }
