@@ -48,6 +48,11 @@ namespace ReaderGui
             string str_in_data = string.Join(separator, str_array);
             return str_in_data;
         }
+        public static string ListToStr(List<string> str_list,string separator)
+        {
+            string str_in_data = string.Join(separator, str_list.ToArray());
+            return str_in_data;
+        }
     }
 
 }

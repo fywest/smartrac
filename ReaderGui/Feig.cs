@@ -41,7 +41,7 @@ namespace ReaderGui
             return strList;
         }
 
-        private List<Command> getCommand(string command)
+        public List<Command> getCommand(string command)
         {
 
             //string phrase = "The quick brown fox jumps over the lazy dog.";

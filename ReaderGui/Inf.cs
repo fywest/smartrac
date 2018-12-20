@@ -133,6 +133,71 @@ namespace ReaderGui
             txtWrite.Close();
             txtOut.Close();
         }
+
+        public void saveCommandExtentToCmdFile(Command command)
+        {
+
+            txtOut = new FileStream(infPath, FileMode.Append, FileAccess.Write);
+            txtWrite = new StreamWriter(txtOut, System.Text.Encoding.Default);
+
+
+            txtWrite.WriteLine("\n$FILE$" + command.icName);
+            txtWrite.WriteLine(command.content);
+            txtWrite.WriteLine("$END$\n");
+            txtWrite.WriteLine();
+
+            txtWrite.Close();
+            txtOut.Close();
+        }
+
+        public void removeCommandFromCmdFile(Command command)
+        {
+            inf = new FileStream(infPath, FileMode.Open, FileAccess.Read);
+            infRead = new StreamReader(inf, System.Text.Encoding.Default);
+
+            string tempPath = infPath.Replace(".inf", ".tmp");
+            txtOut = new FileStream(tempPath, FileMode.Create, FileAccess.Write);
+            txtWrite = new StreamWriter(txtOut, System.Text.Encoding.Default);
+
+            output_command = "";
+            string s = infRead.ReadLine();
+            bool found = false;
+            while (s != null)
+            {
+                if (s.Contains(command.icName))
+                {
+                    found = true;
+                    s = infRead.ReadLine();
+                    continue;
+                }
+                if (found)
+                {
+                    if (s.Contains("$END$"))
+                    {
+                        found = false;
+                    }
+                    s = infRead.ReadLine();
+                    continue;
+                }
+
+                output_command += s;
+                output_command += "\r";
+
+                s = infRead.ReadLine();
+
+            }
+
+            txtWrite.WriteLine(output_command);
+
+            txtWrite.Close();
+            txtOut.Close();
+
+            infRead.Close();
+            inf.Close();
+            File.Delete(infPath);
+            File.Move(tempPath, infPath);
+        }
+
         public void saveCommandList(string tempPath)
         {
             
