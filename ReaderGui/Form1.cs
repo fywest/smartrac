@@ -34,11 +34,16 @@ namespace ReaderGui
 
         private void button1_Click(object sender, EventArgs e)
         {
-            saveCommand();
 
-            label5.Text = outName + " saved suceessfully";
+            ReadFeigJson testjson = new ReadFeigJson();
+            MessageBox.Show(testjson.showInfo());
 
-            button1.Visible = false;
+            //comment for test json
+            //saveCommand();
+
+            //label5.Text = outName + " saved suceessfully";
+
+            //button1.Visible = false;
 
         }
 
