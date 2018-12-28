@@ -1,0 +1,29 @@
+{
+"model": "PR40",
+	"SupportedProtocols": [
+		"ISO14443A",
+		"ISO14443B",
+		"ISO14443A-4",
+		"SRI",
+		"Mifare Classic",
+		"MyD",
+		"ISO15693"
+	],
+	"SupportedICs": [
+		"TAG213",
+		"NTAG210",
+		"SIC43NT"
+	],
+	"SetupCommands": [
+		{
+			"icName": [
+				"NTAG213",
+				"NTAG210",
+				"SIC43NT"
+			],
+			"icCommand": [
+				"YYYY"
+			]
+		}
+	]
+}
