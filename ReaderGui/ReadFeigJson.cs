@@ -15,20 +15,7 @@ namespace ReaderGui
         public string[] icCommand;
     }
 
-    public class Student
-    {
-        //[DataMember]
-        public int ID { get; set; }
 
-        //[DataMember]
-        public string Name { get; set; }
-
-        //[DataMember]
-        public int Age { get; set; }
-
-        //[DataMember]
-        public string Sex { get; set; }
-    }
 
     public class FeigJson
     {
@@ -41,37 +28,55 @@ namespace ReaderGui
     }
     public class FeigJsonList
     {
-        public string ReaderManufacturer;
-        public string[] SupportedModels;
-        public List<FeigJson> ReaderConfig;
+        public string ReaderManufacturer { get; set; }
+        public string[] SupportedModels { get; set; }
+        public List<FeigJson> ReaderConfig { get; set; }
     }
 
     class ReadFeigJson
     {
+        FeigJsonList feigjson;
+
         public ReadFeigJson()
         {
-
+            feigjson = new FeigJsonList();
         }
 
-        public string showInfo()
+        public void readFromFile(string path)
         {
-
-
-
-
-
             //string jsonFile = "feigPR40.json";
             //FeigJson feigjson = JsonConvert.DeserializeObject<FeigJson>(File.ReadAllText(jsonFile));
 
-            string jsonFile = "feig.json";
-            FeigJsonList feigjson = JsonConvert.DeserializeObject<FeigJsonList>(File.ReadAllText(jsonFile));
-
-
-            return "info";
+            string jsonFile_in = path;
+            feigjson = JsonConvert.DeserializeObject<FeigJsonList>(File.ReadAllText(jsonFile_in));
         }
+
+        public void writeToFile(string path)
+        {
+
+            string jsonFile_out = path;
+            File.WriteAllText(jsonFile_out, JsonConvert.SerializeObject(feigjson, Formatting.Indented));
+        }
+
 
     }
 }
+
+
+//public class Student
+//{
+//    //[DataMember]
+//    public int ID { get; set; }
+
+//    //[DataMember]
+//    public string Name { get; set; }
+
+//    //[DataMember]
+//    public int Age { get; set; }
+
+//    //[DataMember]
+//    public string Sex { get; set; }
+//}
 
 //string json = @"{ 'Name':'C#','Age':'3000','ID':'1','Sex':'女'}";
 
