@@ -24,15 +24,18 @@ namespace ReaderGui
         string outName;
 
         ReadFeig readFeig;
+        ReadFeigJson readFeigJson;
 
 
         public Form1()
         {
             
             InitializeComponent();
+
+            readFeigJson = new ReadFeigJson();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//save
         {
 
             //ReadFeigJson testjson = new ReadFeigJson();
@@ -265,7 +268,7 @@ namespace ReaderGui
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//confirm
         {
 
             //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
@@ -279,9 +282,12 @@ namespace ReaderGui
 
             readFeig = new ReadFeig(iniPath);
 
+            readFeigJson.readFromFile("feig.json");
+
+
             //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
             //feigList.Add(feig);
-            if(readFeig.feigList.Count==0)
+            if (readFeig.feigList.Count==0)
             {
                 MessageBox.Show("please check configuration files!");
             }
