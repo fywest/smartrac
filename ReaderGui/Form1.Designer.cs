@@ -93,7 +93,6 @@
             this.checkedListBox3.Name = "checkedListBox3";
             this.checkedListBox3.Size = new System.Drawing.Size(444, 124);
             this.checkedListBox3.TabIndex = 3;
-            this.checkedListBox3.Visible = false;
             this.checkedListBox3.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox3_ItemCheck);
             // 
             // textBox1

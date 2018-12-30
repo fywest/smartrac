@@ -17,6 +17,7 @@ namespace ReaderGui
 
         List<string> readerList=new List<string>();
         List<Command> commandList = new List<Command>();
+        List<CommandJson> commandListJson = new List<CommandJson>();
 
         public static string iniPath;
         public static string infPath;
@@ -65,34 +66,44 @@ namespace ReaderGui
                 
                 string selectedIC = checkedListBox1.SelectedItem.ToString();
                 //MessageBox.Show(selectedIC);
-                addReaderList(selectedIC);
-                
+                string[] readerListArray=addReaderList(selectedIC);
 
+                checkedListBox2.Items.AddRange(readerListArray);
             }
 
 
         }
-        private void addReaderList(string selectedIC)
+        private string[] addReaderList(string selectedIC)
         {
-            string str = selectedIC;////"NTAG213";
+            //string str = selectedIC;////"NTAG213";
             readerList.Clear();
             checkedListBox2.Items.Clear();
             checkedListBox3.Items.Clear();
             textBox1.Clear();
 
-            foreach (var feig in readFeig.feigList)
+            //foreach (var feig in readFeig.feigList)
+            //{
+            //    if (feig.ICs.Contains(str))
+            //    {
+            //        readerList.Add(feig.model);
+            //    }
+            //}
+
+            foreach (var feig in readFeigJson.feigJsonList.ReaderConfig)
             {
-                if (feig.ICs.Contains(str))
+                if (feig.SupportedICs.Contains(selectedIC))
                 {
-                    readerList.Add(feig.model);
+                    readerList.Add(feig.Model);
                 }
             }
 
-            if (readerList.Count>0)
+
+            if (readerList.Count<=0)
             {
-                string[] str_array = readerList.Select(i => i.ToString()).ToArray();
-                checkedListBox2.Items.AddRange(str_array);
+                MessageBox.Show("reader count less than one");
             }
+            string[] str_array = readerList.Select(i => i.ToString()).ToArray();
+            return str_array;
         }
 
         private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -106,22 +117,40 @@ namespace ReaderGui
                 }
 
                 string selectedReader = checkedListBox2.SelectedItem.ToString();
-                //MessageBox.Show(selectedReader);
-                addCommandList(selectedReader);
+                string selectedIC = checkedListBox1.SelectedItem.ToString();
 
-                int index = 0;
-                foreach (var item in checkedListBox3.Items)
+                foreach(FeigJson feig in readFeigJson.feigJsonList.ReaderConfig)
                 {
-                    if (item.ToString().Contains(checkedListBox1.SelectedItem.ToString()))
-                    {
+                    if(string.Equals(feig.Model,selectedReader))
+                        {
+                        foreach(CommandJson command in feig.SetupCommands)
+                        {
+                            if(command.icName.Contains(selectedIC))
+                            {
+                                textBox1.Text = Util.StrArrayToStr(command.icCommand,"\r\n");
+                            }
+                        }
 
-                        //checkedListBox3.Update();
-                        checkedListBox3.SetSelected(index, true);
-                        checkedListBox3.SetItemCheckState(index, CheckState.Checked);
-                        break;
-                    }
-                    index++;
+                        }
                 }
+                //MessageBox.Show(selectedReader);
+                //addCommandList(selectedReader);
+                //addCommandContent("commandIC");
+                //checkedListBox3.Items.AddRange(commandListArray);
+
+                //int index = 0;
+                //foreach (var item in checkedListBox3.Items)
+                //{
+                //    if (item.ToString().Contains(checkedListBox1.SelectedItem.ToString()))
+                //    {
+
+                //        //checkedListBox3.Update();
+                //        checkedListBox3.SetSelected(index, true);
+                //        checkedListBox3.SetItemCheckState(index, CheckState.Checked);
+                //        break;
+                //    }
+                //    index++;
+                //}
 
 
             }
@@ -134,49 +163,64 @@ namespace ReaderGui
             commandList.Clear();
             checkedListBox3.Items.Clear();
 
-            foreach (var feig in readFeig.feigList)
+            //foreach (var feig in readFeig.feigList)
+            //{
+            //    if (feig.model.Contains(str))
+            //    {
+            //        foreach(var command in feig.command)
+            //        {
+            //            Command item;
+            //            item.icName = command.icName;
+            //            item.content = command.content;
+            //            commandList.Add(item);
+
+            //        }
+            //    }
+            //}
+
+            foreach (var feig in readFeigJson.feigJsonList.ReaderConfig)
             {
-                if (feig.model.Contains(str))
+                if (feig.Model.Contains(selectedReader))
                 {
-                    foreach(var command in feig.command)
+                    foreach (var command in feig.SetupCommands)
                     {
-                        Command item;
-                        item.icName = command.icName;
-                        item.content = command.content;
-                        commandList.Add(item);
+                        CommandJson item;
+                        item.icName = command.icName;//command.icName;
+                        item.icCommand = command.icCommand;
+                        commandListJson.Add(item);
 
                     }
                 }
             }
-            if (commandList.Count > 0)
+
+
+            if (commandListJson.Count <= 0)
             {
-                string[] str_array = commandList.Select(i => i.icName.ToString()).ToArray();
-                checkedListBox3.Items.AddRange(str_array);
-
-
-
+                MessageBox.Show("command count less than one");
             }
+            //string[] str_array = commandListJson.Select(i => i.icName.ToString()).ToArray();
+
         }
 
         private void checkedListBox3_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (e.NewValue == CheckState.Checked)
-            {
-                foreach (int i in checkedListBox3.CheckedIndices)
-                {
-                    checkedListBox3.SetItemCheckState(i, CheckState.Unchecked);
-                }
+            //if (e.NewValue == CheckState.Checked)
+            //{
+            //    foreach (int i in checkedListBox3.CheckedIndices)
+            //    {
+            //        checkedListBox3.SetItemCheckState(i, CheckState.Unchecked);
+            //    }
 
 
-                string commandIC = checkedListBox3.SelectedItem.ToString();
-                //MessageBox.Show(CommandIC);
-                addCommandContent(commandIC);
+            //    string commandIC = checkedListBox3.SelectedItem.ToString();
+            //    //MessageBox.Show(CommandIC);
+            //    addCommandContent(commandIC);
                 
-            }
-            else if(e.NewValue == CheckState.Unchecked)
-            {
-                textBox1.Clear();
-            }
+            //}
+            //else if(e.NewValue == CheckState.Unchecked)
+            //{
+            //    textBox1.Clear();
+            //}
 
         }
 
@@ -188,26 +232,29 @@ namespace ReaderGui
                 if(item.icName==str)
                 {
                     //MessageBox.Show(item.content);
-                    string keyword = checkedListBox2.SelectedItem.ToString() + "-SetupCommands-" + checkedListBox3.SelectedItem.ToString();
-                    outName = keyword + ".txt";
-                    string content="";
-                    if(item.content.Contains("$FILE$"))
-                    {
-                        Inf inf = new Inf(infPath);
+                    //string keyword = checkedListBox2.SelectedItem.ToString() + "-SetupCommands-" + checkedListBox3.SelectedItem.ToString();
+                    //outName = keyword + ".txt";
+                    //string content="";
+                    //if(item.content.Contains("$FILE$"))
+                    //{
+                    //    Inf inf = new Inf(infPath);
                         
-                        content = inf.getContent(keyword);// ("CPR74_class-SetupCommands1-SLIX2");
-                        outCommand=inf.output_command;
+                    //    content = inf.getContent(keyword);// ("CPR74_class-SetupCommands1-SLIX2");
+                    //    outCommand=inf.output_command;
 
-                    }
-                    else
-                    {
-                        content = item.content;
-                        outCommand = content;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    content = item.content;
+                    //    outCommand = content;
+                    //}
                     //textBox1.Font=new Font(textBox1.Font.Name,6,textBox1.Font.Style);
-                    label4.Text = "Command: "+keyword;
-                    textBox1.Text = content;
- 
+                    //label4.Text = "Command: "+keyword;
+                    //textBox1.Text = content;
+
+                    label4.Text = item.icName;
+                    textBox1.Text = item.content;
+
 
                 }
             }
@@ -274,6 +321,7 @@ namespace ReaderGui
             //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
 
             //iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
+
             if(string.IsNullOrEmpty(infPath))
             {
                 infPath = iniPath.Replace(".ini", ".inf");
@@ -283,6 +331,7 @@ namespace ReaderGui
             readFeig = new ReadFeig(iniPath);
 
             readFeigJson.readFromFile("feig.json");
+            readFeigJson.getICsProtocolsModelList();
 
 
             //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
@@ -294,8 +343,10 @@ namespace ReaderGui
             else
             {
                 button2.Visible = false;
-                
-                checkedListBox1.Items.AddRange(readFeig.getICsList());
+
+                //checkedListBox1.Items.AddRange(readFeig.getICsList());
+                checkedListBox1.Items.AddRange(readFeigJson.ICsNameList.ToArray());
+
             }
 
         }

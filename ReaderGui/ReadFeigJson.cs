@@ -35,11 +35,18 @@ namespace ReaderGui
 
     class ReadFeigJson
     {
-        FeigJsonList feigjson;
+        public FeigJsonList feigJsonList { get; set; }
+        public List<string> ICsNameList { get; set; }
+        public List<string> ProtocolsNameList { get; set; }
+        public List<string> ModelList { get; set; }
 
         public ReadFeigJson()
         {
-            feigjson = new FeigJsonList();
+            feigJsonList = new FeigJsonList();
+            ICsNameList = new List<string>();
+            ProtocolsNameList = new List<string>();
+            ModelList = new List<string>();
+
         }
 
         public void readFromFile(string path)
@@ -48,15 +55,43 @@ namespace ReaderGui
             //FeigJson feigjson = JsonConvert.DeserializeObject<FeigJson>(File.ReadAllText(jsonFile));
 
             string jsonFile_in = path;
-            feigjson = JsonConvert.DeserializeObject<FeigJsonList>(File.ReadAllText(jsonFile_in));
+            feigJsonList = JsonConvert.DeserializeObject<FeigJsonList>(File.ReadAllText(jsonFile_in));
+
         }
 
+        public void getICsProtocolsModelList()
+        {
+            foreach (FeigJson feigJson in feigJsonList.ReaderConfig)
+            {
+                if (!ModelList.Contains(feigJson.Model))
+                {
+                    ModelList.Add(feigJson.Model);
+                }
+
+                foreach (string IC in feigJson.SupportedICs)
+                {
+                    if (!ICsNameList.Contains(IC))
+                    {
+                        ICsNameList.Add(IC);
+                    }
+                }
+                foreach (string Protocol in feigJson.SupportedProtocols)
+                {
+                    if (!ProtocolsNameList.Contains(Protocol))
+                    {
+                        ProtocolsNameList.Add(Protocol);
+                    }
+                }
+
+            }
+        }
         public void writeToFile(string path)
         {
 
             string jsonFile_out = path;
-            File.WriteAllText(jsonFile_out, JsonConvert.SerializeObject(feigjson, Formatting.Indented));
+            File.WriteAllText(jsonFile_out, JsonConvert.SerializeObject(feigJsonList, Formatting.Indented));
         }
+
 
 
     }
