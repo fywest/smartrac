@@ -28,171 +28,153 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.checkedListBoxSelectIC = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxSelectReader = new System.Windows.Forms.CheckedListBox();
+            this.textBoxCommand = new System.Windows.Forms.TextBox();
+            this.labelSelectIC = new System.Windows.Forms.Label();
+            this.labelSelectReader = new System.Windows.Forms.Label();
+            this.labelCommand = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openReadIniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openCommandInfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openReadJsonFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.labelReadConfigFile = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonSave
             // 
-            this.button1.Location = new System.Drawing.Point(24, 786);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSave.Location = new System.Drawing.Point(24, 786);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(102, 41);
+            this.buttonSave.TabIndex = 0;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonCommand_Click);
             // 
-            // checkedListBox1
+            // checkedListBoxSelectIC
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(20, 198);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(444, 124);
-            this.checkedListBox1.TabIndex = 1;
-            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            this.checkedListBoxSelectIC.FormattingEnabled = true;
+            this.checkedListBoxSelectIC.Location = new System.Drawing.Point(24, 124);
+            this.checkedListBoxSelectIC.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBoxSelectIC.Name = "checkedListBoxSelectIC";
+            this.checkedListBoxSelectIC.Size = new System.Drawing.Size(552, 244);
+            this.checkedListBoxSelectIC.TabIndex = 1;
+            this.checkedListBoxSelectIC.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSelectIC_ItemCheck);
             // 
-            // checkedListBox2
+            // checkedListBoxSelectReader
             // 
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(476, 198);
-            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(444, 124);
-            this.checkedListBox2.TabIndex = 2;
-            this.checkedListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox2_ItemCheck);
+            this.checkedListBoxSelectReader.FormattingEnabled = true;
+            this.checkedListBoxSelectReader.Location = new System.Drawing.Point(592, 124);
+            this.checkedListBoxSelectReader.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBoxSelectReader.Name = "checkedListBoxSelectReader";
+            this.checkedListBoxSelectReader.Size = new System.Drawing.Size(552, 244);
+            this.checkedListBoxSelectReader.TabIndex = 2;
+            this.checkedListBoxSelectReader.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSelectReader_ItemCheck);
             // 
-            // textBox1
+            // textBoxCommand
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 419);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(1352, 349);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.WordWrap = false;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxCommand.Location = new System.Drawing.Point(24, 419);
+            this.textBoxCommand.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxCommand.Multiline = true;
+            this.textBoxCommand.Name = "textBoxCommand";
+            this.textBoxCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxCommand.Size = new System.Drawing.Size(1120, 349);
+            this.textBoxCommand.TabIndex = 4;
+            this.textBoxCommand.WordWrap = false;
+            this.textBoxCommand.TextChanged += new System.EventHandler(this.textBoxCommand_TextChanged);
             // 
-            // label1
+            // labelSelectIC
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 170);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 24);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Select IC";
+            this.labelSelectIC.AutoSize = true;
+            this.labelSelectIC.Location = new System.Drawing.Point(28, 96);
+            this.labelSelectIC.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelSelectIC.Name = "labelSelectIC";
+            this.labelSelectIC.Size = new System.Drawing.Size(118, 24);
+            this.labelSelectIC.TabIndex = 5;
+            this.labelSelectIC.Text = "Select IC";
             // 
-            // label2
+            // labelSelectReader
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(482, 170);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 24);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Select Reader";
+            this.labelSelectReader.AutoSize = true;
+            this.labelSelectReader.Location = new System.Drawing.Point(588, 96);
+            this.labelSelectReader.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelSelectReader.Name = "labelSelectReader";
+            this.labelSelectReader.Size = new System.Drawing.Size(166, 24);
+            this.labelSelectReader.TabIndex = 6;
+            this.labelSelectReader.Text = "Select Reader";
             // 
-            // label4
+            // labelCommand
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 393);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 24);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Command";
+            this.labelCommand.AutoSize = true;
+            this.labelCommand.Location = new System.Drawing.Point(24, 393);
+            this.labelCommand.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelCommand.Name = "labelCommand";
+            this.labelCommand.Size = new System.Drawing.Size(94, 24);
+            this.labelCommand.TabIndex = 8;
+            this.labelCommand.Text = "Command";
             // 
-            // label5
+            // labelStatus
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(188, 796);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 24);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Status";
-            this.label5.Visible = false;
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(188, 796);
+            this.labelStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(82, 24);
+            this.labelStatus.TabIndex = 9;
+            this.labelStatus.Text = "Status";
+            this.labelStatus.Visible = false;
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.componentToolStripMenuItem});
+            this.componentToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(1400, 44);
+            this.menuStrip1.Size = new System.Drawing.Size(1184, 44);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openReadIniToolStripMenuItem,
-            this.openCommandInfToolStripMenuItem,
+            this.openReadJsonFileToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // openReadIniToolStripMenuItem
+            // openReadJsonFileToolStripMenuItem
             // 
-            this.openReadIniToolStripMenuItem.Name = "openReadIniToolStripMenuItem";
-            this.openReadIniToolStripMenuItem.Size = new System.Drawing.Size(360, 38);
-            this.openReadIniToolStripMenuItem.Text = "Open Reader config ini";
-            this.openReadIniToolStripMenuItem.Click += new System.EventHandler(this.openReadIniToolStripMenuItem_Click);
-            // 
-            // openCommandInfToolStripMenuItem
-            // 
-            this.openCommandInfToolStripMenuItem.Name = "openCommandInfToolStripMenuItem";
-            this.openCommandInfToolStripMenuItem.Size = new System.Drawing.Size(360, 38);
-            this.openCommandInfToolStripMenuItem.Text = "Open Command inf";
-            this.openCommandInfToolStripMenuItem.Click += new System.EventHandler(this.openCommandInfToolStripMenuItem_Click);
+            this.openReadJsonFileToolStripMenuItem.Name = "openReadJsonFileToolStripMenuItem";
+            this.openReadJsonFileToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.openReadJsonFileToolStripMenuItem.Text = "Open Reader config ";
+            this.openReadJsonFileToolStripMenuItem.Click += new System.EventHandler(this.openReadJsonFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(357, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(331, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(360, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 36);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // componentToolStripMenuItem
             // 
@@ -209,60 +191,42 @@
             this.readerToolStripMenuItem.Text = "Reader";
             this.readerToolStripMenuItem.Click += new System.EventHandler(this.readerToolStripMenuItem_Click);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 36);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label6
+            // labelReadConfigFile
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 52);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(250, 24);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Reader Config File :";
-            this.label6.TextChanged += new System.EventHandler(this.label6_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 83);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(250, 24);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Command Config File:";
-            this.label7.TextChanged += new System.EventHandler(this.label7_TextChanged);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(20, 116);
-            this.button2.Margin = new System.Windows.Forms.Padding(6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 42);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Confirm";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.labelReadConfigFile.AutoSize = true;
+            this.labelReadConfigFile.Location = new System.Drawing.Point(26, 52);
+            this.labelReadConfigFile.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelReadConfigFile.Name = "labelReadConfigFile";
+            this.labelReadConfigFile.Size = new System.Drawing.Size(250, 24);
+            this.labelReadConfigFile.TabIndex = 11;
+            this.labelReadConfigFile.Text = "Reader Config File :";
+            this.labelReadConfigFile.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 844);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.checkedListBox2);
-            this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1184, 844);
+            this.Controls.Add(this.labelReadConfigFile);
+            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.labelCommand);
+            this.Controls.Add(this.labelSelectReader);
+            this.Controls.Add(this.labelSelectIC);
+            this.Controls.Add(this.textBoxCommand);
+            this.Controls.Add(this.checkedListBoxSelectReader);
+            this.Controls.Add(this.checkedListBoxSelectIC);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -277,22 +241,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSelectIC;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSelectReader;
+        private System.Windows.Forms.TextBox textBoxCommand;
+        private System.Windows.Forms.Label labelSelectIC;
+        private System.Windows.Forms.Label labelSelectReader;
+        private System.Windows.Forms.Label labelCommand;
+        private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openReadIniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openCommandInfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openReadJsonFileToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelReadConfigFile;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

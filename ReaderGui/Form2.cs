@@ -13,15 +13,11 @@ namespace ReaderGui
 {
     public partial class Form2 : Form
     {
-        //ReadFeig readFeig;
-        //Feig feig;
-        //string iniPath;
-        //string infPath;
 
         string str_conf_model;
         string str_conf_protocols;
         string str_conf_ICs;
-        //string str_conf_command;
+        
         string str_icName_1;
         string str_icName_2;
         string str_icName_3;
@@ -29,30 +25,13 @@ namespace ReaderGui
         string str_command_1;
         string str_command_2;
         string str_command_3;
-        //List<string> str_commandContent = new List<string>();
-        //List<string> str_commandKeywords = new List<string>();
 
-
-        //json
         ReadFeigJson readFeigJson;
         FeigJson feigJson;
 
         public Form2()
         {
             InitializeComponent();
-            //if (string.IsNullOrEmpty(Form1.iniPath))
-            //{
-            //    iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_configuration_ver2.ini");
-            //    infPath = iniPath.Replace(".ini", ".inf");
-            //    //Form1.iniPath = inipath;// @"C:\Users\fywes\git_fywest\smartrac\ReaderGui\bin\Debug\HF_reader_FEIG2_configuration.ini";
-            //}
-            //else
-            //{
-            //    iniPath = Form1.iniPath;
-            //    infPath = Form1.infPath;
-            //}
-            //readFeig = new ReadFeig(iniPath,infPath);
-
             initFeigJson();
         }
 
@@ -61,10 +40,12 @@ namespace ReaderGui
             readFeigJson = new ReadFeigJson();
             feigJson = new FeigJson();
 
-            
-            readFeigJson.readFromFile("feig.json");
+
+            readFeigJson.readFromFile(Form1.jsonPath);
             readFeigJson.getICsProtocolsModelList();
             InitlistBoxSelectModel();
+            
+
         }
         private void buttonModify_Click(object sender, EventArgs e)
         {
@@ -72,54 +53,29 @@ namespace ReaderGui
             string selectModel = listBoxSelectModel.SelectedItem.ToString();
             
             deleteFeig(selectModel);
-            readFeigJson.writeToFile("feig.json");
-
-            initFeigJson();
 
             CreateFeig(selectModel);
-
-           readFeigJson.writeToFile("feig.json");
+            readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
+            readFeigJson.writeToFile(Form1.jsonPath);
 
             initFeigJson();
 
-            //string temp_section = listBoxSelectModel.GetItemText(listBoxSelectModel.SelectedItem);//"CPR88";
-            //addSectionToConfFile(temp_section);
-            //List<Command> commandList = new List<Command>();
-            //Feig feig = new Feig();
-            //commandList = feig.getCommand(str_conf_command);
-            //int index = 0;
-            //foreach (Command item in commandList)
-            //{
-
-            //    if (item.content.Contains("$FILE$"))
-            //    {
-            //        //MessageBox.Show("hi");
-            //        index++;
-            //        string keyword = temp_section + "-SetupCommands-" + item.icName;
-            //        replaceCommandToCommandFile(keyword, index);
-
-            //    }
-            //}
-
-
-            //initList();
         }
 
         private void InitlistBoxSelectModel()
         {
             listBoxSelectModel.SelectionMode = SelectionMode.One;
             listBoxSelectModel.BeginUpdate();
-            //for (int x = 1; x <= 50; x++)
-            //{
+
             if(listBoxSelectModel.Items.Count>0)
             {
                 listBoxSelectModel.Items.Clear();
 
             }
-            //foreach(var item in Util.ListToStrArray(readFeig.ModelList))
+
             foreach (var item in readFeigJson.ModelList)
                 listBoxSelectModel.Items.Add(item);
-            //}
+
 
             listBoxSelectModel.EndUpdate();
             listBoxSelectModel.SetSelected(0, true);
@@ -127,81 +83,36 @@ namespace ReaderGui
 
         private void listBoxSelectModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show(listBoxSelectModel.SelectedItem.ToString());
+
             contentClear();
             string selectModel = listBoxSelectModel.SelectedItem.ToString();
-
-            //this.feig=getSelectedReader(selectModel);
             feigJson = getSelectedReaderJson(selectModel);
-
-            //string[] str_lines=readFeig.ini.INIGetAllItems(feig.model+"_class");
-            //string str_command= commandToStr(feig.command[0]);
-            
-
+         
             textBoxFeigModel.Text = selectModel;
             str_conf_model = selectModel;
 
-            //textBoxSupportedProtocols.Text = Util.StrArrayToStr(feig.protocols, ",");
             textBoxSupportedProtocols.Text = Util.StrArrayToStr(feigJson.SupportedProtocols,";");
             str_conf_protocols = Util.StrArrayToStr(feigJson.SupportedProtocols, ";");
 
-            //textBoxSupportedICs.Text = Util.StrArrayToStr(feig.ICs, ",");
             textBoxSupportedICs.Text = Util.StrArrayToStr(feigJson.SupportedICs, ";");
             str_conf_ICs = Util.StrArrayToStr(feigJson.SupportedICs, ";");
 
-            //string str_commandList = commandListToStr(feig);
-            //textBoxICsCommand3.Text = str_commandList;
-            //str_conf_command = str_commandList;
-
-
             ShowSetupCommand(feigJson);
-
-           // if (str_commandContent.Count >= 1)
-           // {
-           //     labelICsName1.Text = str_commandKeywords[0];
-           //     textBoxICsCommand1.Text = str_commandContent[0];
-           // }
-           //if(str_commandContent.Count == 2)
-           // {
-           //     labelICsName2.Text = str_commandKeywords[1];
-           //     textBoxICsCommand2.Text = str_commandContent[1];
-           // }
-
-
-
-            
+       
         }
 
         private void ShowSetupCommand(FeigJson feigjson)
         {
-            //string[] commandNamesArray = Util.ListToStrArray(read)
-            //InitListBox2();
-            //int y_posi = 450;// feigjson.SetupCommands.Count;
+
             int i = 1;
             foreach(CommandJson command in feigjson.SetupCommands)
             {
-                // TextBox tb = new TextBox();
-                // //tb.Size=new Size(1000,200);
-                // //tb.Top = 400 + num * 50;
-                // //tb.Left = 20;
 
-                // tb.Location = new System.Drawing.Point(20, y_posi);//x,y
-                // tb.Size = new System.Drawing.Size(500, 50);
-
-                // tb.Multiline = true;
-
-                // y_posi+=60;
-                //// panel1.Controls.Add(tb);
-                // tb.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
-                // tb.Visible = true;
-                // tb.Show();
-                // //panel1.Visible = false;
                 if(i==1)
                 {
                     textBoxICsName1.Text = Util.StrArrayToStr(command.icName, ";");
                     str_icName_1= Util.StrArrayToStr(command.icName, ";");
-                    //int numberOfLines = command.icCommand.Count();
-                    //textBoxICsCommand1.Height = (textBoxICsCommand1.Font.Height + 2) * (numberOfLines);
+
                     textBoxICsCommand1.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
                     str_command_1 = Util.StrArrayToStr(command.icCommand, "\r\n");
 
@@ -228,39 +139,6 @@ namespace ReaderGui
             }
         }
 
-        //private void InitlistBoxSetupCommands(string[] commandIcnamesArray)
-        //{
-        //    listBoxSetupCommands.SelectionMode = SelectionMode.One;
-        //    listBoxSetupCommands.BeginUpdate();
-        //    //for (int x = 1; x <= 50; x++)
-        //    //{
-        //    if (listBoxSetupCommands.Items.Count > 0)
-        //    {
-        //        listBoxSetupCommands.Items.Clear();
-
-        //    }
-        //    //foreach(var item in Util.ListToStrArray(readFeig.ModelList))
-        //    foreach (var item in commandIcnamesArray)
-        //        listBoxSetupCommands.Items.Add(item);
-        //    //}
-
-        //    listBoxSetupCommands.EndUpdate();
-        //    listBoxSetupCommands.SetSelected(0, true);
-        //}
-
-        //private Feig getSelectedReader(string selectedModel)
-        //{
-        //    Feig feig_temp = new Feig();
-        //    foreach(Feig temp in readFeig.feigList)
-        //    {
-        //        if(string.Compare(temp.model,selectedModel)==0)
-        //        {
-        //            feig_temp = temp;
-        //            return feig_temp;
-        //        }
-        //    }
-        //    return null;
-        //}
         private FeigJson getSelectedReaderJson(string selectedModel)
         {
             FeigJson feig_temp = new FeigJson();
@@ -275,26 +153,6 @@ namespace ReaderGui
             return null;
         }
 
-        //private string commandListToStr(Feig feig)
-        //{
-        //    List<string> str_command=new List<string>();
-        //    foreach(Command temp in feig.command)
-        //    {
-        //        str_command.Add(commandToStr(temp));
-        //        if(temp.content.Contains("$FILE$"))
-        //        {
-                    
-        //            string keyword = feig.model+ "-SetupCommands-" + temp.icName;
-        //            //string str_content = readFeig.inf.getContent(keyword);
-        //            string str_content = readFeig.inf.getContentFromList(keyword);
-        //            str_commandContent.Add(str_content);
-        //            str_commandKeywords.Add(keyword);
-        //        }
-        //    }
-
-        //    string str_commandList = string.Join(";", str_command.ToArray());
-        //    return str_commandList;
-        //}
         private string commandToStr(Command command)
         {
             string[] str = new string[2];
@@ -305,8 +163,7 @@ namespace ReaderGui
 
         private void contentClear()
         {
-            //str_commandContent.Clear();
-            //str_commandKeywords.Clear();
+
             textBoxSupportedProtocols.Clear();
             textBoxSupportedICs.Clear();
             textBoxICsName1.Clear();
@@ -317,9 +174,6 @@ namespace ReaderGui
             textBoxICsCommand2.Clear();
             textBoxICsCommand3.Clear();
 
-            //labelICsName1.Text = "Command Name";
-            //labelICsName2.Text = "Command Name";
-
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -328,7 +182,7 @@ namespace ReaderGui
 
             
             readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
-            readFeigJson.writeToFile("feig.json");
+            readFeigJson.writeToFile(Form1.jsonPath);
 
             initFeigJson();
 
@@ -358,23 +212,6 @@ namespace ReaderGui
             }
             FeigJson feigJsonTemp = new FeigJson(model, str_conf_protocols, str_conf_ICs, commandJsonList);
             return feigJsonTemp;
-        }
-
-        private void addSectionToConfFile(string str_section)
-        {
-            //string str_section = str_conf_section + "88";
-
-            
-
-            //if (string.IsNullOrEmpty(str_conf_protocols))
-            //{
-            //    MessageBox.Show("some value is empty.Please check");
-            //}
-            
-            //readFeig.ini.INIWriteValue(str_section, "SupportedProtocols", str_conf_protocols);
-            //readFeig.ini.INIWriteValue(str_section, "SupportedICs", str_conf_ICs);
-            //readFeig.ini.INIWriteValue(str_section, "SetupCommands", str_conf_command);
-
         }
 
         private void testIni()
@@ -424,7 +261,7 @@ namespace ReaderGui
 
             deleteFeig(selectModel);
 
-            readFeigJson.writeToFile("feig.json");
+            readFeigJson.writeToFile(Form1.jsonPath);
 
             initFeigJson();
 
@@ -437,76 +274,6 @@ namespace ReaderGui
             readFeigJson.feigJsonList.ReaderConfig.Remove(feigJson);
 
         }
-
-        //private void removeSectionFromConfFile(string str_section)
-        //{
-        //    string str_base_models = readFeig.ini.INIGetStringValue("Base", "SupportedModels");
-        //    if (str_base_models.Contains(str_section))
-        //    {
-        //        List<string> str = Util.strToList(str_base_models);
-        //        str.Remove(str_section);
-        //        string new_base_models = Util.ListToStr(str,",");
-
-        //        readFeig.ini.INIWriteValue("Base", "SupportedModels", new_base_models);
-        //        readFeig.ini.INIDeleteSection(str_section);
-        //    }
-        //}
-
-        //private void addCommandToCommandFile(string keyword,int index)
-        //{
-        //    Command temp_cmd;
-        //    temp_cmd.icName = keyword;
-        //    temp_cmd.content="";
-        //    if(index==1)
-        //    {
-        //        temp_cmd.content = str_command_1.Trim();
-        //    }
-        //    if(index==2)
-        //    {
-        //        temp_cmd.content = str_command_2.Trim();
-        //    }
-            
-        //    readFeig.inf.saveCommandExtentToCmdFile(temp_cmd);
-        //}
-
-        //private void removeCommandToCommandFile(string keyword)
-        //{
-        //    Command temp_cmd;
-        //    temp_cmd.icName = keyword;
-        //    temp_cmd.content = "content:" + keyword;
-        //    readFeig.inf.removeCommandFromCmdFile(temp_cmd);
-        //}
-
-        //private void replaceCommandToCommandFile(string keyword,int index)
-        //{
-        //    Command temp_cmd;
-        //    temp_cmd.icName = keyword;
-        //    temp_cmd.content = "";
-        //    if (index == 1)
-        //    {
-        //        temp_cmd.content = str_command_1.Trim();
-        //    }
-        //    if (index == 2)
-        //    {
-        //        temp_cmd.content = str_command_2.Trim();
-        //    }
-
-        //    readFeig.inf.removeCommandFromCmdFile(temp_cmd);
-        //    readFeig.inf.saveCommandExtentToCmdFile(temp_cmd);
-        //}
-
-        //private void initList()
-        //{
-        //    //readFeig.inf.getCommandList();
-        //    //readFeig.getModelList();
-        //    //readFeig.getAllFeig();
-        //    //InitlistBoxSelectModel();
-
-        //    readFeig = new ReadFeig(iniPath, infPath);
-
-
-        //    InitlistBoxSelectModel();
-        //}
 
         private void clearText()
         {
@@ -565,12 +332,12 @@ namespace ReaderGui
 
         private void textBoxICsName2_TextChanged(object sender, EventArgs e)
         {
-            str_icName_2 = textBoxICsName1.Text.ToString();
+            str_icName_2 = textBoxICsName2.Text.ToString();
         }
 
         private void textBoxICsName3_TextChanged(object sender, EventArgs e)
         {
-            str_icName_3 = textBoxICsName1.Text.ToString();
+            str_icName_3 = textBoxICsName3.Text.ToString();
         }
     }
 }
