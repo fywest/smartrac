@@ -20,10 +20,16 @@ namespace ReaderGui
             return protocols_List;
         }
 
-        public static List<string> strTrimToList(string str_array)
+        public static List<string> strTrimToList(string str)
         {
 
-            List<string> parts = str_array.Split(',').Select(p => p.Trim()).ToList();
+            List<string> parts = str.Split(',').Select(p => p.Trim()).ToList();
+            return parts;
+        }
+        public static List<string> strTrimToList(string str,char separate)
+        {
+
+            List<string> parts = str.Split(separate).Select(p => p.Trim()).ToList();
             return parts;
         }
 
@@ -31,6 +37,12 @@ namespace ReaderGui
         {
             string[] str_array = str_list.Select(i => i.ToString()).ToArray();
             return str_array;
+        }
+
+        public static string[] strTrimToArray(string str,char separate)
+        {
+            string[] array = str.Split(separate).Select(p => p.Trim()).ToArray();
+            return array;
         }
 
         public static string ListToStr(List<string> str_list)

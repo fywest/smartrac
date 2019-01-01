@@ -25,6 +25,17 @@ namespace ReaderGui
         public string[] SupportedICs { get; set; }
         public List<CommandJson> SetupCommands { get; set; }
 
+        public FeigJson()
+        { }
+        public FeigJson(string model,string protocols,string ics,List<CommandJson> commandJsonList)
+        {
+            Model = model.Trim();
+            SupportedProtocols = Util.strTrimToArray(protocols, ';');
+            SupportedICs= Util.strTrimToArray(ics, ';');
+            SetupCommands = commandJsonList;
+
+        }
+
     }
     public class FeigJsonList
     {

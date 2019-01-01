@@ -13,10 +13,8 @@ namespace ReaderGui
 {
     public partial class Form1 : Form
     {
-        //string[] ICsList;
 
         List<string> readerList=new List<string>();
-        List<Command> commandList = new List<Command>();
         List<CommandJson> commandListJson = new List<CommandJson>();
 
         public static string iniPath;
@@ -25,6 +23,8 @@ namespace ReaderGui
         string outName;
 
         ReadFeig readFeig;
+
+        //json
         ReadFeigJson readFeigJson;
 
 
@@ -51,7 +51,41 @@ namespace ReaderGui
 
         }
 
+        private void button2_Click(object sender, EventArgs e)//confirm
+        {
 
+            //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
+
+            //iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
+
+            if (string.IsNullOrEmpty(infPath))
+            {
+                infPath = iniPath.Replace(".ini", ".inf");
+                label7.Text = "DefaultCommand File: " + infPath;
+            }
+
+            readFeig = new ReadFeig(iniPath);
+
+            readFeigJson.readFromFile("feig.json");
+            readFeigJson.getICsProtocolsModelList();
+
+
+            //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
+            //feigList.Add(feig);
+            if (readFeig.feigList.Count == 0)
+            {
+                MessageBox.Show("please check configuration files!");
+            }
+            else
+            {
+                button2.Visible = false;
+
+                //checkedListBox1.Items.AddRange(readFeig.getICsList());
+                checkedListBox1.Items.AddRange(readFeigJson.ICsNameList.ToArray());
+
+            }
+
+        }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -78,7 +112,6 @@ namespace ReaderGui
             //string str = selectedIC;////"NTAG213";
             readerList.Clear();
             checkedListBox2.Items.Clear();
-            checkedListBox3.Items.Clear();
             textBox1.Clear();
 
             //foreach (var feig in readFeig.feigList)
@@ -127,30 +160,14 @@ namespace ReaderGui
                         {
                             if(command.icName.Contains(selectedIC))
                             {
-                                textBox1.Text = Util.StrArrayToStr(command.icCommand,"\r\n");
+                                outName=selectedReader+"-"+selectedIC+"-SetupCommand.txt";
+                                outCommand= Util.StrArrayToStr(command.icCommand, "\r\n");
+                                textBox1.Text = outCommand;
                             }
                         }
 
                         }
                 }
-                //MessageBox.Show(selectedReader);
-                //addCommandList(selectedReader);
-                //addCommandContent("commandIC");
-                //checkedListBox3.Items.AddRange(commandListArray);
-
-                //int index = 0;
-                //foreach (var item in checkedListBox3.Items)
-                //{
-                //    if (item.ToString().Contains(checkedListBox1.SelectedItem.ToString()))
-                //    {
-
-                //        //checkedListBox3.Update();
-                //        checkedListBox3.SetSelected(index, true);
-                //        checkedListBox3.SetItemCheckState(index, CheckState.Checked);
-                //        break;
-                //    }
-                //    index++;
-                //}
 
 
             }
@@ -159,24 +176,9 @@ namespace ReaderGui
 
         private void addCommandList(string selectedReader)
         {
-            string str = selectedReader;////"CPR40";
-            commandList.Clear();
-            checkedListBox3.Items.Clear();
+            //string str = selectedReader;////"CPR40";
+            commandListJson.Clear();
 
-            //foreach (var feig in readFeig.feigList)
-            //{
-            //    if (feig.model.Contains(str))
-            //    {
-            //        foreach(var command in feig.command)
-            //        {
-            //            Command item;
-            //            item.icName = command.icName;
-            //            item.content = command.content;
-            //            commandList.Add(item);
-
-            //        }
-            //    }
-            //}
 
             foreach (var feig in readFeigJson.feigJsonList.ReaderConfig)
             {
@@ -202,63 +204,6 @@ namespace ReaderGui
 
         }
 
-        private void checkedListBox3_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            //if (e.NewValue == CheckState.Checked)
-            //{
-            //    foreach (int i in checkedListBox3.CheckedIndices)
-            //    {
-            //        checkedListBox3.SetItemCheckState(i, CheckState.Unchecked);
-            //    }
-
-
-            //    string commandIC = checkedListBox3.SelectedItem.ToString();
-            //    //MessageBox.Show(CommandIC);
-            //    addCommandContent(commandIC);
-                
-            //}
-            //else if(e.NewValue == CheckState.Unchecked)
-            //{
-            //    textBox1.Clear();
-            //}
-
-        }
-
-        private void addCommandContent(string commandIC)
-        {
-            string str = commandIC;
-            foreach(var item in commandList)
-            {
-                if(item.icName==str)
-                {
-                    //MessageBox.Show(item.content);
-                    //string keyword = checkedListBox2.SelectedItem.ToString() + "-SetupCommands-" + checkedListBox3.SelectedItem.ToString();
-                    //outName = keyword + ".txt";
-                    //string content="";
-                    //if(item.content.Contains("$FILE$"))
-                    //{
-                    //    Inf inf = new Inf(infPath);
-                        
-                    //    content = inf.getContent(keyword);// ("CPR74_class-SetupCommands1-SLIX2");
-                    //    outCommand=inf.output_command;
-
-                    //}
-                    //else
-                    //{
-                    //    content = item.content;
-                    //    outCommand = content;
-                    //}
-                    //textBox1.Font=new Font(textBox1.Font.Name,6,textBox1.Font.Style);
-                    //label4.Text = "Command: "+keyword;
-                    //textBox1.Text = content;
-
-                    label4.Text = item.icName;
-                    textBox1.Text = item.content;
-
-
-                }
-            }
-        }
 
         public void saveCommand()
         {
@@ -315,41 +260,7 @@ namespace ReaderGui
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)//confirm
-        {
-
-            //ICsList = new string[]{ "NTAG213", "NTAG210", "SIC43NT", "SLIX2" };
-
-            //iniPath = Path.Combine(Application.StartupPath, "HF_reader_FEIG2_new.ini");
-
-            if(string.IsNullOrEmpty(infPath))
-            {
-                infPath = iniPath.Replace(".ini", ".inf");
-                label7.Text = "DefaultCommand File: " + infPath;
-            }
-
-            readFeig = new ReadFeig(iniPath);
-
-            readFeigJson.readFromFile("feig.json");
-            readFeigJson.getICsProtocolsModelList();
-
-
-            //Feig feig = new Feig("CPR74", "ISO14443A", "NTAG213", "NTAG213:YYYY",null);
-            //feigList.Add(feig);
-            if (readFeig.feigList.Count==0)
-            {
-                MessageBox.Show("please check configuration files!");
-            }
-            else
-            {
-                button2.Visible = false;
-
-                //checkedListBox1.Items.AddRange(readFeig.getICsList());
-                checkedListBox1.Items.AddRange(readFeigJson.ICsNameList.ToArray());
-
-            }
-
-        }
+       
 
         private void label6_TextChanged(object sender, EventArgs e)
         {
@@ -374,10 +285,7 @@ namespace ReaderGui
             {
                 checkedListBox2.Items.Clear();
             }
-            if (checkedListBox3.Items.Count > 0)
-            {
-                checkedListBox3.Items.Clear();
-            }
+
             if (!string.IsNullOrEmpty(textBox1.Text))
             {
                 textBox1.Clear();
