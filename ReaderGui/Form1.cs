@@ -282,5 +282,21 @@ namespace ReaderGui
             }
         }
 
+        private void saveAsReaderConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Reader config Files|*.json";
+            saveFileDialog1.Title = "save a Feig json File";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                string SaveAsPath = saveFileDialog1.FileName;
+                readFeigJson.writeToFile(SaveAsPath);
+                labelReadConfigFile.Text = "Reader Config File : " + SaveAsPath;
+            }
+
+
+        }
     }
 }
