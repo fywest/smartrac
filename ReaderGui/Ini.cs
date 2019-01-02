@@ -227,6 +227,44 @@ namespace ReaderGui
             return WritePrivateProfileSection(section, string.Empty, path);
         }
 
+        public static void testIni()
+        {
+            string iniWritePath = Path.Combine(Application.StartupPath, "test.ini");
+            //readFeig.ini.INIWriteValue("t1", "h1", "r1");
+
+            string file = iniWritePath;
+            Ini iniTest = new Ini(file);
+            //写入/更新键值
+            iniTest.INIWriteValue("Desktop", "Color", "Red");
+            iniTest.INIWriteValue("Desktop", "Width", "3270");
+
+            iniTest.INIWriteValue("Toolbar", "Items", "Save,Delete,Open");
+            iniTest.INIWriteValue("Toolbar", "Dock", "True");
+
+            //写入一批键值
+            iniTest.INIWriteItems("Menu", "File=文件\0View=视图\0Edit=编辑");
+
+            //获取文件中所有的节点
+            string[] sections = iniTest.INIGetAllSectionNames();
+
+            //获取指定节点中的所有项
+            string[] items = iniTest.INIGetAllItems("Menu");
+
+            //获取指定节点中所有的键
+            string[] keys = iniTest.INIGetAllItemKeys("Menu");
+
+            //获取指定KEY的值
+            string value = iniTest.INIGetStringValue("Desktop", "color");
+
+            //删除指定的KEY
+            iniTest.INIDeleteKey("desktop", "color");
+
+            //删除指定的节点
+            iniTest.INIDeleteSection("desktop");
+
+            //清空指定的节点
+            iniTest.INIEmptySection("toolbar");
+        }
 
     }
 }

@@ -15,8 +15,7 @@ namespace ReaderGui
             string protocols_new = protocols.Replace("\"", "");
             List<string> protocols_List = new List<string>();
             protocols_List = protocols_new.Split(',', ';').ToList();
-            //string str_in_data = string.Join("\n", protocols_List.ToArray());
-            //MessageBox.Show(str_in_data);
+
             return protocols_List;
         }
 

@@ -29,10 +29,16 @@ namespace ReaderGui
         ReadFeigJson readFeigJson;
         FeigJson feigJson;
 
-        public Form2()
+        Form1 form1;
+
+        public Form2(Form1 form1)
         {
             InitializeComponent();
             initFeigJson();
+
+           this.form1 = form1;
+            
+            
         }
 
         private void initFeigJson()
@@ -44,6 +50,7 @@ namespace ReaderGui
             readFeigJson.readFromFile(Form1.jsonPath);
             readFeigJson.getICsProtocolsModelList();
             InitlistBoxSelectModel();
+
             
 
         }
@@ -51,15 +58,18 @@ namespace ReaderGui
         {
 
             string selectModel = listBoxSelectModel.SelectedItem.ToString();
-            
-            deleteFeig(selectModel);
 
-            CreateFeig(selectModel);
-            readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
-            readFeigJson.writeToFile(Form1.jsonPath);
+            if (MessageBox.Show("Are you sure to update " + selectModel + " to file", "Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                deleteFeig(selectModel);
 
-            initFeigJson();
+                CreateFeig(selectModel);
+                readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
+                readFeigJson.writeToFile(Form1.jsonPath);
 
+                initFeigJson();
+                labelModify.Text = selectModel + " is updated to file successfully";
+            }
         }
 
         private void InitlistBoxSelectModel()
@@ -178,14 +188,18 @@ namespace ReaderGui
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            
 
-            
+
+            string model_temp = str_conf_model;
             readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
+            List<string> modelList = readFeigJson.feigJsonList.SupportedModels.ToList();
+            modelList.Add(model_temp.Trim());
+            readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
             readFeigJson.writeToFile(Form1.jsonPath);
 
             initFeigJson();
-
+            labelAdd.Text = model_temp+" is added to file successfully";
+            labelAdd.Enabled = false;
         }
 
         private FeigJson CreateFeig(string model)
@@ -214,56 +228,30 @@ namespace ReaderGui
             return feigJsonTemp;
         }
 
-        private void testIni()
-        {
-            string iniWritePath = Path.Combine(Application.StartupPath, "test.ini");
-            //readFeig.ini.INIWriteValue("t1", "h1", "r1");
-
-            string file = iniWritePath;
-            Ini iniTest = new Ini(file);
-            //写入/更新键值
-            iniTest.INIWriteValue("Desktop", "Color", "Red");
-            iniTest.INIWriteValue("Desktop", "Width", "3270");
-
-            iniTest.INIWriteValue("Toolbar", "Items", "Save,Delete,Open");
-            iniTest.INIWriteValue("Toolbar", "Dock", "True");
-
-            //写入一批键值
-            iniTest.INIWriteItems("Menu", "File=文件\0View=视图\0Edit=编辑");
-
-            //获取文件中所有的节点
-            string[] sections = iniTest.INIGetAllSectionNames();
-
-            //获取指定节点中的所有项
-            string[] items = iniTest.INIGetAllItems("Menu");
-
-            //获取指定节点中所有的键
-            string[] keys = iniTest.INIGetAllItemKeys("Menu");
-
-            //获取指定KEY的值
-            string value = iniTest.INIGetStringValue("Desktop", "color");
-
-            //删除指定的KEY
-            iniTest.INIDeleteKey("desktop", "color");
-
-            //删除指定的节点
-            iniTest.INIDeleteSection("desktop");
-
-            //清空指定的节点
-            iniTest.INIEmptySection("toolbar");
-        }
-
+        
         private void buttonDelete_Click(object sender, EventArgs e)
         {
 
 
             string selectModel = listBoxSelectModel.SelectedItem.ToString();
 
-            deleteFeig(selectModel);
+            if (MessageBox.Show("Are you sure to delete " + selectModel + " from file", "Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                deleteFeig(selectModel);
 
-            readFeigJson.writeToFile(Form1.jsonPath);
+                List<string> modelList = readFeigJson.feigJsonList.SupportedModels.ToList();
+                modelList.Remove(selectModel);
+                readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
 
-            initFeigJson();
+
+                readFeigJson.writeToFile(Form1.jsonPath);
+
+                initFeigJson();
+                labelDelete.Text = selectModel + " is removed from file successfully";
+
+            }
+
+
 
         }
 
@@ -292,9 +280,12 @@ namespace ReaderGui
 
         private void textBoxFeigModel_TextChanged(object sender, EventArgs e)
         {
+            
             clearText();
+            //labelAdd.Text = "Now adding a new one";
+            buttonAdd.Enabled = false;
             str_conf_model = textBoxFeigModel.Text.ToString();
- 
+    
 
         }
 
@@ -338,6 +329,31 @@ namespace ReaderGui
         private void textBoxICsName3_TextChanged(object sender, EventArgs e)
         {
             str_icName_3 = textBoxICsName3.Text.ToString();
+        }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            form1.InitData();
+        }
+
+        private void textBoxFeigModel_Validated(object sender, EventArgs e)
+        {
+            //buttonAdd.Enabled = false;
+            string temp = textBoxFeigModel.Text;
+            if(readFeigJson.feigJsonList.SupportedModels.Contains(temp))
+            {
+                MessageBox.Show("Model ID is already existed. Please check!");
+            }
+            else if(string.IsNullOrEmpty(temp))
+            {
+                MessageBox.Show("Model ID cannot be empty");
+            }
+            else
+            {
+                
+                labelAdd.Text = "Now adding a new one";
+                buttonAdd.Enabled = true;
+            }
         }
     }
 }

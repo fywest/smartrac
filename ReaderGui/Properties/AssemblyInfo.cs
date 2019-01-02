@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ReaderGui")]
-[assembly: AssemblyDescription("The application is a tool of supporting Smartrac RFID production test.\r\nThis is as a project for trainee DEA.\r\n\r\nDeveloper Li Li")]
+[assembly: AssemblyDescription("The application is a tool of supporting Smartrac RFID production test.\r\nThis is as a project for trainee DEA.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SMARTRAC")]
 [assembly: AssemblyProduct("ReaderGui")]

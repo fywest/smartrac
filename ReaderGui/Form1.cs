@@ -28,7 +28,7 @@ namespace ReaderGui
         {
 
             InitializeComponent();
-            readFeigJson = new ReadFeigJson();
+
         }
 
         private void buttonCommand_Click(object sender, EventArgs e)//save
@@ -225,7 +225,7 @@ namespace ReaderGui
             }
             else
             {
-                Form2 form2 = new Form2();
+                Form2 form2 = new Form2(this);
                 form2.Show();
                 
             }
@@ -247,13 +247,28 @@ namespace ReaderGui
             InitData();
         }
 
-        private void InitData()
+        public void InitData()
         {
+            readFeigJson = new ReadFeigJson();
             readFeigJson.readFromFile(jsonPath);//("feig.json");
             readFeigJson.getICsProtocolsModelList();
 
+            if (checkedListBoxSelectIC.Items.Count > 0)
+            {
 
+                checkedListBoxSelectIC.Items.Clear();
+                
+            }
+            if (checkedListBoxSelectReader.Items.Count > 0)
+            {
+                checkedListBoxSelectReader.Items.Clear();
 
+            }
+            if(!string.IsNullOrEmpty(textBoxCommand.Text))
+            {
+                textBoxCommand.Clear();
+            }
+            //MessageBox.Show("form1 here");
             bool isEmpty = !readFeigJson.feigJsonList.ReaderConfig.Any();
             if (isEmpty)
             {
@@ -266,5 +281,6 @@ namespace ReaderGui
 
             }
         }
+
     }
 }
