@@ -243,14 +243,23 @@ namespace ReaderGui
                 labelReadConfigFile.Text = "Reader Config File : " + jsonPath;
             }
 
-
-            InitData();
+            
+            InitData(false);
         }
 
-        public void InitData()
+        public void InitData(bool isNew)
         {
             readFeigJson = new ReadFeigJson();
-            readFeigJson.readFromFile(jsonPath);//("feig.json");
+            if(isNew)
+            {
+                readFeigJson.createNewJson(jsonPath);
+            }
+            else
+            {
+                readFeigJson.readFromFile(jsonPath);//("feig.json");
+            }
+            
+
             readFeigJson.getICsProtocolsModelList();
 
             if (checkedListBoxSelectIC.Items.Count > 0)
@@ -284,7 +293,7 @@ namespace ReaderGui
 
         private void saveAsReaderConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Reader config Files|*.json";
             saveFileDialog1.Title = "save a Feig json File";
             saveFileDialog1.ShowDialog();
@@ -297,6 +306,23 @@ namespace ReaderGui
             }
 
 
+        }
+
+        private void newReaderConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            saveFileDialog2 = new SaveFileDialog();
+            saveFileDialog2.Filter = "Reader config Files|*.json";
+            saveFileDialog2.Title = "save a Feig json File";
+            saveFileDialog2.ShowDialog();
+
+            if (saveFileDialog2.ShowDialog(this) == DialogResult.OK)
+            {
+                jsonPath = saveFileDialog2.FileName;
+                labelReadConfigFile.Text = "Reader Config File : " + jsonPath;
+            }
+
+            InitData(true);
         }
     }
 }

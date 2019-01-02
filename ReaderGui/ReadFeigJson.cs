@@ -47,6 +47,7 @@ namespace ReaderGui
     class ReadFeigJson
     {
         public FeigJsonList feigJsonList { get; set; }
+
         public List<string> ICsNameList { get; set; }
         public List<string> ProtocolsNameList { get; set; }
         public List<string> ModelList { get; set; }
@@ -100,8 +101,43 @@ namespace ReaderGui
         {
 
             string jsonFile_out = path;
+            
             File.WriteAllText(jsonFile_out, JsonConvert.SerializeObject(feigJsonList, Formatting.Indented));
         }
+
+        public void createNewJson(string path)
+        {
+            string str_feigJsonList = @"{
+              'ReaderManufacturer': 'FEIG',
+              'SupportedModels': [
+                'Model'
+              ],
+              'ReaderConfig': [
+                {
+                  'Model': 'Model',
+                  'SupportedProtocols': [
+                    'Protocols'
+                  ],
+                  'SupportedICs': [
+                    'ICs'
+                  ],
+                  'SetupCommands': [
+                    {
+                      'icName': [
+                        'ICs'
+                      ],
+                      'icCommand': [
+                        'ICsCommand'
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }";
+            feigJsonList = JsonConvert.DeserializeObject<FeigJsonList>(str_feigJsonList);
+            File.WriteAllText(path, JsonConvert.SerializeObject(feigJsonList, Formatting.Indented));
+        }
+        //{"ReaderManufacturer":"FEIG","SupportedModels":["Model"],"ReaderConfig":[{"Model":"Model","SupportedProtocols":["Protocols"],"SupportedICs":["ICs"],"SetupCommands":[{"icName":["ICs"],"icCommand":["ICsCommand"]}]}]}
 
 
 

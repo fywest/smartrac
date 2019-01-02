@@ -39,6 +39,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openReadJsonFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newReaderConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsReaderConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,16 +49,16 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.labelReadConfigFile = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.saveAsReaderConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(12, 426);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSave.Location = new System.Drawing.Point(24, 786);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(51, 22);
+            this.buttonSave.Size = new System.Drawing.Size(102, 41);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -65,31 +67,31 @@
             // checkedListBoxSelectIC
             // 
             this.checkedListBoxSelectIC.FormattingEnabled = true;
-            this.checkedListBoxSelectIC.Location = new System.Drawing.Point(12, 67);
-            this.checkedListBoxSelectIC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxSelectIC.Location = new System.Drawing.Point(24, 124);
+            this.checkedListBoxSelectIC.Margin = new System.Windows.Forms.Padding(4);
             this.checkedListBoxSelectIC.Name = "checkedListBoxSelectIC";
-            this.checkedListBoxSelectIC.Size = new System.Drawing.Size(278, 124);
+            this.checkedListBoxSelectIC.Size = new System.Drawing.Size(552, 214);
             this.checkedListBoxSelectIC.TabIndex = 1;
             this.checkedListBoxSelectIC.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSelectIC_ItemCheck);
             // 
             // checkedListBoxSelectReader
             // 
             this.checkedListBoxSelectReader.FormattingEnabled = true;
-            this.checkedListBoxSelectReader.Location = new System.Drawing.Point(296, 67);
-            this.checkedListBoxSelectReader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxSelectReader.Location = new System.Drawing.Point(592, 124);
+            this.checkedListBoxSelectReader.Margin = new System.Windows.Forms.Padding(4);
             this.checkedListBoxSelectReader.Name = "checkedListBoxSelectReader";
-            this.checkedListBoxSelectReader.Size = new System.Drawing.Size(278, 124);
+            this.checkedListBoxSelectReader.Size = new System.Drawing.Size(552, 214);
             this.checkedListBoxSelectReader.TabIndex = 2;
             this.checkedListBoxSelectReader.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSelectReader_ItemCheck);
             // 
             // textBoxCommand
             // 
-            this.textBoxCommand.Location = new System.Drawing.Point(12, 227);
-            this.textBoxCommand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCommand.Location = new System.Drawing.Point(24, 419);
+            this.textBoxCommand.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxCommand.Multiline = true;
             this.textBoxCommand.Name = "textBoxCommand";
             this.textBoxCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxCommand.Size = new System.Drawing.Size(562, 191);
+            this.textBoxCommand.Size = new System.Drawing.Size(1120, 349);
             this.textBoxCommand.TabIndex = 4;
             this.textBoxCommand.WordWrap = false;
             this.textBoxCommand.TextChanged += new System.EventHandler(this.textBoxCommand_TextChanged);
@@ -97,37 +99,40 @@
             // labelSelectIC
             // 
             this.labelSelectIC.AutoSize = true;
-            this.labelSelectIC.Location = new System.Drawing.Point(14, 52);
+            this.labelSelectIC.Location = new System.Drawing.Point(28, 96);
+            this.labelSelectIC.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelSelectIC.Name = "labelSelectIC";
-            this.labelSelectIC.Size = new System.Drawing.Size(50, 13);
+            this.labelSelectIC.Size = new System.Drawing.Size(118, 24);
             this.labelSelectIC.TabIndex = 5;
             this.labelSelectIC.Text = "Select IC";
             // 
             // labelSelectReader
             // 
             this.labelSelectReader.AutoSize = true;
-            this.labelSelectReader.Location = new System.Drawing.Point(294, 52);
+            this.labelSelectReader.Location = new System.Drawing.Point(588, 96);
+            this.labelSelectReader.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelSelectReader.Name = "labelSelectReader";
-            this.labelSelectReader.Size = new System.Drawing.Size(75, 13);
+            this.labelSelectReader.Size = new System.Drawing.Size(166, 24);
             this.labelSelectReader.TabIndex = 6;
             this.labelSelectReader.Text = "Select Reader";
             // 
             // labelCommand
             // 
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(12, 213);
+            this.labelCommand.Location = new System.Drawing.Point(24, 393);
+            this.labelCommand.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelCommand.Name = "labelCommand";
-            this.labelCommand.Size = new System.Drawing.Size(54, 13);
+            this.labelCommand.Size = new System.Drawing.Size(94, 24);
             this.labelCommand.TabIndex = 8;
             this.labelCommand.Text = "Command";
             // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(94, 431);
-            this.labelStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelStatus.Location = new System.Drawing.Point(188, 796);
+            this.labelStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelStatus.Size = new System.Drawing.Size(82, 24);
             this.labelStatus.TabIndex = 9;
             this.labelStatus.Text = "Status";
             this.labelStatus.Visible = false;
@@ -141,7 +146,8 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(592, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
+            this.menuStrip1.Size = new System.Drawing.Size(1184, 44);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -149,29 +155,44 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openReadJsonFileToolStripMenuItem,
+            this.newReaderConfigToolStripMenuItem,
             this.saveAsReaderConfigToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openReadJsonFileToolStripMenuItem
             // 
             this.openReadJsonFileToolStripMenuItem.Name = "openReadJsonFileToolStripMenuItem";
-            this.openReadJsonFileToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.openReadJsonFileToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
             this.openReadJsonFileToolStripMenuItem.Text = "Open Reader config ";
             this.openReadJsonFileToolStripMenuItem.Click += new System.EventHandler(this.openReadJsonFileToolStripMenuItem_Click);
+            // 
+            // newReaderConfigToolStripMenuItem
+            // 
+            this.newReaderConfigToolStripMenuItem.Name = "newReaderConfigToolStripMenuItem";
+            this.newReaderConfigToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.newReaderConfigToolStripMenuItem.Text = "New Reader config";
+            this.newReaderConfigToolStripMenuItem.Click += new System.EventHandler(this.newReaderConfigToolStripMenuItem_Click);
+            // 
+            // saveAsReaderConfigToolStripMenuItem
+            // 
+            this.saveAsReaderConfigToolStripMenuItem.Name = "saveAsReaderConfigToolStripMenuItem";
+            this.saveAsReaderConfigToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.saveAsReaderConfigToolStripMenuItem.Text = "Save As Reader config";
+            this.saveAsReaderConfigToolStripMenuItem.Click += new System.EventHandler(this.saveAsReaderConfigToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(347, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -180,20 +201,20 @@
             this.componentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readerToolStripMenuItem});
             this.componentToolStripMenuItem.Name = "componentToolStripMenuItem";
-            this.componentToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.componentToolStripMenuItem.Size = new System.Drawing.Size(154, 36);
             this.componentToolStripMenuItem.Text = "Component";
             // 
             // readerToolStripMenuItem
             // 
             this.readerToolStripMenuItem.Name = "readerToolStripMenuItem";
-            this.readerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readerToolStripMenuItem.Size = new System.Drawing.Size(187, 38);
             this.readerToolStripMenuItem.Text = "Reader";
             this.readerToolStripMenuItem.Click += new System.EventHandler(this.readerToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 36);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -204,25 +225,19 @@
             // labelReadConfigFile
             // 
             this.labelReadConfigFile.AutoSize = true;
-            this.labelReadConfigFile.Location = new System.Drawing.Point(13, 28);
+            this.labelReadConfigFile.Location = new System.Drawing.Point(26, 52);
+            this.labelReadConfigFile.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelReadConfigFile.Name = "labelReadConfigFile";
-            this.labelReadConfigFile.Size = new System.Drawing.Size(100, 13);
+            this.labelReadConfigFile.Size = new System.Drawing.Size(250, 24);
             this.labelReadConfigFile.TabIndex = 11;
             this.labelReadConfigFile.Text = "Reader Config File :";
             this.labelReadConfigFile.Visible = false;
             // 
-            // saveAsReaderConfigToolStripMenuItem
-            // 
-            this.saveAsReaderConfigToolStripMenuItem.Name = "saveAsReaderConfigToolStripMenuItem";
-            this.saveAsReaderConfigToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.saveAsReaderConfigToolStripMenuItem.Text = "Save As Reader config";
-            this.saveAsReaderConfigToolStripMenuItem.Click += new System.EventHandler(this.saveAsReaderConfigToolStripMenuItem_Click);
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 457);
+            this.ClientSize = new System.Drawing.Size(1184, 844);
             this.Controls.Add(this.labelReadConfigFile);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.labelCommand);
@@ -234,7 +249,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Reader Gui";
             this.menuStrip1.ResumeLayout(false);
@@ -266,6 +281,8 @@
         private System.Windows.Forms.ToolStripMenuItem readerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsReaderConfigToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem newReaderConfigToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
     }
 }
 

@@ -237,21 +237,27 @@ namespace ReaderGui
 
             if (MessageBox.Show("Are you sure to delete " + selectModel + " from file", "Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                deleteFeig(selectModel);
+                if (readFeigJson.feigJsonList.ReaderConfig.Count > 1)
+                {
+                    deleteFeig(selectModel);
 
-                List<string> modelList = readFeigJson.feigJsonList.SupportedModels.ToList();
-                modelList.Remove(selectModel);
-                readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
+                    List<string> modelList = readFeigJson.feigJsonList.SupportedModels.ToList();
+                    modelList.Remove(selectModel);
+                    readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
 
 
-                readFeigJson.writeToFile(Form1.jsonPath);
+                    readFeigJson.writeToFile(Form1.jsonPath);
 
-                initFeigJson();
-                labelDelete.Text = selectModel + " is removed from file successfully";
+                    initFeigJson();
+                    labelDelete.Text = selectModel + " is removed from file successfully";
 
+                }
+                else
+                {
+                    MessageBox.Show("Last model can not be removed in list!");
+                }
+                
             }
-
-
 
         }
 
@@ -259,7 +265,7 @@ namespace ReaderGui
         {
             feigJson = getSelectedReaderJson(model);
 
-            readFeigJson.feigJsonList.ReaderConfig.Remove(feigJson);
+            readFeigJson.feigJsonList.ReaderConfig.Remove(feigJson);                 
 
         }
 
@@ -333,7 +339,7 @@ namespace ReaderGui
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
-            form1.InitData();
+            form1.InitData(false);
         }
 
         private void textBoxFeigModel_Validated(object sender, EventArgs e)
