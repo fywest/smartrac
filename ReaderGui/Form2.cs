@@ -48,7 +48,7 @@ namespace ReaderGui
 
 
             readFeigJson.readFromFile(Form1.jsonPath);
-            readFeigJson.getICsProtocolsModelList();
+            //readFeigJson.getICsProtocolsModelList();
             InitlistBoxSelectModel();
 
             
@@ -83,7 +83,7 @@ namespace ReaderGui
 
             }
 
-            foreach (var item in readFeigJson.ModelList)
+            foreach (var item in readFeigJson.feigJsonList.getModels())
                 listBoxSelectModel.Items.Add(item);
 
 
@@ -192,9 +192,9 @@ namespace ReaderGui
 
             string model_temp = str_conf_model;
             readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
-            List<string> modelList = readFeigJson.feigJsonList.SupportedModels.ToList();
+            List<string> modelList = readFeigJson.feigJsonList.getModels().ToList();
             modelList.Add(model_temp.Trim());
-            readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
+            //readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
             readFeigJson.writeToFile(Form1.jsonPath);
 
             initFeigJson();
@@ -241,9 +241,9 @@ namespace ReaderGui
                 {
                     deleteFeig(selectModel);
 
-                    List<string> modelList = readFeigJson.feigJsonList.SupportedModels.ToList();
+                    List<string> modelList = readFeigJson.feigJsonList.getModels().ToList();
                     modelList.Remove(selectModel);
-                    readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
+                    //readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
 
 
                     readFeigJson.writeToFile(Form1.jsonPath);
@@ -346,7 +346,7 @@ namespace ReaderGui
         {
             //buttonAdd.Enabled = false;
             string temp = textBoxFeigModel.Text;
-            if(readFeigJson.feigJsonList.SupportedModels.Contains(temp))
+            if(readFeigJson.feigJsonList.getModels().Contains(temp))
             {
                 MessageBox.Show("Model ID is already existed. Please check!");
             }

@@ -40,24 +40,76 @@ namespace ReaderGui
     public class FeigJsonList
     {
         public string ReaderManufacturer { get; set; }
-        public string[] SupportedModels { get; set; }
+        public string[] AvailableModels { get; set; }
+        public string[] AvailableProtocols { get; set; }
+        public string[] AvailableICs { get; set; }
         public List<FeigJson> ReaderConfig { get; set; }
+
+        public FeigJsonList()
+        {
+
+        }
+
+        public List<string> getModels()
+        {
+            List<string> ModelList = new List<string>();
+            foreach (FeigJson feigJson in ReaderConfig)
+            {
+                
+                if (!ModelList.Contains(feigJson.Model))
+                {
+                    ModelList.Add(feigJson.Model);
+                }
+            }
+            return ModelList;
+        }
+
+        public List<string> getProtocols()
+        {
+            List<string> protocolList = new List<string>();
+            foreach (FeigJson feigJson in ReaderConfig)
+            {
+                foreach(string protocol in feigJson.SupportedProtocols)
+                {
+                    if (!protocolList.Contains(protocol))
+                    {
+                        protocolList.Add(protocol);
+                    }
+                }
+
+            }
+            return protocolList;
+        }
+
+        public List<string> getICs()
+        {
+            List<string> ICList = new List<string>();
+            foreach (FeigJson feigJson in ReaderConfig)
+            {
+                foreach(string IC in feigJson.SupportedICs)
+                if (!ICList.Contains(IC))
+                {
+                    ICList.Add(IC);
+                }
+            }
+            return ICList;
+        }
     }
 
     class ReadFeigJson
     {
-        public FeigJsonList feigJsonList { get; set; }
+        public FeigJsonList feigJsonList { get; set; }//Update to List if more than one ReaderManufacture
 
-        public List<string> ICsNameList { get; set; }
-        public List<string> ProtocolsNameList { get; set; }
-        public List<string> ModelList { get; set; }
+        //public List<string> ICsNameList { get; set; }
+        //public List<string> ProtocolsNameList { get; set; }
+        //public List<string> ModelList { get; set; }
 
         public ReadFeigJson()
         {
             feigJsonList = new FeigJsonList();
-            ICsNameList = new List<string>();
-            ProtocolsNameList = new List<string>();
-            ModelList = new List<string>();
+            //ICsNameList = new List<string>();
+            //ProtocolsNameList = new List<string>();
+            //ModelList = new List<string>();
 
         }
 
@@ -71,32 +123,32 @@ namespace ReaderGui
 
         }
 
-        public void getICsProtocolsModelList()
-        {
-            foreach (FeigJson feigJson in feigJsonList.ReaderConfig)
-            {
-                if (!ModelList.Contains(feigJson.Model))
-                {
-                    ModelList.Add(feigJson.Model);
-                }
+        //public void getICsProtocolsModelList()
+        //{
+        //    foreach (FeigJson feigJson in feigJsonList.ReaderConfig)
+        //    {
+        //        if (!ModelList.Contains(feigJson.Model))
+        //        {
+        //            ModelList.Add(feigJson.Model);
+        //        }
 
-                foreach (string IC in feigJson.SupportedICs)
-                {
-                    if (!ICsNameList.Contains(IC))
-                    {
-                        ICsNameList.Add(IC);
-                    }
-                }
-                foreach (string Protocol in feigJson.SupportedProtocols)
-                {
-                    if (!ProtocolsNameList.Contains(Protocol))
-                    {
-                        ProtocolsNameList.Add(Protocol);
-                    }
-                }
+        //        foreach (string IC in feigJson.SupportedICs)
+        //        {
+        //            if (!ICsNameList.Contains(IC))
+        //            {
+        //                ICsNameList.Add(IC);
+        //            }
+        //        }
+        //        foreach (string Protocol in feigJson.SupportedProtocols)
+        //        {
+        //            if (!ProtocolsNameList.Contains(Protocol))
+        //            {
+        //                ProtocolsNameList.Add(Protocol);
+        //            }
+        //        }
 
-            }
-        }
+        //    }
+        //}
         public void writeToFile(string path)
         {
 

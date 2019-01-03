@@ -258,9 +258,12 @@ namespace ReaderGui
             {
                 readFeigJson.readFromFile(jsonPath);//("feig.json");
             }
-            
 
-            readFeigJson.getICsProtocolsModelList();
+
+            //readFeigJson.getICsProtocolsModelList();
+            //readFeigJson.feigJsonList.getModels();
+            //readFeigJson.feigJsonList.getProtocols();
+            //readFeigJson.feigJsonList.getICs();
 
             if (checkedListBoxSelectIC.Items.Count > 0)
             {
@@ -286,7 +289,8 @@ namespace ReaderGui
             else
             {
                 labelReadConfigFile.Visible = true;
-                checkedListBoxSelectIC.Items.AddRange(readFeigJson.ICsNameList.ToArray());
+                //checkedListBoxSelectIC.Items.AddRange(readFeigJson.ICsNameList.ToArray());
+                checkedListBoxSelectIC.Items.AddRange(readFeigJson.feigJsonList.getICs().ToArray());
 
             }
         }
