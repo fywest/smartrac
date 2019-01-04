@@ -48,10 +48,14 @@ namespace ReaderGui
 
             
             //readFeigJson.getICsProtocolsModelList();
-
+            
             feigJson = new FeigJson();
 
             InitlistBoxSelectModel();
+            InitComboBoxes();
+
+
+
             toolStripStatusLabel1.Text = "Operation Status";//DateTime.Now.ToShortDateString();
 
 
@@ -73,6 +77,40 @@ namespace ReaderGui
                 //labelModify.Text = selectModel + " is updated to file successfully";
                 toolStripStatusLabel1.Text= selectModel + " is updated to file successfully";
             }
+        }
+
+        private void InitComboBoxes()
+        {
+            comboBoxReaderManufacturer.Items.Clear();
+            comboBoxReaderManufacturer.Items.Add(readFeigJson.feigJsonList.ReaderManufacturer);
+            comboBoxReaderManufacturer.SelectedIndex=0;
+
+            comboBoxAvailableModels.Items.Clear();
+            comboBoxAvailableModels.Items.AddRange(readFeigJson.feigJsonList.AvailableModels);
+            comboBoxAvailableModels.SelectedIndex = 0;
+
+            comboBoxAvailableProtocols.Items.Clear();
+            comboBoxAvailableProtocols.Items.AddRange(readFeigJson.feigJsonList.AvailableProtocols);
+            comboBoxAvailableProtocols.SelectedIndex = 0;
+
+            comboBoxAvailableICs.Items.Clear();
+            comboBoxAvailableICs.Items.AddRange(readFeigJson.feigJsonList.AvailableICs);
+            comboBoxAvailableICs.SelectedIndex = 0;
+
+            //listBoxSelectModel.BeginUpdate();
+
+            //if (listBoxSelectModel.Items.Count > 0)
+            //{
+            //    listBoxSelectModel.Items.Clear();
+
+            //}
+
+            //foreach (var item in readFeigJson.feigJsonList.getModels())
+            //    listBoxSelectModel.Items.Add(item);
+
+
+            //listBoxSelectModel.EndUpdate();
+            //listBoxSelectModel.SetSelected(0, true);
         }
 
         private void InitlistBoxSelectModel()
