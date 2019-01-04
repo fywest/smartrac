@@ -48,15 +48,19 @@
             this.textBoxICsName1 = new System.Windows.Forms.TextBox();
             this.textBoxICsName2 = new System.Windows.Forms.TextBox();
             this.textBoxICsName3 = new System.Windows.Forms.TextBox();
-            this.labelAdd = new System.Windows.Forms.Label();
-            this.labelModify = new System.Windows.Forms.Label();
-            this.labelDelete = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelReaderManufacturer = new System.Windows.Forms.Label();
+            this.labelAvailableModels = new System.Windows.Forms.Label();
+            this.labelAvailableProtocols = new System.Windows.Forms.Label();
+            this.labelAvailableICs = new System.Windows.Forms.Label();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxSelectModel
             // 
             this.listBoxSelectModel.FormattingEnabled = true;
-            this.listBoxSelectModel.Location = new System.Drawing.Point(27, 48);
+            this.listBoxSelectModel.Location = new System.Drawing.Point(27, 40);
             this.listBoxSelectModel.Name = "listBoxSelectModel";
             this.listBoxSelectModel.Size = new System.Drawing.Size(120, 108);
             this.listBoxSelectModel.TabIndex = 0;
@@ -74,7 +78,7 @@
             // labelSelectModel
             // 
             this.labelSelectModel.AutoSize = true;
-            this.labelSelectModel.Location = new System.Drawing.Point(24, 17);
+            this.labelSelectModel.Location = new System.Drawing.Point(24, 9);
             this.labelSelectModel.Name = "labelSelectModel";
             this.labelSelectModel.Size = new System.Drawing.Size(69, 13);
             this.labelSelectModel.TabIndex = 2;
@@ -131,7 +135,7 @@
             // 
             // buttonModify
             // 
-            this.buttonModify.Location = new System.Drawing.Point(163, 75);
+            this.buttonModify.Location = new System.Drawing.Point(163, 67);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(75, 23);
             this.buttonModify.TabIndex = 8;
@@ -141,7 +145,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(163, 48);
+            this.buttonAdd.Location = new System.Drawing.Point(163, 40);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
@@ -151,7 +155,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(163, 104);
+            this.buttonDelete.Location = new System.Drawing.Point(163, 96);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 10;
@@ -243,41 +247,69 @@
             this.textBoxICsName3.WordWrap = false;
             this.textBoxICsName3.TextChanged += new System.EventHandler(this.textBoxICsName3_TextChanged);
             // 
-            // labelAdd
+            // statusStrip1
             // 
-            this.labelAdd.AutoSize = true;
-            this.labelAdd.Location = new System.Drawing.Point(274, 52);
-            this.labelAdd.Name = "labelAdd";
-            this.labelAdd.Size = new System.Drawing.Size(37, 13);
-            this.labelAdd.TabIndex = 22;
-            this.labelAdd.Text = "Status";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 622);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(586, 22);
+            this.statusStrip1.TabIndex = 25;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // labelModify
+            // toolStripStatusLabel1
             // 
-            this.labelModify.AutoSize = true;
-            this.labelModify.Location = new System.Drawing.Point(274, 80);
-            this.labelModify.Name = "labelModify";
-            this.labelModify.Size = new System.Drawing.Size(37, 13);
-            this.labelModify.TabIndex = 23;
-            this.labelModify.Text = "Status";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(571, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // labelDelete
+            // labelReaderManufacturer
             // 
-            this.labelDelete.AutoSize = true;
-            this.labelDelete.Location = new System.Drawing.Point(274, 114);
-            this.labelDelete.Name = "labelDelete";
-            this.labelDelete.Size = new System.Drawing.Size(37, 13);
-            this.labelDelete.TabIndex = 24;
-            this.labelDelete.Text = "Status";
+            this.labelReaderManufacturer.AutoSize = true;
+            this.labelReaderManufacturer.Location = new System.Drawing.Point(283, 44);
+            this.labelReaderManufacturer.Name = "labelReaderManufacturer";
+            this.labelReaderManufacturer.Size = new System.Drawing.Size(105, 13);
+            this.labelReaderManufacturer.TabIndex = 26;
+            this.labelReaderManufacturer.Text = "ReaderManufacturer";
+            // 
+            // labelAvailableModels
+            // 
+            this.labelAvailableModels.AutoSize = true;
+            this.labelAvailableModels.Location = new System.Drawing.Point(283, 72);
+            this.labelAvailableModels.Name = "labelAvailableModels";
+            this.labelAvailableModels.Size = new System.Drawing.Size(84, 13);
+            this.labelAvailableModels.TabIndex = 27;
+            this.labelAvailableModels.Text = "AvailableModels";
+            // 
+            // labelAvailableProtocols
+            // 
+            this.labelAvailableProtocols.AutoSize = true;
+            this.labelAvailableProtocols.Location = new System.Drawing.Point(283, 101);
+            this.labelAvailableProtocols.Name = "labelAvailableProtocols";
+            this.labelAvailableProtocols.Size = new System.Drawing.Size(94, 13);
+            this.labelAvailableProtocols.TabIndex = 28;
+            this.labelAvailableProtocols.Text = "AvailableProtocols";
+            // 
+            // labelAvailableICs
+            // 
+            this.labelAvailableICs.AutoSize = true;
+            this.labelAvailableICs.Location = new System.Drawing.Point(283, 130);
+            this.labelAvailableICs.Name = "labelAvailableICs";
+            this.labelAvailableICs.Size = new System.Drawing.Size(65, 13);
+            this.labelAvailableICs.TabIndex = 29;
+            this.labelAvailableICs.Text = "AvailableICs";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 644);
-            this.Controls.Add(this.labelDelete);
-            this.Controls.Add(this.labelModify);
-            this.Controls.Add(this.labelAdd);
+            this.Controls.Add(this.labelAvailableICs);
+            this.Controls.Add(this.labelAvailableProtocols);
+            this.Controls.Add(this.labelAvailableModels);
+            this.Controls.Add(this.labelReaderManufacturer);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textBoxICsName3);
             this.Controls.Add(this.textBoxICsName2);
             this.Controls.Add(this.textBoxICsName1);
@@ -301,6 +333,8 @@
             this.Name = "Form2";
             this.Text = "Reader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,8 +362,11 @@
         private System.Windows.Forms.TextBox textBoxICsName1;
         private System.Windows.Forms.TextBox textBoxICsName2;
         private System.Windows.Forms.TextBox textBoxICsName3;
-        private System.Windows.Forms.Label labelAdd;
-        private System.Windows.Forms.Label labelModify;
-        private System.Windows.Forms.Label labelDelete;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Label labelReaderManufacturer;
+        private System.Windows.Forms.Label labelAvailableModels;
+        private System.Windows.Forms.Label labelAvailableProtocols;
+        private System.Windows.Forms.Label labelAvailableICs;
     }
 }

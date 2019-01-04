@@ -52,8 +52,8 @@ namespace ReaderGui
             feigJson = new FeigJson();
 
             InitlistBoxSelectModel();
+            toolStripStatusLabel1.Text = "Operation Status";//DateTime.Now.ToShortDateString();
 
-            
 
         }
         private void buttonModify_Click(object sender, EventArgs e)
@@ -70,7 +70,8 @@ namespace ReaderGui
                 readFeigJson.writeToFile(Form1.jsonPath);
 
                 initFeigJson();
-                labelModify.Text = selectModel + " is updated to file successfully";
+                //labelModify.Text = selectModel + " is updated to file successfully";
+                toolStripStatusLabel1.Text= selectModel + " is updated to file successfully";
             }
         }
 
@@ -200,8 +201,9 @@ namespace ReaderGui
             readFeigJson.writeToFile(Form1.jsonPath);
 
             initFeigJson();
-            labelAdd.Text = model_temp+" is added to file successfully";
-            labelAdd.Enabled = false;
+            //labelAdd.Text = model_temp+" is added to file successfully";
+            toolStripStatusLabel1.Text= model_temp + " is added to file successfully";
+            //labelAdd.Enabled = false;
         }
 
         private FeigJson CreateFeig(string model)
@@ -251,8 +253,8 @@ namespace ReaderGui
                     readFeigJson.writeToFile(Form1.jsonPath);
 
                     initFeigJson();
-                    labelDelete.Text = selectModel + " is removed from file successfully";
-
+                    //labelDelete.Text = selectModel + " is removed from file successfully";
+                    toolStripStatusLabel1.Text= selectModel + " is removed from file successfully";
                 }
                 else
                 {
@@ -359,7 +361,7 @@ namespace ReaderGui
             else
             {
                 
-                labelAdd.Text = "Now adding a new one";
+                toolStripStatusLabel1.Text = "Now adding a new one";
                 buttonAdd.Enabled = true;
             }
         }
