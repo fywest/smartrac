@@ -44,11 +44,13 @@ namespace ReaderGui
         private void initFeigJson()
         {
             readFeigJson = new ReadFeigJson();
+            readFeigJson.readFromFile(Form1.jsonPath);
+
+            
+            //readFeigJson.getICsProtocolsModelList();
+
             feigJson = new FeigJson();
 
-
-            readFeigJson.readFromFile(Form1.jsonPath);
-            //readFeigJson.getICsProtocolsModelList();
             InitlistBoxSelectModel();
 
             

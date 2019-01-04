@@ -161,8 +161,14 @@ namespace ReaderGui
         {
             string str_feigJsonList = @"{
               'ReaderManufacturer': 'FEIG',
-              'SupportedModels': [
+              'AvailableModels': [
                 'Model'
+              ],
+              'AvailableProtocols': [
+                'Protocol'
+              ],
+             'AvailableICs': [
+                'IC'
               ],
               'ReaderConfig': [
                 {
