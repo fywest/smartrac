@@ -64,6 +64,11 @@ namespace ReaderGui
             string str_in_data = string.Join(separator, str_list.ToArray());
             return str_in_data;
         }
+        public static List<string> strArrayToList(string[] strArray)
+        {
+            List<string> list = new List<string>(strArray);
+            return list;
+        }
     }
 
 }
