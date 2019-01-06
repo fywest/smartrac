@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            PresentationControls.CheckBoxProperties checkBoxProperties2 = new PresentationControls.CheckBoxProperties();
             this.listBoxSelectModel = new System.Windows.Forms.ListBox();
             this.textBoxSupportedProtocols = new System.Windows.Forms.TextBox();
             this.labelSelectModel = new System.Windows.Forms.Label();
@@ -60,12 +61,14 @@
             this.comboBoxAvailableICs = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox4 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox5 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxSupportedProtocols = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxSupportedICs = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxICsName1 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxICsName2 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxICsName3 = new System.Windows.Forms.CheckedListBox();
+            this.listBoxSupportedProtocols = new System.Windows.Forms.ListBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkBoxComboBox1 = new PresentationControls.CheckBoxComboBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,19 +76,19 @@
             // 
             this.listBoxSelectModel.FormattingEnabled = true;
             this.listBoxSelectModel.ItemHeight = 24;
-            this.listBoxSelectModel.Location = new System.Drawing.Point(52, 50);
+            this.listBoxSelectModel.Location = new System.Drawing.Point(321, 223);
             this.listBoxSelectModel.Margin = new System.Windows.Forms.Padding(6);
             this.listBoxSelectModel.Name = "listBoxSelectModel";
-            this.listBoxSelectModel.Size = new System.Drawing.Size(236, 196);
+            this.listBoxSelectModel.Size = new System.Drawing.Size(236, 124);
             this.listBoxSelectModel.TabIndex = 0;
             this.listBoxSelectModel.SelectedIndexChanged += new System.EventHandler(this.listBoxSelectModel_SelectedIndexChanged);
             // 
             // textBoxSupportedProtocols
             // 
-            this.textBoxSupportedProtocols.Location = new System.Drawing.Point(568, 362);
+            this.textBoxSupportedProtocols.Location = new System.Drawing.Point(572, 365);
             this.textBoxSupportedProtocols.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxSupportedProtocols.Name = "textBoxSupportedProtocols";
-            this.textBoxSupportedProtocols.Size = new System.Drawing.Size(720, 35);
+            this.textBoxSupportedProtocols.Size = new System.Drawing.Size(538, 35);
             this.textBoxSupportedProtocols.TabIndex = 1;
             this.textBoxSupportedProtocols.WordWrap = false;
             this.textBoxSupportedProtocols.TextChanged += new System.EventHandler(this.textBoxSupportedProtocols_TextChanged);
@@ -93,7 +96,7 @@
             // labelSelectModel
             // 
             this.labelSelectModel.AutoSize = true;
-            this.labelSelectModel.Location = new System.Drawing.Point(48, 17);
+            this.labelSelectModel.Location = new System.Drawing.Point(54, 223);
             this.labelSelectModel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelSelectModel.Name = "labelSelectModel";
             this.labelSelectModel.Size = new System.Drawing.Size(154, 24);
@@ -103,7 +106,7 @@
             // labelFeigModel
             // 
             this.labelFeigModel.AutoSize = true;
-            this.labelFeigModel.Location = new System.Drawing.Point(54, 306);
+            this.labelFeigModel.Location = new System.Drawing.Point(778, 307);
             this.labelFeigModel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelFeigModel.Name = "labelFeigModel";
             this.labelFeigModel.Size = new System.Drawing.Size(130, 24);
@@ -112,12 +115,12 @@
             // 
             // textBoxICsCommand1
             // 
-            this.textBoxICsCommand1.Location = new System.Drawing.Point(52, 548);
+            this.textBoxICsCommand1.Location = new System.Drawing.Point(54, 635);
             this.textBoxICsCommand1.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxICsCommand1.Multiline = true;
             this.textBoxICsCommand1.Name = "textBoxICsCommand1";
             this.textBoxICsCommand1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxICsCommand1.Size = new System.Drawing.Size(1056, 146);
+            this.textBoxICsCommand1.Size = new System.Drawing.Size(1056, 159);
             this.textBoxICsCommand1.TabIndex = 4;
             this.textBoxICsCommand1.WordWrap = false;
             this.textBoxICsCommand1.TextChanged += new System.EventHandler(this.textBoxICsCommand1_TextChanged);
@@ -125,7 +128,7 @@
             // labelICsName1
             // 
             this.labelICsName1.AutoSize = true;
-            this.labelICsName1.Location = new System.Drawing.Point(48, 498);
+            this.labelICsName1.Location = new System.Drawing.Point(50, 598);
             this.labelICsName1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelICsName1.Name = "labelICsName1";
             this.labelICsName1.Size = new System.Drawing.Size(106, 24);
@@ -134,7 +137,7 @@
             // 
             // textBoxICsCommand2
             // 
-            this.textBoxICsCommand2.Location = new System.Drawing.Point(50, 786);
+            this.textBoxICsCommand2.Location = new System.Drawing.Point(52, 886);
             this.textBoxICsCommand2.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxICsCommand2.Multiline = true;
             this.textBoxICsCommand2.Name = "textBoxICsCommand2";
@@ -147,7 +150,7 @@
             // labelICsName2
             // 
             this.labelICsName2.AutoSize = true;
-            this.labelICsName2.Location = new System.Drawing.Point(46, 738);
+            this.labelICsName2.Location = new System.Drawing.Point(48, 838);
             this.labelICsName2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelICsName2.Name = "labelICsName2";
             this.labelICsName2.Size = new System.Drawing.Size(106, 24);
@@ -156,7 +159,7 @@
             // 
             // buttonModify
             // 
-            this.buttonModify.Location = new System.Drawing.Point(324, 100);
+            this.buttonModify.Location = new System.Drawing.Point(568, 265);
             this.buttonModify.Margin = new System.Windows.Forms.Padding(6);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(150, 42);
@@ -167,7 +170,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(324, 50);
+            this.buttonAdd.Location = new System.Drawing.Point(568, 223);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(6);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(150, 42);
@@ -178,7 +181,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(324, 153);
+            this.buttonDelete.Location = new System.Drawing.Point(568, 307);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(6);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(150, 42);
@@ -189,17 +192,17 @@
             // 
             // textBoxSupportedICs
             // 
-            this.textBoxSupportedICs.Location = new System.Drawing.Point(568, 423);
+            this.textBoxSupportedICs.Location = new System.Drawing.Point(572, 479);
             this.textBoxSupportedICs.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxSupportedICs.Name = "textBoxSupportedICs";
-            this.textBoxSupportedICs.Size = new System.Drawing.Size(718, 35);
+            this.textBoxSupportedICs.Size = new System.Drawing.Size(538, 35);
             this.textBoxSupportedICs.TabIndex = 11;
             this.textBoxSupportedICs.WordWrap = false;
             this.textBoxSupportedICs.TextChanged += new System.EventHandler(this.textBoxSupportedICs_TextChanged);
             // 
             // textBoxICsCommand3
             // 
-            this.textBoxICsCommand3.Location = new System.Drawing.Point(52, 1026);
+            this.textBoxICsCommand3.Location = new System.Drawing.Point(54, 1126);
             this.textBoxICsCommand3.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxICsCommand3.Multiline = true;
             this.textBoxICsCommand3.Name = "textBoxICsCommand3";
@@ -211,7 +214,7 @@
             // 
             // textBoxFeigModel
             // 
-            this.textBoxFeigModel.Location = new System.Drawing.Point(568, 302);
+            this.textBoxFeigModel.Location = new System.Drawing.Point(920, 307);
             this.textBoxFeigModel.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxFeigModel.Name = "textBoxFeigModel";
             this.textBoxFeigModel.Size = new System.Drawing.Size(102, 35);
@@ -233,7 +236,7 @@
             // labelSupportedICs
             // 
             this.labelSupportedICs.AutoSize = true;
-            this.labelSupportedICs.Location = new System.Drawing.Point(54, 417);
+            this.labelSupportedICs.Location = new System.Drawing.Point(48, 468);
             this.labelSupportedICs.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelSupportedICs.Name = "labelSupportedICs";
             this.labelSupportedICs.Size = new System.Drawing.Size(166, 24);
@@ -243,7 +246,7 @@
             // labelICsName3
             // 
             this.labelICsName3.AutoSize = true;
-            this.labelICsName3.Location = new System.Drawing.Point(54, 978);
+            this.labelICsName3.Location = new System.Drawing.Point(56, 1078);
             this.labelICsName3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelICsName3.Name = "labelICsName3";
             this.labelICsName3.Size = new System.Drawing.Size(106, 24);
@@ -252,7 +255,7 @@
             // 
             // textBoxICsName1
             // 
-            this.textBoxICsName1.Location = new System.Drawing.Point(570, 495);
+            this.textBoxICsName1.Location = new System.Drawing.Point(570, 588);
             this.textBoxICsName1.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxICsName1.Name = "textBoxICsName1";
             this.textBoxICsName1.Size = new System.Drawing.Size(338, 35);
@@ -262,7 +265,7 @@
             // 
             // textBoxICsName2
             // 
-            this.textBoxICsName2.Location = new System.Drawing.Point(570, 735);
+            this.textBoxICsName2.Location = new System.Drawing.Point(572, 835);
             this.textBoxICsName2.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxICsName2.Name = "textBoxICsName2";
             this.textBoxICsName2.Size = new System.Drawing.Size(338, 35);
@@ -272,7 +275,7 @@
             // 
             // textBoxICsName3
             // 
-            this.textBoxICsName3.Location = new System.Drawing.Point(570, 975);
+            this.textBoxICsName3.Location = new System.Drawing.Point(572, 1075);
             this.textBoxICsName3.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxICsName3.Name = "textBoxICsName3";
             this.textBoxICsName3.Size = new System.Drawing.Size(338, 35);
@@ -285,24 +288,24 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1186);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1302);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 28, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1300, 37);
+            this.statusStrip1.Size = new System.Drawing.Size(1162, 37);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1270, 32);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1132, 32);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // labelReaderManufacturer
             // 
             this.labelReaderManufacturer.AutoSize = true;
-            this.labelReaderManufacturer.Location = new System.Drawing.Point(564, 57);
+            this.labelReaderManufacturer.Location = new System.Drawing.Point(54, 29);
             this.labelReaderManufacturer.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelReaderManufacturer.Name = "labelReaderManufacturer";
             this.labelReaderManufacturer.Size = new System.Drawing.Size(226, 24);
@@ -312,7 +315,7 @@
             // labelAvailableModels
             // 
             this.labelAvailableModels.AutoSize = true;
-            this.labelAvailableModels.Location = new System.Drawing.Point(564, 109);
+            this.labelAvailableModels.Location = new System.Drawing.Point(54, 66);
             this.labelAvailableModels.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelAvailableModels.Name = "labelAvailableModels";
             this.labelAvailableModels.Size = new System.Drawing.Size(190, 24);
@@ -322,7 +325,7 @@
             // labelAvailableProtocols
             // 
             this.labelAvailableProtocols.AutoSize = true;
-            this.labelAvailableProtocols.Location = new System.Drawing.Point(564, 162);
+            this.labelAvailableProtocols.Location = new System.Drawing.Point(54, 104);
             this.labelAvailableProtocols.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelAvailableProtocols.Name = "labelAvailableProtocols";
             this.labelAvailableProtocols.Size = new System.Drawing.Size(226, 24);
@@ -332,7 +335,7 @@
             // labelAvailableICs
             // 
             this.labelAvailableICs.AutoSize = true;
-            this.labelAvailableICs.Location = new System.Drawing.Point(564, 216);
+            this.labelAvailableICs.Location = new System.Drawing.Point(54, 145);
             this.labelAvailableICs.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelAvailableICs.Name = "labelAvailableICs";
             this.labelAvailableICs.Size = new System.Drawing.Size(154, 24);
@@ -342,7 +345,7 @@
             // comboBoxReaderManufacturer
             // 
             this.comboBoxReaderManufacturer.FormattingEnabled = true;
-            this.comboBoxReaderManufacturer.Location = new System.Drawing.Point(829, 49);
+            this.comboBoxReaderManufacturer.Location = new System.Drawing.Point(317, 26);
             this.comboBoxReaderManufacturer.Name = "comboBoxReaderManufacturer";
             this.comboBoxReaderManufacturer.Size = new System.Drawing.Size(214, 32);
             this.comboBoxReaderManufacturer.TabIndex = 30;
@@ -350,7 +353,7 @@
             // comboBoxAvailableModels
             // 
             this.comboBoxAvailableModels.FormattingEnabled = true;
-            this.comboBoxAvailableModels.Location = new System.Drawing.Point(829, 100);
+            this.comboBoxAvailableModels.Location = new System.Drawing.Point(319, 66);
             this.comboBoxAvailableModels.Name = "comboBoxAvailableModels";
             this.comboBoxAvailableModels.Size = new System.Drawing.Size(214, 32);
             this.comboBoxAvailableModels.TabIndex = 31;
@@ -358,7 +361,7 @@
             // comboBoxAvailableProtocols
             // 
             this.comboBoxAvailableProtocols.FormattingEnabled = true;
-            this.comboBoxAvailableProtocols.Location = new System.Drawing.Point(829, 163);
+            this.comboBoxAvailableProtocols.Location = new System.Drawing.Point(317, 104);
             this.comboBoxAvailableProtocols.Name = "comboBoxAvailableProtocols";
             this.comboBoxAvailableProtocols.Size = new System.Drawing.Size(214, 32);
             this.comboBoxAvailableProtocols.TabIndex = 32;
@@ -366,14 +369,14 @@
             // comboBoxAvailableICs
             // 
             this.comboBoxAvailableICs.FormattingEnabled = true;
-            this.comboBoxAvailableICs.Location = new System.Drawing.Point(829, 214);
+            this.comboBoxAvailableICs.Location = new System.Drawing.Point(317, 142);
             this.comboBoxAvailableICs.Name = "comboBoxAvailableICs";
             this.comboBoxAvailableICs.Size = new System.Drawing.Size(214, 32);
             this.comboBoxAvailableICs.TabIndex = 33;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1073, 98);
+            this.button1.Location = new System.Drawing.Point(563, 70);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 35);
             this.button1.TabIndex = 34;
@@ -382,73 +385,117 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1147, 97);
+            this.button2.Location = new System.Drawing.Point(637, 69);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(68, 35);
             this.button2.TabIndex = 35;
             this.button2.Text = "Del";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // checkedListBoxSupportedProtocols
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(317, 302);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(168, 28);
-            this.listBox1.TabIndex = 36;
+            this.checkedListBoxSupportedProtocols.FormattingEnabled = true;
+            this.checkedListBoxSupportedProtocols.Items.AddRange(new object[] {
+            "item1",
+            "item2",
+            "item3"});
+            this.checkedListBoxSupportedProtocols.Location = new System.Drawing.Point(837, 26);
+            this.checkedListBoxSupportedProtocols.Name = "checkedListBoxSupportedProtocols";
+            this.checkedListBoxSupportedProtocols.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.checkedListBoxSupportedProtocols.Size = new System.Drawing.Size(238, 94);
+            this.checkedListBoxSupportedProtocols.TabIndex = 37;
             // 
-            // checkedListBox1
+            // checkedListBoxSupportedICs
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(319, 358);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(240, 34);
-            this.checkedListBox1.TabIndex = 37;
+            this.checkedListBoxSupportedICs.FormattingEnabled = true;
+            this.checkedListBoxSupportedICs.Location = new System.Drawing.Point(317, 480);
+            this.checkedListBoxSupportedICs.Name = "checkedListBoxSupportedICs";
+            this.checkedListBoxSupportedICs.Size = new System.Drawing.Size(240, 34);
+            this.checkedListBoxSupportedICs.TabIndex = 38;
             // 
-            // checkedListBox2
+            // checkedListBoxICsName1
             // 
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(319, 417);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(240, 34);
-            this.checkedListBox2.TabIndex = 38;
+            this.checkedListBoxICsName1.FormattingEnabled = true;
+            this.checkedListBoxICsName1.Location = new System.Drawing.Point(319, 588);
+            this.checkedListBoxICsName1.Name = "checkedListBoxICsName1";
+            this.checkedListBoxICsName1.Size = new System.Drawing.Size(240, 34);
+            this.checkedListBoxICsName1.TabIndex = 39;
             // 
-            // checkedListBox3
+            // checkedListBoxICsName2
             // 
-            this.checkedListBox3.FormattingEnabled = true;
-            this.checkedListBox3.Location = new System.Drawing.Point(317, 488);
-            this.checkedListBox3.Name = "checkedListBox3";
-            this.checkedListBox3.Size = new System.Drawing.Size(240, 34);
-            this.checkedListBox3.TabIndex = 39;
+            this.checkedListBoxICsName2.FormattingEnabled = true;
+            this.checkedListBoxICsName2.Location = new System.Drawing.Point(319, 828);
+            this.checkedListBoxICsName2.Name = "checkedListBoxICsName2";
+            this.checkedListBoxICsName2.Size = new System.Drawing.Size(240, 34);
+            this.checkedListBoxICsName2.TabIndex = 40;
             // 
-            // checkedListBox4
+            // checkedListBoxICsName3
             // 
-            this.checkedListBox4.FormattingEnabled = true;
-            this.checkedListBox4.Location = new System.Drawing.Point(317, 728);
-            this.checkedListBox4.Name = "checkedListBox4";
-            this.checkedListBox4.Size = new System.Drawing.Size(240, 34);
-            this.checkedListBox4.TabIndex = 40;
+            this.checkedListBoxICsName3.FormattingEnabled = true;
+            this.checkedListBoxICsName3.Location = new System.Drawing.Point(319, 1068);
+            this.checkedListBoxICsName3.Name = "checkedListBoxICsName3";
+            this.checkedListBoxICsName3.Size = new System.Drawing.Size(240, 34);
+            this.checkedListBoxICsName3.TabIndex = 41;
             // 
-            // checkedListBox5
+            // listBoxSupportedProtocols
             // 
-            this.checkedListBox5.FormattingEnabled = true;
-            this.checkedListBox5.Location = new System.Drawing.Point(317, 968);
-            this.checkedListBox5.Name = "checkedListBox5";
-            this.checkedListBox5.Size = new System.Drawing.Size(240, 34);
-            this.checkedListBox5.TabIndex = 41;
+            this.listBoxSupportedProtocols.FormattingEnabled = true;
+            this.listBoxSupportedProtocols.ItemHeight = 24;
+            this.listBoxSupportedProtocols.Items.AddRange(new object[] {
+            "item1",
+            "item2",
+            "item3"});
+            this.listBoxSupportedProtocols.Location = new System.Drawing.Point(805, 234);
+            this.listBoxSupportedProtocols.Name = "listBoxSupportedProtocols";
+            this.listBoxSupportedProtocols.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxSupportedProtocols.Size = new System.Drawing.Size(237, 52);
+            this.listBoxSupportedProtocols.TabIndex = 42;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "item1",
+            "item2",
+            "item3"});
+            this.comboBox1.Location = new System.Drawing.Point(817, 166);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(225, 32);
+            this.comboBox1.TabIndex = 43;
+            // 
+            // checkBoxComboBox1
+            // 
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBoxComboBox1.CheckBoxProperties = checkBoxProperties2;
+            this.checkBoxComboBox1.DisplayMemberSingleItem = "";
+            this.checkBoxComboBox1.FormattingEnabled = true;
+            this.checkBoxComboBox1.Items.AddRange(new object[] {
+            "item1",
+            "item2",
+            "item3",
+            "item4",
+            "item5",
+            "item6",
+            "item7",
+            "item8"});
+            this.checkBoxComboBox1.Location = new System.Drawing.Point(331, 426);
+            this.checkBoxComboBox1.Name = "checkBoxComboBox1";
+            this.checkBoxComboBox1.Size = new System.Drawing.Size(777, 32);
+            this.checkBoxComboBox1.TabIndex = 44;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1300, 1223);
-            this.Controls.Add(this.checkedListBox5);
-            this.Controls.Add(this.checkedListBox4);
-            this.Controls.Add(this.checkedListBox3);
-            this.Controls.Add(this.checkedListBox2);
-            this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(1162, 1339);
+            this.Controls.Add(this.checkBoxComboBox1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.listBoxSupportedProtocols);
+            this.Controls.Add(this.checkedListBoxICsName3);
+            this.Controls.Add(this.checkedListBoxICsName2);
+            this.Controls.Add(this.checkedListBoxICsName1);
+            this.Controls.Add(this.checkedListBoxSupportedICs);
+            this.Controls.Add(this.checkedListBoxSupportedProtocols);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxAvailableICs);
@@ -484,6 +531,7 @@
             this.Name = "Form2";
             this.Text = "Reader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -525,11 +573,13 @@
         private System.Windows.Forms.ComboBox comboBoxAvailableICs;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
-        private System.Windows.Forms.CheckedListBox checkedListBox3;
-        private System.Windows.Forms.CheckedListBox checkedListBox4;
-        private System.Windows.Forms.CheckedListBox checkedListBox5;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSupportedProtocols;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSupportedICs;
+        private System.Windows.Forms.CheckedListBox checkedListBoxICsName1;
+        private System.Windows.Forms.CheckedListBox checkedListBoxICsName2;
+        private System.Windows.Forms.CheckedListBox checkedListBoxICsName3;
+        private System.Windows.Forms.ListBox listBoxSupportedProtocols;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private PresentationControls.CheckBoxComboBox checkBoxComboBox1;
     }
 }
