@@ -63,33 +63,28 @@
             this.comboBoxAvailableModels = new System.Windows.Forms.ComboBox();
             this.comboBoxAvailableProtocols = new System.Windows.Forms.ComboBox();
             this.comboBoxAvailableICs = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.checkBoxComboBoxSupportedProtocols = new PresentationControls.CheckBoxComboBox();
             this.checkBoxComboBoxSupportedICs = new PresentationControls.CheckBoxComboBox();
-            this.checkBoxComboBoxICsName1 = new PresentationControls.CheckBoxComboBox();
             this.checkBoxComboBoxICsName2 = new PresentationControls.CheckBoxComboBox();
             this.checkBoxComboBoxICsName3 = new PresentationControls.CheckBoxComboBox();
+            this.checkBoxComboBoxICsName1 = new PresentationControls.CheckBoxComboBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxSelectModel
             // 
             this.listBoxSelectModel.FormattingEnabled = true;
-            this.listBoxSelectModel.ItemHeight = 24;
-            this.listBoxSelectModel.Location = new System.Drawing.Point(321, 223);
-            this.listBoxSelectModel.Margin = new System.Windows.Forms.Padding(6);
+            this.listBoxSelectModel.Location = new System.Drawing.Point(160, 42);
             this.listBoxSelectModel.Name = "listBoxSelectModel";
-            this.listBoxSelectModel.Size = new System.Drawing.Size(236, 124);
+            this.listBoxSelectModel.Size = new System.Drawing.Size(120, 82);
             this.listBoxSelectModel.TabIndex = 0;
             this.listBoxSelectModel.SelectedIndexChanged += new System.EventHandler(this.listBoxSelectModel_SelectedIndexChanged);
             // 
             // textBoxSupportedProtocols
             // 
-            this.textBoxSupportedProtocols.Location = new System.Drawing.Point(572, 423);
-            this.textBoxSupportedProtocols.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxSupportedProtocols.Location = new System.Drawing.Point(286, 175);
             this.textBoxSupportedProtocols.Name = "textBoxSupportedProtocols";
-            this.textBoxSupportedProtocols.Size = new System.Drawing.Size(839, 35);
+            this.textBoxSupportedProtocols.Size = new System.Drawing.Size(422, 20);
             this.textBoxSupportedProtocols.TabIndex = 1;
             this.textBoxSupportedProtocols.WordWrap = false;
             this.textBoxSupportedProtocols.TextChanged += new System.EventHandler(this.textBoxSupportedProtocols_TextChanged);
@@ -97,31 +92,28 @@
             // labelSelectModel
             // 
             this.labelSelectModel.AutoSize = true;
-            this.labelSelectModel.Location = new System.Drawing.Point(54, 223);
-            this.labelSelectModel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelSelectModel.Location = new System.Drawing.Point(25, 42);
             this.labelSelectModel.Name = "labelSelectModel";
-            this.labelSelectModel.Size = new System.Drawing.Size(154, 24);
+            this.labelSelectModel.Size = new System.Drawing.Size(69, 13);
             this.labelSelectModel.TabIndex = 2;
             this.labelSelectModel.Text = "Select Model";
             // 
             // labelFeigModel
             // 
             this.labelFeigModel.AutoSize = true;
-            this.labelFeigModel.Location = new System.Drawing.Point(766, 69);
-            this.labelFeigModel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelFeigModel.Location = new System.Drawing.Point(25, 150);
             this.labelFeigModel.Name = "labelFeigModel";
-            this.labelFeigModel.Size = new System.Drawing.Size(130, 24);
+            this.labelFeigModel.Size = new System.Drawing.Size(106, 13);
             this.labelFeigModel.TabIndex = 3;
-            this.labelFeigModel.Text = "Feig Model";
+            this.labelFeigModel.Text = "Add New Feig Model";
             // 
             // textBoxICsCommand1
             // 
-            this.textBoxICsCommand1.Location = new System.Drawing.Point(54, 635);
-            this.textBoxICsCommand1.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxICsCommand1.Location = new System.Drawing.Point(27, 282);
             this.textBoxICsCommand1.Multiline = true;
             this.textBoxICsCommand1.Name = "textBoxICsCommand1";
             this.textBoxICsCommand1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxICsCommand1.Size = new System.Drawing.Size(1357, 159);
+            this.textBoxICsCommand1.Size = new System.Drawing.Size(680, 88);
             this.textBoxICsCommand1.TabIndex = 4;
             this.textBoxICsCommand1.WordWrap = false;
             this.textBoxICsCommand1.TextChanged += new System.EventHandler(this.textBoxICsCommand1_TextChanged);
@@ -129,21 +121,19 @@
             // labelICsName1
             // 
             this.labelICsName1.AutoSize = true;
-            this.labelICsName1.Location = new System.Drawing.Point(50, 598);
-            this.labelICsName1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelICsName1.Location = new System.Drawing.Point(25, 262);
             this.labelICsName1.Name = "labelICsName1";
-            this.labelICsName1.Size = new System.Drawing.Size(106, 24);
+            this.labelICsName1.Size = new System.Drawing.Size(56, 13);
             this.labelICsName1.TabIndex = 5;
             this.labelICsName1.Text = "ICsName1";
             // 
             // textBoxICsCommand2
             // 
-            this.textBoxICsCommand2.Location = new System.Drawing.Point(52, 886);
-            this.textBoxICsCommand2.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxICsCommand2.Location = new System.Drawing.Point(26, 418);
             this.textBoxICsCommand2.Multiline = true;
             this.textBoxICsCommand2.Name = "textBoxICsCommand2";
             this.textBoxICsCommand2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxICsCommand2.Size = new System.Drawing.Size(1359, 146);
+            this.textBoxICsCommand2.Size = new System.Drawing.Size(680, 88);
             this.textBoxICsCommand2.TabIndex = 6;
             this.textBoxICsCommand2.WordWrap = false;
             this.textBoxICsCommand2.TextChanged += new System.EventHandler(this.textBoxICsCommand2_TextChanged);
@@ -151,19 +141,17 @@
             // labelICsName2
             // 
             this.labelICsName2.AutoSize = true;
-            this.labelICsName2.Location = new System.Drawing.Point(48, 838);
-            this.labelICsName2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelICsName2.Location = new System.Drawing.Point(24, 392);
             this.labelICsName2.Name = "labelICsName2";
-            this.labelICsName2.Size = new System.Drawing.Size(106, 24);
+            this.labelICsName2.Size = new System.Drawing.Size(56, 13);
             this.labelICsName2.TabIndex = 7;
             this.labelICsName2.Text = "ICsName2";
             // 
             // buttonModify
             // 
-            this.buttonModify.Location = new System.Drawing.Point(568, 265);
-            this.buttonModify.Margin = new System.Windows.Forms.Padding(6);
+            this.buttonModify.Location = new System.Drawing.Point(284, 79);
             this.buttonModify.Name = "buttonModify";
-            this.buttonModify.Size = new System.Drawing.Size(150, 42);
+            this.buttonModify.Size = new System.Drawing.Size(75, 23);
             this.buttonModify.TabIndex = 8;
             this.buttonModify.Text = "Modify";
             this.buttonModify.UseVisualStyleBackColor = true;
@@ -171,10 +159,9 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(568, 223);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(6);
+            this.buttonAdd.Location = new System.Drawing.Point(285, 148);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(150, 42);
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -182,10 +169,9 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(568, 307);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(6);
+            this.buttonDelete.Location = new System.Drawing.Point(284, 101);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(150, 42);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 10;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -193,32 +179,29 @@
             // 
             // textBoxSupportedICs
             // 
-            this.textBoxSupportedICs.Location = new System.Drawing.Point(570, 534);
-            this.textBoxSupportedICs.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxSupportedICs.Location = new System.Drawing.Point(285, 205);
             this.textBoxSupportedICs.Name = "textBoxSupportedICs";
-            this.textBoxSupportedICs.Size = new System.Drawing.Size(841, 35);
+            this.textBoxSupportedICs.Size = new System.Drawing.Size(422, 20);
             this.textBoxSupportedICs.TabIndex = 11;
             this.textBoxSupportedICs.WordWrap = false;
             this.textBoxSupportedICs.TextChanged += new System.EventHandler(this.textBoxSupportedICs_TextChanged);
             // 
             // textBoxICsCommand3
             // 
-            this.textBoxICsCommand3.Location = new System.Drawing.Point(54, 1126);
-            this.textBoxICsCommand3.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxICsCommand3.Location = new System.Drawing.Point(27, 548);
             this.textBoxICsCommand3.Multiline = true;
             this.textBoxICsCommand3.Name = "textBoxICsCommand3";
             this.textBoxICsCommand3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxICsCommand3.Size = new System.Drawing.Size(1357, 146);
+            this.textBoxICsCommand3.Size = new System.Drawing.Size(680, 88);
             this.textBoxICsCommand3.TabIndex = 12;
             this.textBoxICsCommand3.WordWrap = false;
             this.textBoxICsCommand3.TextChanged += new System.EventHandler(this.textBoxICsCommand3_TextChanged);
             // 
             // textBoxFeigModel
             // 
-            this.textBoxFeigModel.Location = new System.Drawing.Point(898, 66);
-            this.textBoxFeigModel.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxFeigModel.Location = new System.Drawing.Point(160, 150);
             this.textBoxFeigModel.Name = "textBoxFeigModel";
-            this.textBoxFeigModel.Size = new System.Drawing.Size(102, 35);
+            this.textBoxFeigModel.Size = new System.Drawing.Size(119, 20);
             this.textBoxFeigModel.TabIndex = 13;
             this.textBoxFeigModel.WordWrap = false;
             this.textBoxFeigModel.TextChanged += new System.EventHandler(this.textBoxFeigModel_TextChanged);
@@ -227,59 +210,53 @@
             // labelSupportedProtocols
             // 
             this.labelSupportedProtocols.AutoSize = true;
-            this.labelSupportedProtocols.Location = new System.Drawing.Point(48, 426);
-            this.labelSupportedProtocols.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelSupportedProtocols.Location = new System.Drawing.Point(24, 177);
             this.labelSupportedProtocols.Name = "labelSupportedProtocols";
-            this.labelSupportedProtocols.Size = new System.Drawing.Size(238, 24);
+            this.labelSupportedProtocols.Size = new System.Drawing.Size(103, 13);
             this.labelSupportedProtocols.TabIndex = 14;
             this.labelSupportedProtocols.Text = "Supported Protocols";
             // 
             // labelSupportedICs
             // 
             this.labelSupportedICs.AutoSize = true;
-            this.labelSupportedICs.Location = new System.Drawing.Point(54, 537);
-            this.labelSupportedICs.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelSupportedICs.Location = new System.Drawing.Point(27, 207);
             this.labelSupportedICs.Name = "labelSupportedICs";
-            this.labelSupportedICs.Size = new System.Drawing.Size(166, 24);
+            this.labelSupportedICs.Size = new System.Drawing.Size(74, 13);
             this.labelSupportedICs.TabIndex = 15;
             this.labelSupportedICs.Text = "Supported ICs";
             // 
             // labelICsName3
             // 
             this.labelICsName3.AutoSize = true;
-            this.labelICsName3.Location = new System.Drawing.Point(56, 1078);
-            this.labelICsName3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelICsName3.Location = new System.Drawing.Point(28, 522);
             this.labelICsName3.Name = "labelICsName3";
-            this.labelICsName3.Size = new System.Drawing.Size(106, 24);
+            this.labelICsName3.Size = new System.Drawing.Size(56, 13);
             this.labelICsName3.TabIndex = 18;
             this.labelICsName3.Text = "ICsName3";
             // 
             // textBoxICsName1
             // 
-            this.textBoxICsName1.Location = new System.Drawing.Point(570, 588);
-            this.textBoxICsName1.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxICsName1.Location = new System.Drawing.Point(285, 257);
             this.textBoxICsName1.Name = "textBoxICsName1";
-            this.textBoxICsName1.Size = new System.Drawing.Size(841, 35);
+            this.textBoxICsName1.Size = new System.Drawing.Size(422, 20);
             this.textBoxICsName1.TabIndex = 19;
             this.textBoxICsName1.WordWrap = false;
             this.textBoxICsName1.TextChanged += new System.EventHandler(this.textBoxICsName1_TextChanged);
             // 
             // textBoxICsName2
             // 
-            this.textBoxICsName2.Location = new System.Drawing.Point(572, 835);
-            this.textBoxICsName2.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxICsName2.Location = new System.Drawing.Point(286, 390);
             this.textBoxICsName2.Name = "textBoxICsName2";
-            this.textBoxICsName2.Size = new System.Drawing.Size(839, 35);
+            this.textBoxICsName2.Size = new System.Drawing.Size(422, 20);
             this.textBoxICsName2.TabIndex = 20;
             this.textBoxICsName2.WordWrap = false;
             this.textBoxICsName2.TextChanged += new System.EventHandler(this.textBoxICsName2_TextChanged);
             // 
             // textBoxICsName3
             // 
-            this.textBoxICsName3.Location = new System.Drawing.Point(572, 1075);
-            this.textBoxICsName3.Margin = new System.Windows.Forms.Padding(6);
+            this.textBoxICsName3.Location = new System.Drawing.Point(286, 520);
             this.textBoxICsName3.Name = "textBoxICsName3";
-            this.textBoxICsName3.Size = new System.Drawing.Size(839, 35);
+            this.textBoxICsName3.Size = new System.Drawing.Size(422, 20);
             this.textBoxICsName3.TabIndex = 21;
             this.textBoxICsName3.WordWrap = false;
             this.textBoxICsName3.TextChanged += new System.EventHandler(this.textBoxICsName3_TextChanged);
@@ -289,109 +266,90 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1302);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 644);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 28, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1446, 37);
+            this.statusStrip1.Size = new System.Drawing.Size(734, 22);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1416, 32);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(719, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // labelReaderManufacturer
             // 
             this.labelReaderManufacturer.AutoSize = true;
-            this.labelReaderManufacturer.Location = new System.Drawing.Point(54, 29);
-            this.labelReaderManufacturer.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelReaderManufacturer.Location = new System.Drawing.Point(461, 41);
             this.labelReaderManufacturer.Name = "labelReaderManufacturer";
-            this.labelReaderManufacturer.Size = new System.Drawing.Size(226, 24);
+            this.labelReaderManufacturer.Size = new System.Drawing.Size(105, 13);
             this.labelReaderManufacturer.TabIndex = 26;
             this.labelReaderManufacturer.Text = "ReaderManufacturer";
             // 
             // labelAvailableModels
             // 
             this.labelAvailableModels.AutoSize = true;
-            this.labelAvailableModels.Location = new System.Drawing.Point(54, 66);
-            this.labelAvailableModels.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelAvailableModels.Location = new System.Drawing.Point(461, 61);
             this.labelAvailableModels.Name = "labelAvailableModels";
-            this.labelAvailableModels.Size = new System.Drawing.Size(190, 24);
+            this.labelAvailableModels.Size = new System.Drawing.Size(84, 13);
             this.labelAvailableModels.TabIndex = 27;
             this.labelAvailableModels.Text = "AvailableModels";
             // 
             // labelAvailableProtocols
             // 
             this.labelAvailableProtocols.AutoSize = true;
-            this.labelAvailableProtocols.Location = new System.Drawing.Point(54, 104);
-            this.labelAvailableProtocols.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelAvailableProtocols.Location = new System.Drawing.Point(461, 81);
             this.labelAvailableProtocols.Name = "labelAvailableProtocols";
-            this.labelAvailableProtocols.Size = new System.Drawing.Size(226, 24);
+            this.labelAvailableProtocols.Size = new System.Drawing.Size(94, 13);
             this.labelAvailableProtocols.TabIndex = 28;
             this.labelAvailableProtocols.Text = "AvailableProtocols";
             // 
             // labelAvailableICs
             // 
             this.labelAvailableICs.AutoSize = true;
-            this.labelAvailableICs.Location = new System.Drawing.Point(54, 145);
-            this.labelAvailableICs.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelAvailableICs.Location = new System.Drawing.Point(461, 104);
             this.labelAvailableICs.Name = "labelAvailableICs";
-            this.labelAvailableICs.Size = new System.Drawing.Size(154, 24);
+            this.labelAvailableICs.Size = new System.Drawing.Size(65, 13);
             this.labelAvailableICs.TabIndex = 29;
             this.labelAvailableICs.Text = "AvailableICs";
             // 
             // comboBoxReaderManufacturer
             // 
             this.comboBoxReaderManufacturer.FormattingEnabled = true;
-            this.comboBoxReaderManufacturer.Location = new System.Drawing.Point(317, 26);
+            this.comboBoxReaderManufacturer.Location = new System.Drawing.Point(592, 39);
+            this.comboBoxReaderManufacturer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxReaderManufacturer.Name = "comboBoxReaderManufacturer";
-            this.comboBoxReaderManufacturer.Size = new System.Drawing.Size(214, 32);
+            this.comboBoxReaderManufacturer.Size = new System.Drawing.Size(119, 21);
             this.comboBoxReaderManufacturer.TabIndex = 30;
             // 
             // comboBoxAvailableModels
             // 
             this.comboBoxAvailableModels.FormattingEnabled = true;
-            this.comboBoxAvailableModels.Location = new System.Drawing.Point(319, 66);
+            this.comboBoxAvailableModels.Location = new System.Drawing.Point(592, 59);
+            this.comboBoxAvailableModels.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxAvailableModels.Name = "comboBoxAvailableModels";
-            this.comboBoxAvailableModels.Size = new System.Drawing.Size(214, 32);
+            this.comboBoxAvailableModels.Size = new System.Drawing.Size(119, 21);
             this.comboBoxAvailableModels.TabIndex = 31;
             // 
             // comboBoxAvailableProtocols
             // 
             this.comboBoxAvailableProtocols.FormattingEnabled = true;
-            this.comboBoxAvailableProtocols.Location = new System.Drawing.Point(317, 104);
+            this.comboBoxAvailableProtocols.Location = new System.Drawing.Point(592, 81);
+            this.comboBoxAvailableProtocols.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxAvailableProtocols.Name = "comboBoxAvailableProtocols";
-            this.comboBoxAvailableProtocols.Size = new System.Drawing.Size(214, 32);
+            this.comboBoxAvailableProtocols.Size = new System.Drawing.Size(119, 21);
             this.comboBoxAvailableProtocols.TabIndex = 32;
             // 
             // comboBoxAvailableICs
             // 
             this.comboBoxAvailableICs.FormattingEnabled = true;
-            this.comboBoxAvailableICs.Location = new System.Drawing.Point(317, 142);
+            this.comboBoxAvailableICs.Location = new System.Drawing.Point(592, 102);
+            this.comboBoxAvailableICs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxAvailableICs.Name = "comboBoxAvailableICs";
-            this.comboBoxAvailableICs.Size = new System.Drawing.Size(214, 32);
+            this.comboBoxAvailableICs.Size = new System.Drawing.Size(119, 21);
             this.comboBoxAvailableICs.TabIndex = 33;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(563, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 35);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(637, 69);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(68, 35);
-            this.button2.TabIndex = 35;
-            this.button2.Text = "Del";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // checkBoxComboBoxSupportedProtocols
             // 
@@ -408,9 +366,10 @@
             "item6",
             "item7",
             "item8"});
-            this.checkBoxComboBoxSupportedProtocols.Location = new System.Drawing.Point(331, 426);
+            this.checkBoxComboBoxSupportedProtocols.Location = new System.Drawing.Point(160, 177);
+            this.checkBoxComboBoxSupportedProtocols.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxComboBoxSupportedProtocols.Name = "checkBoxComboBoxSupportedProtocols";
-            this.checkBoxComboBoxSupportedProtocols.Size = new System.Drawing.Size(223, 32);
+            this.checkBoxComboBoxSupportedProtocols.Size = new System.Drawing.Size(119, 21);
             this.checkBoxComboBoxSupportedProtocols.TabIndex = 44;
             this.checkBoxComboBoxSupportedProtocols.CheckBoxCheckedChanged += new System.EventHandler(this.checkBoxComboBoxSupportedProtocols_CheckBoxCheckedChanged);
             this.checkBoxComboBoxSupportedProtocols.SelectedIndexChanged += new System.EventHandler(this.checkBoxComboBoxSupportedProtocols_SelectedIndexChanged);
@@ -431,37 +390,17 @@
             "item6",
             "item7",
             "item8"});
-            this.checkBoxComboBoxSupportedICs.Location = new System.Drawing.Point(331, 537);
+            this.checkBoxComboBoxSupportedICs.Location = new System.Drawing.Point(161, 207);
+            this.checkBoxComboBoxSupportedICs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxComboBoxSupportedICs.Name = "checkBoxComboBoxSupportedICs";
-            this.checkBoxComboBoxSupportedICs.Size = new System.Drawing.Size(223, 32);
+            this.checkBoxComboBoxSupportedICs.Size = new System.Drawing.Size(119, 21);
             this.checkBoxComboBoxSupportedICs.TabIndex = 45;
             this.checkBoxComboBoxSupportedICs.CheckBoxCheckedChanged += new System.EventHandler(this.checkBoxComboBoxSupportedICs_CheckBoxCheckedChanged);
             // 
-            // checkBoxComboBoxICsName1
-            // 
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.checkBoxComboBoxICsName1.CheckBoxProperties = checkBoxProperties3;
-            this.checkBoxComboBoxICsName1.DisplayMemberSingleItem = "";
-            this.checkBoxComboBoxICsName1.FormattingEnabled = true;
-            this.checkBoxComboBoxICsName1.Items.AddRange(new object[] {
-            "item1",
-            "item2",
-            "item3",
-            "item4",
-            "item5",
-            "item6",
-            "item7",
-            "item8"});
-            this.checkBoxComboBoxICsName1.Location = new System.Drawing.Point(334, 588);
-            this.checkBoxComboBoxICsName1.Name = "checkBoxComboBoxICsName1";
-            this.checkBoxComboBoxICsName1.Size = new System.Drawing.Size(223, 32);
-            this.checkBoxComboBoxICsName1.TabIndex = 46;
-            this.checkBoxComboBoxICsName1.CheckBoxCheckedChanged += new System.EventHandler(this.checkBoxComboBoxICsName1_CheckBoxCheckedChanged);
-            // 
             // checkBoxComboBoxICsName2
             // 
-            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.checkBoxComboBoxICsName2.CheckBoxProperties = checkBoxProperties4;
+            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBoxComboBoxICsName2.CheckBoxProperties = checkBoxProperties3;
             this.checkBoxComboBoxICsName2.DisplayMemberSingleItem = "";
             this.checkBoxComboBoxICsName2.FormattingEnabled = true;
             this.checkBoxComboBoxICsName2.Items.AddRange(new object[] {
@@ -473,16 +412,17 @@
             "item6",
             "item7",
             "item8"});
-            this.checkBoxComboBoxICsName2.Location = new System.Drawing.Point(331, 838);
+            this.checkBoxComboBoxICsName2.Location = new System.Drawing.Point(161, 392);
+            this.checkBoxComboBoxICsName2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxComboBoxICsName2.Name = "checkBoxComboBoxICsName2";
-            this.checkBoxComboBoxICsName2.Size = new System.Drawing.Size(223, 32);
+            this.checkBoxComboBoxICsName2.Size = new System.Drawing.Size(119, 21);
             this.checkBoxComboBoxICsName2.TabIndex = 47;
             this.checkBoxComboBoxICsName2.CheckBoxCheckedChanged += new System.EventHandler(this.checkBoxComboBoxICsName2_CheckBoxCheckedChanged);
             // 
             // checkBoxComboBoxICsName3
             // 
-            checkBoxProperties5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.checkBoxComboBoxICsName3.CheckBoxProperties = checkBoxProperties5;
+            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBoxComboBoxICsName3.CheckBoxProperties = checkBoxProperties4;
             this.checkBoxComboBoxICsName3.DisplayMemberSingleItem = "";
             this.checkBoxComboBoxICsName3.FormattingEnabled = true;
             this.checkBoxComboBoxICsName3.Items.AddRange(new object[] {
@@ -494,24 +434,38 @@
             "item6",
             "item7",
             "item8"});
-            this.checkBoxComboBoxICsName3.Location = new System.Drawing.Point(331, 1075);
+            this.checkBoxComboBoxICsName3.Location = new System.Drawing.Point(161, 520);
+            this.checkBoxComboBoxICsName3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxComboBoxICsName3.Name = "checkBoxComboBoxICsName3";
-            this.checkBoxComboBoxICsName3.Size = new System.Drawing.Size(223, 32);
+            this.checkBoxComboBoxICsName3.Size = new System.Drawing.Size(119, 21);
             this.checkBoxComboBoxICsName3.TabIndex = 48;
             this.checkBoxComboBoxICsName3.CheckBoxCheckedChanged += new System.EventHandler(this.checkBoxComboBoxICsName3_CheckBoxCheckedChanged);
             // 
+            // checkBoxComboBoxICsName1
+            // 
+            checkBoxProperties5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBoxComboBoxICsName1.CheckBoxProperties = checkBoxProperties5;
+            this.checkBoxComboBoxICsName1.DisplayMemberSingleItem = "";
+            this.checkBoxComboBoxICsName1.FormattingEnabled = true;
+            this.checkBoxComboBoxICsName1.Items.AddRange(new object[] {
+            "item1",
+            "item2"});
+            this.checkBoxComboBoxICsName1.Location = new System.Drawing.Point(161, 256);
+            this.checkBoxComboBoxICsName1.Name = "checkBoxComboBoxICsName1";
+            this.checkBoxComboBoxICsName1.Size = new System.Drawing.Size(119, 21);
+            this.checkBoxComboBoxICsName1.TabIndex = 49;
+            this.checkBoxComboBoxICsName1.CheckBoxCheckedChanged += new System.EventHandler(this.checkBoxComboBoxICsName1_CheckBoxCheckedChanged);
+            // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1446, 1339);
+            this.ClientSize = new System.Drawing.Size(734, 666);
+            this.Controls.Add(this.checkBoxComboBoxICsName1);
             this.Controls.Add(this.checkBoxComboBoxICsName3);
             this.Controls.Add(this.checkBoxComboBoxICsName2);
-            this.Controls.Add(this.checkBoxComboBoxICsName1);
             this.Controls.Add(this.checkBoxComboBoxSupportedICs);
             this.Controls.Add(this.checkBoxComboBoxSupportedProtocols);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxAvailableICs);
             this.Controls.Add(this.comboBoxAvailableProtocols);
             this.Controls.Add(this.comboBoxAvailableModels);
@@ -541,7 +495,6 @@
             this.Controls.Add(this.labelSelectModel);
             this.Controls.Add(this.textBoxSupportedProtocols);
             this.Controls.Add(this.listBoxSelectModel);
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form2";
             this.Text = "Reader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
@@ -585,12 +538,10 @@
         private System.Windows.Forms.ComboBox comboBoxAvailableModels;
         private System.Windows.Forms.ComboBox comboBoxAvailableProtocols;
         private System.Windows.Forms.ComboBox comboBoxAvailableICs;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private PresentationControls.CheckBoxComboBox checkBoxComboBoxSupportedProtocols;
         private PresentationControls.CheckBoxComboBox checkBoxComboBoxSupportedICs;
-        private PresentationControls.CheckBoxComboBox checkBoxComboBoxICsName1;
         private PresentationControls.CheckBoxComboBox checkBoxComboBoxICsName2;
         private PresentationControls.CheckBoxComboBox checkBoxComboBoxICsName3;
+        private PresentationControls.CheckBoxComboBox checkBoxComboBoxICsName1;
     }
 }

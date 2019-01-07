@@ -54,22 +54,7 @@ namespace ReaderGui
             InitComboBoxes();
             InitlistBoxSelectModel();
 
-            initCheckBoxComboBoxSupportedProtocols();
-
-            initCheckBoxComboBoxSupportedICs();
-
-            if(feigJson.SetupCommands.Count>0)
-            {
-                initCheckBoxComboBoxICsName1();
-            }
-            if(feigJson.SetupCommands.Count > 1)
-            {
-                initCheckBoxComboBoxICsName2();
-            }
-            if (feigJson.SetupCommands.Count > 2)
-            {
-                initCheckBoxComboBoxICsName3();
-            }
+            
 
 
 
@@ -148,7 +133,7 @@ namespace ReaderGui
 
 
             listBoxSelectModel.EndUpdate();
-            listBoxSelectModel.SetSelected(0, true);
+            //listBoxSelectModel.SetSelected(0, true);
         }
 
         private void listBoxSelectModel_SelectedIndexChanged(object sender, EventArgs e)
@@ -161,56 +146,72 @@ namespace ReaderGui
             textBoxFeigModel.Text = selectModel;
             str_conf_model = selectModel;
 
-            textBoxSupportedProtocols.Text = Util.StrArrayToStr(feigJson.SupportedProtocols,";");
-            str_conf_protocols = Util.StrArrayToStr(feigJson.SupportedProtocols, ";");
+            //textBoxSupportedProtocols.Text = Util.StrArrayToStr(feigJson.SupportedProtocols,";");
+            //str_conf_protocols = Util.StrArrayToStr(feigJson.SupportedProtocols, ";");
 
-
-
-            
 
             textBoxSupportedICs.Text = Util.StrArrayToStr(feigJson.SupportedICs, ";");
             str_conf_ICs = Util.StrArrayToStr(feigJson.SupportedICs, ";");
 
-            ShowSetupCommand(feigJson);
+
+            initCheckBoxComboBoxSupportedProtocols();
+
+            initCheckBoxComboBoxSupportedICs();
+
+            if (feigJson.SetupCommands.Count > 0)
+            {
+                initCheckBoxComboBoxICsName1();
+            }
+            if (feigJson.SetupCommands.Count > 1)
+            {
+                initCheckBoxComboBoxICsName2();
+            }
+            if (feigJson.SetupCommands.Count > 2)
+            {
+                initCheckBoxComboBoxICsName3();
+            }
+
+
+            //ShowSetupCommand(feigJson);
        
         }
 
         private void ShowSetupCommand(FeigJson feigjson)
         {
 
-            int i = 1;
-            foreach(CommandJson command in feigjson.SetupCommands)
-            {
+            //int i = 1;
+            //foreach(CommandJson command in feigjson.SetupCommands)
+            //{
 
-                if(i==1)
-                {
-                    textBoxICsName1.Text = Util.StrArrayToStr(command.icName, ";");
-                    str_icName_1= Util.StrArrayToStr(command.icName, ";");
+            //    if(i==1)
+            //    {
+            //        textBoxICsName1.Text = Util.StrArrayToStr(command.icName, ";");
+            //        str_icName_1= Util.StrArrayToStr(command.icName, ";");
 
-                    textBoxICsCommand1.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
-                    str_command_1 = Util.StrArrayToStr(command.icCommand, "\r\n");
+            //        textBoxICsCommand1.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
+            //        str_command_1 = Util.StrArrayToStr(command.icCommand, "\r\n");
 
 
-                }
-                else if(i==2)
-                {
-                    textBoxICsName2.Text = Util.StrArrayToStr(command.icName, ";");
-                    str_icName_2 = Util.StrArrayToStr(command.icName, ";");
+            //    }
+            //    else if(i==2)
+            //    {
+            //        textBoxICsName2.Text = Util.StrArrayToStr(command.icName, ";");
+            //        str_icName_2 = Util.StrArrayToStr(command.icName, ";");
 
-                    textBoxICsCommand2.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
-                    str_command_2 = Util.StrArrayToStr(command.icCommand, "\r\n");
-                }
-                else if(i==3)
-                {
-                    textBoxICsName3.Text = Util.StrArrayToStr(command.icName, ";");
-                    str_icName_3 = Util.StrArrayToStr(command.icName, ";");
+            //        textBoxICsCommand2.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
+            //        str_command_2 = Util.StrArrayToStr(command.icCommand, "\r\n");
+            //    }
+            //    else if(i==3)
+            //    {
+            //        textBoxICsName3.Text = Util.StrArrayToStr(command.icName, ";");
+            //        str_icName_3 = Util.StrArrayToStr(command.icName, ";");
 
-                    textBoxICsCommand3.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
-                    str_command_3 = Util.StrArrayToStr(command.icCommand, "\r\n");
-                }
+            //        textBoxICsCommand3.Text = Util.StrArrayToStr(command.icCommand, "\r\n");
+            //        str_command_3 = Util.StrArrayToStr(command.icCommand, "\r\n");
+            //    }
 
-                i++;
-            }
+            //    i++;
+            //}
         }
 
         private FeigJson getSelectedReaderJson(string selectedModel)
@@ -248,8 +249,29 @@ namespace ReaderGui
             textBoxICsCommand2.Clear();
             textBoxICsCommand3.Clear();
 
+            checkBoxComboBoxSupportedProtocols.Text = "";
+            checkBoxComboBoxSupportedICs.Text = "";
+
+            checkBoxComboBoxICsName1.Text="";
+            checkBoxComboBoxICsName2.Text = "";
+            checkBoxComboBoxICsName3.Text = "";
+
         }
 
+        //private void clearText()
+        //{
+        //    textBoxSupportedProtocols.Clear();
+        //    textBoxSupportedICs.Clear();
+
+        //    textBoxICsCommand1.Clear();
+        //    textBoxICsCommand2.Clear();
+        //    textBoxICsCommand3.Clear();
+
+        //    textBoxICsName1.Clear();
+        //    textBoxICsName2.Clear();
+        //    textBoxICsName3.Clear();
+
+        //}
         private void buttonAdd_Click(object sender, EventArgs e)
         {
 
@@ -340,25 +362,12 @@ namespace ReaderGui
 
         }
 
-        private void clearText()
-        {
-            textBoxSupportedProtocols.Clear();
-            textBoxSupportedICs.Clear();
 
-            textBoxICsCommand1.Clear();
-            textBoxICsCommand2.Clear();
-            textBoxICsCommand3.Clear();
-
-            textBoxICsName1.Clear();
-            textBoxICsName2.Clear();
-            textBoxICsName3.Clear();
-
-        }
 
         private void textBoxFeigModel_TextChanged(object sender, EventArgs e)
         {
             
-            clearText();
+            contentClear();
             //labelAdd.Text = "Now adding a new one";
             buttonAdd.Enabled = false;
             str_conf_model = textBoxFeigModel.Text.ToString();
@@ -439,21 +448,28 @@ namespace ReaderGui
             checkBoxComboBoxSupportedProtocols.Items.AddRange(readFeigJson.feigJsonList.AvailableProtocols);
             //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
-
+            
             string checkedProtocols = "";
-
+            int count = 0;
             foreach (var checkBoxItem in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
             {
-
+                checkBoxItem.Checked = false;
                 if (feigJson.SupportedProtocols.Contains(checkBoxItem.Text))
                 {
                     checkBoxItem.Checked = true;
-                    checkedProtocols = checkedProtocols + "'" + checkBoxItem.Text + "',";
-
+                    checkedProtocols += checkBoxItem.Text + ";";
+                    count++;
                 }
 
             }
 
+            if (checkedProtocols.Length > 0)
+                checkedProtocols = checkedProtocols.Remove(checkedProtocols.Length - 1);
+            checkBoxComboBoxSupportedProtocols.Text = count.ToString() + " Selected";//checkedProd;
+
+            textBoxSupportedProtocols.Text = checkedProtocols;
+
+            str_conf_protocols = checkedProtocols;
             //string checkedProd = "";
             //foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
             //{
@@ -474,17 +490,27 @@ namespace ReaderGui
             checkBoxComboBoxSupportedICs.Items.AddRange(readFeigJson.feigJsonList.AvailableICs);
             //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
-
+            string checkedICs = "";
+            int count = 0;
             foreach (var checkBoxItem in checkBoxComboBoxSupportedICs.CheckBoxItems)
             {
-
+                checkBoxItem.Checked = false;
                 if (feigJson.SupportedICs.Contains(checkBoxItem.Text))
                 {
                     checkBoxItem.Checked = true;
-
+                    checkedICs += checkBoxItem.Text + ";";
+                    count++;
                 }
 
             }
+
+            if (checkedICs.Length > 0)
+                checkedICs = checkedICs.Remove(checkedICs.Length - 1);
+            checkBoxComboBoxSupportedICs.Text = count.ToString() + " Selected";//checkedProd;
+
+            textBoxSupportedICs.Text = checkedICs;
+
+            str_conf_ICs = checkedICs;
 
         }
 
@@ -492,19 +518,25 @@ namespace ReaderGui
         {
             checkBoxComboBoxICsName1.Items.Clear();
             checkBoxComboBoxICsName1.Items.AddRange(feigJson.SupportedICs);
-            //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
-            //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
-
-            foreach (var checkBoxItem in checkBoxComboBoxSupportedICs.CheckBoxItems)
+            int count = 0;
+            string checkedICsName1 = "";
+            foreach (var checkBoxItem in checkBoxComboBoxICsName1.CheckBoxItems)
             {
                 //checkBoxItem.Checked = false;
                 if (feigJson.SetupCommands[0].icName.Contains(checkBoxItem.Text))
                 {
                     checkBoxItem.Checked = true;
-
+                    checkedICsName1 += checkBoxItem.Text + ";";
+                    count++;
                 }
 
             }
+            
+            if (checkedICsName1.Length > 0)
+                checkedICsName1 = checkedICsName1.Remove(checkedICsName1.Length - 1);
+            textBoxICsName1.Text = checkedICsName1;
+            checkBoxComboBoxICsName1.Text = count.ToString() + " Selected";
+            textBoxICsCommand1.Text = Util.StrArrayToStr(feigJson.SetupCommands[0].icCommand, "\r\n");
 
         }
 
@@ -514,18 +546,24 @@ namespace ReaderGui
             checkBoxComboBoxICsName2.Items.AddRange(feigJson.SupportedICs);
             //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
-
-            foreach (var checkBoxItem in checkBoxComboBoxSupportedICs.CheckBoxItems)
+            int count = 0;
+            string checkedICsName2 = "";
+            foreach (var checkBoxItem in checkBoxComboBoxICsName2.CheckBoxItems)
             {
 
                 if (feigJson.SetupCommands[1].icName.Contains(checkBoxItem.Text))
                 {
                     checkBoxItem.Checked = true;
-
+                    checkedICsName2 += checkBoxItem.Text + ";";
+                    count++;
                 }
 
             }
-
+            if (checkedICsName2.Length > 0)
+                checkedICsName2 = checkedICsName2.Remove(checkedICsName2.Length - 1);
+            textBoxICsName2.Text = checkedICsName2;
+            checkBoxComboBoxICsName2.Text = count.ToString() + " Selected";
+            textBoxICsCommand2.Text = Util.StrArrayToStr(feigJson.SetupCommands[1].icCommand, "\r\n");
         }
 
         private void initCheckBoxComboBoxICsName3()
@@ -534,18 +572,24 @@ namespace ReaderGui
             checkBoxComboBoxICsName3.Items.AddRange(feigJson.SupportedICs);
             //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
-
-            foreach (var checkBoxItem in checkBoxComboBoxSupportedICs.CheckBoxItems)
+            int count = 0;
+            string checkedICsName3 = "";
+            foreach (var checkBoxItem in checkBoxComboBoxICsName3.CheckBoxItems)
             {
 
                 if (feigJson.SetupCommands[2].icName.Contains(checkBoxItem.Text))
                 {
                     checkBoxItem.Checked = true;
-
+                    checkedICsName3 += checkBoxItem.Text + ";";
+                    count++;
                 }
 
             }
-
+            if (checkedICsName3.Length > 0)
+                checkedICsName3 = checkedICsName3.Remove(checkedICsName3.Length - 1);
+            textBoxICsName3.Text = checkedICsName3;
+            checkBoxComboBoxICsName3.Text = count.ToString() + " Selected";
+            textBoxICsCommand3.Text = Util.StrArrayToStr(feigJson.SetupCommands[2].icCommand, "\r\n");
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -692,15 +736,17 @@ namespace ReaderGui
                 if (item.Checked == true)
                 {
                     checkedICsName3 += item.Text + ";";//checkedProd + "'" + item.Text + "',";
+                    
                     count++;
                 }
 
             }
             if (checkedICsName3.Length > 0)
                 checkedICsName3 = checkedICsName3.Remove(checkedICsName3.Length - 1);
+            textBoxICsName3.Text = checkedICsName3;
             checkBoxComboBoxICsName3.Text = count.ToString() + " Selected";//checkedProd;
 
-            textBoxICsName3.Text = checkedICsName3;
+            
         }
     }
 }

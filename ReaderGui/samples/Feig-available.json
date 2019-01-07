@@ -3,9 +3,7 @@
   "AvailableModels": [
     "CPR40",
     "CPR74",
-    "CPR50",
-    "CPR66",
-    "CPR88"
+    "CPR50"
   ],
   "AvailableProtocols": [
     "ISO14443A",
@@ -148,41 +146,6 @@
           ],
           "icCommand": [
             "TTTT"
-          ]
-        }
-      ]
-    },
-    {
-      "Model": "CPR88",
-      "SupportedProtocols": [
-        "ISO14443A",
-        "ISO14443A-4",
-        "Mifare Classic",
-        "ISO15693"
-      ],
-      "SupportedICs": [
-        "NTAG213",
-        "SIC43NT"
-      ],
-      "SetupCommands": [
-        {
-          "icName": [
-            "NTAG213"
-          ],
-          "icCommand": [
-            "11",
-            "22",
-            "33"
-          ]
-        },
-        {
-          "icName": [
-            "SIC43NT"
-          ],
-          "icCommand": [
-            "44",
-            "55",
-            "66"
           ]
         }
       ]
