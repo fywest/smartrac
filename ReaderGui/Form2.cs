@@ -15,16 +15,27 @@ namespace ReaderGui
     {
 
         string str_conf_model;
-        string str_conf_protocols;
-        string str_conf_ICs;
+        //string str_conf_protocols;
+        //string str_conf_ICs;
         
-        string str_icName_1;
-        string str_icName_2;
-        string str_icName_3;
+        //string str_icName_1;
+        //string str_icName_2;
+        //string str_icName_3;
 
-        string str_command_1;
-        string str_command_2;
-        string str_command_3;
+        //string str_command_1;
+        //string str_command_2;
+        //string str_command_3;
+
+        string[] str_arr_conf_protocols;
+        string[] str_arr_conf_ICs;
+
+        string[] str_arr_icName_1;
+        string[] str_arr_icName_2;
+        string[] str_arr_icName_3;
+
+        string[] str_arr_command_1;
+        string[] str_arr_command_2;
+        string[] str_arr_command_3;
 
         ReadFeigJson readFeigJson;
         FeigJson feigJson;
@@ -54,34 +65,11 @@ namespace ReaderGui
             InitComboBoxes();
             InitlistBoxSelectModel();
 
-            
-
-
-
-
-
             toolStripStatusLabel1.Text = "Operation Status";//DateTime.Now.ToShortDateString();
 
 
         }
-        private void buttonModify_Click(object sender, EventArgs e)
-        {
 
-            string selectModel = listBoxSelectModel.SelectedItem.ToString();
-
-            if (MessageBox.Show("Are you sure to update " + selectModel + " to file", "Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                deleteFeig(selectModel);
-
-                CreateFeig(selectModel);
-                readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
-                readFeigJson.writeToFile(Form1.jsonPath);
-
-                initFeigJson();
-                //labelModify.Text = selectModel + " is updated to file successfully";
-                toolStripStatusLabel1.Text= selectModel + " is updated to file successfully";
-            }
-        }
 
         private void InitComboBoxes()
         {
@@ -138,7 +126,7 @@ namespace ReaderGui
 
 
             textBoxSupportedICs.Text = Util.StrArrayToStr(feigJson.SupportedICs, ";");
-            str_conf_ICs = Util.StrArrayToStr(feigJson.SupportedICs, ";");
+            //str_conf_ICs = Util.StrArrayToStr(feigJson.SupportedICs, ";");
 
 
             initCheckBoxComboBoxSupportedProtocols();
@@ -312,7 +300,6 @@ namespace ReaderGui
             
             List<string> availableModel_list =Util.strArrayToList(readFeigJson.feigJsonList.AvailableModels);
             availableModel_list.Add(model_temp);
-
             readFeigJson.feigJsonList.AvailableModels = Util.ListToStrArray(availableModel_list);
 
             readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
@@ -331,25 +318,46 @@ namespace ReaderGui
         {
             List<CommandJson> commandJsonList = new List<CommandJson>();
             CommandJson temp;
-            if (!string.IsNullOrEmpty(str_icName_1))
+            //if (!string.IsNullOrEmpty(str_icName_1))
+            //{
+            //    temp.icName = Util.strTrimToArray(str_icName_1, ';');
+            //    temp.icCommand = Util.strTrimToArray(str_command_1, '\n');
+            //    commandJsonList.Add(temp);
+            //}
+            //if (!string.IsNullOrEmpty(str_icName_2))
+            //{
+            //    temp.icName = Util.strTrimToArray(str_icName_2, ';');
+            //    temp.icCommand = Util.strTrimToArray(str_command_2, '\n');
+            //    commandJsonList.Add(temp);
+            //}
+            //if (!string.IsNullOrEmpty(str_icName_3))
+            //{
+            //    temp.icName = Util.strTrimToArray(str_icName_3, ';');
+            //    temp.icCommand = Util.strTrimToArray(str_command_3, '\n');
+            //    commandJsonList.Add(temp);
+            //}
+
+            //FeigJson feigJsonTemp = new FeigJson(model, str_conf_protocols, str_conf_ICs, commandJsonList);
+
+            if(!(str_arr_icName_1 == null || str_arr_icName_1.Length == 0))
             {
-                temp.icName = Util.strTrimToArray(str_icName_1, ';');
-                temp.icCommand = Util.strTrimToArray(str_command_1, '\n');
+                temp.icName = str_arr_icName_1;
+                temp.icCommand = str_arr_command_1;
                 commandJsonList.Add(temp);
             }
-            if (!string.IsNullOrEmpty(str_icName_2))
+            if (!(str_arr_icName_2==null||str_arr_icName_2.Length==0))
             {
-                temp.icName = Util.strTrimToArray(str_icName_2, ';');
-                temp.icCommand = Util.strTrimToArray(str_command_2, '\n');
+                temp.icName = str_arr_icName_2;
+                temp.icCommand = str_arr_command_2;
                 commandJsonList.Add(temp);
             }
-            if (!string.IsNullOrEmpty(str_icName_3))
+            if (!(str_arr_icName_3 == null || str_arr_icName_3.Length == 0))
             {
-                temp.icName = Util.strTrimToArray(str_icName_3, ';');
-                temp.icCommand = Util.strTrimToArray(str_command_3, '\n');
+                temp.icName = str_arr_icName_3;
+                temp.icCommand = str_arr_command_3;
                 commandJsonList.Add(temp);
             }
-            FeigJson feigJsonTemp = new FeigJson(model, str_conf_protocols, str_conf_ICs, commandJsonList);
+            FeigJson feigJsonTemp = new FeigJson(model, str_arr_conf_protocols, str_arr_conf_ICs, commandJsonList);
             return feigJsonTemp;
         }
 
@@ -370,6 +378,9 @@ namespace ReaderGui
                     modelList.Remove(selectModel);
                     //readFeigJson.feigJsonList.SupportedModels = modelList.ToArray();
 
+                    List<string> availableModel_list = Util.strArrayToList(readFeigJson.feigJsonList.AvailableModels);
+                    availableModel_list.Remove(selectModel);
+                    readFeigJson.feigJsonList.AvailableModels = Util.ListToStrArray(availableModel_list);
 
                     readFeigJson.writeToFile(Form1.jsonPath);
 
@@ -384,6 +395,25 @@ namespace ReaderGui
                 
             }
 
+        }
+
+        private void buttonModify_Click(object sender, EventArgs e)
+        {
+
+            string selectModel = listBoxSelectModel.SelectedItem.ToString();
+
+            if (MessageBox.Show("Are you sure to update " + selectModel + " to file", "Notice", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                deleteFeig(selectModel);
+
+                CreateFeig(selectModel);
+                readFeigJson.feigJsonList.ReaderConfig.Add(CreateFeig(str_conf_model));
+                readFeigJson.writeToFile(Form1.jsonPath);
+
+                initFeigJson();
+                //labelModify.Text = selectModel + " is updated to file successfully";
+                toolStripStatusLabel1.Text = selectModel + " is updated to file successfully";
+            }
         }
 
         private void deleteFeig(string model)
@@ -410,44 +440,54 @@ namespace ReaderGui
 
         private void textBoxSupportedProtocols_TextChanged(object sender, EventArgs e)
         {
-            str_conf_protocols = textBoxSupportedProtocols.Text.ToString();
+            //str_conf_protocols = textBoxSupportedProtocols.Text.ToString();
         }
 
         private void textBoxSupportedICs_TextChanged(object sender, EventArgs e)
         {
-            str_conf_ICs = textBoxSupportedICs.Text.ToString();
+            //str_conf_ICs = textBoxSupportedICs.Text.ToString();
         }
 
 
 
         private void textBoxICsCommand1_TextChanged(object sender, EventArgs e)
         {
-            str_command_1 = textBoxICsCommand1.Text.ToString();
+            //str_command_1 = textBoxICsCommand1.Text.ToString();
+
+            List<string> strLines = new List<string>();
+            strLines.AddRange(textBoxICsCommand1.Lines);
+            str_arr_command_1 = strLines.ToArray();
         }
 
         private void textBoxICsCommand2_TextChanged(object sender, EventArgs e)
         {
-            str_command_2 = textBoxICsCommand2.Text.ToString();
+            //str_command_2 = textBoxICsCommand2.Text.ToString();
+            List<string> strLines = new List<string>();
+            strLines.AddRange(textBoxICsCommand2.Lines);
+            str_arr_command_2 = strLines.ToArray();
         }
 
         private void textBoxICsCommand3_TextChanged(object sender, EventArgs e)
         {
-            str_command_3 = textBoxICsCommand3.Text.ToString();
+            //str_command_3 = textBoxICsCommand3.Text.ToString();
+            List<string> strLines = new List<string>();
+            strLines.AddRange(textBoxICsCommand3.Lines);
+            str_arr_command_3 = strLines.ToArray();
         }
 
         private void textBoxICsName1_TextChanged(object sender, EventArgs e)
         {
-            str_icName_1 = textBoxICsName1.Text.ToString();
+            //str_icName_1 = textBoxICsName1.Text.ToString();
         }
 
         private void textBoxICsName2_TextChanged(object sender, EventArgs e)
         {
-            str_icName_2 = textBoxICsName2.Text.ToString();
+            //str_icName_2 = textBoxICsName2.Text.ToString();
         }
 
         private void textBoxICsName3_TextChanged(object sender, EventArgs e)
         {
-            str_icName_3 = textBoxICsName3.Text.ToString();
+            //str_icName_3 = textBoxICsName3.Text.ToString();
         }
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
@@ -503,7 +543,7 @@ namespace ReaderGui
 
             textBoxSupportedProtocols.Text = checkedProtocols;
 
-            str_conf_protocols = checkedProtocols;
+            //str_conf_protocols = checkedProtocols;
             //string checkedProd = "";
             //foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
             //{
@@ -544,7 +584,7 @@ namespace ReaderGui
 
             textBoxSupportedICs.Text = checkedICs;
 
-            str_conf_ICs = checkedICs;
+            //str_conf_ICs = checkedICs;
 
         }
 
@@ -648,15 +688,19 @@ namespace ReaderGui
             //MessageBox.Show("checkBox checked change");
             string checkedProtocols = "";
             int count = 0;
+            //string[] arr = new string[] { };
+            List<string> strList = new List<string>();
             foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
             {
                 if (item.Checked == true)
                 {
                     checkedProtocols += item.Text + ";";//checkedProd + "'" + item.Text + "',";
                     count++;
+                    strList.Add(item.Text);
                 }
 
             }
+            str_arr_conf_protocols = strList.ToArray();
             if (checkedProtocols.Length > 0)
                 checkedProtocols = checkedProtocols.Remove(checkedProtocols.Length - 1);
             checkBoxComboBoxSupportedProtocols.Text =  count.ToString()+" Selected";//checkedProd;
@@ -670,15 +714,19 @@ namespace ReaderGui
         {
             string checkedICs = "";
             int count = 0;
+            List<string> strList = new List<string>();
             foreach (var item in checkBoxComboBoxSupportedICs.CheckBoxItems)
             {
                 if (item.Checked == true)
                 {
                     checkedICs += item.Text + ";";//checkedProd + "'" + item.Text + "',";
                     count++;
+                    strList.Add(item.Text);
                 }
 
             }
+
+            str_arr_conf_ICs = strList.ToArray();
             if (checkedICs.Length > 0)
                 checkedICs = checkedICs.Remove(checkedICs.Length - 1);
             checkBoxComboBoxSupportedICs.Text = count.ToString() + " Selected";//checkedProd;
@@ -690,6 +738,7 @@ namespace ReaderGui
         {
             string checkedICsName1 = "";
             int count = 0;
+            List<string> strList = new List<string>();
             //checkBoxComboBoxICsName1.Items.AddRange(checkBoxComboBoxSupportedICs.CheckBoxItems.ToArray());
             foreach (var item in checkBoxComboBoxICsName1.CheckBoxItems)
             {
@@ -697,9 +746,11 @@ namespace ReaderGui
                 {
                     checkedICsName1 += item.Text + ";";//checkedProd + "'" + item.Text + "',";
                     count++;
+                    strList.Add(item.Text);
                 }
 
             }
+            str_arr_icName_1= strList.ToArray();
             if (checkedICsName1.Length > 0)
                 checkedICsName1 = checkedICsName1.Remove(checkedICsName1.Length - 1);
             checkBoxComboBoxICsName1.Text = count.ToString() + " Selected";//checkedProd;
@@ -711,15 +762,18 @@ namespace ReaderGui
         {
             string checkedICsName2 = "";
             int count = 0;
+            List<string> strList = new List<string>();
             foreach (var item in checkBoxComboBoxICsName2.CheckBoxItems)
             {
                 if (item.Checked == true)
                 {
                     checkedICsName2 += item.Text + ";";//checkedProd + "'" + item.Text + "',";
                     count++;
+                    strList.Add(item.Text);
                 }
 
             }
+            str_arr_icName_2 = strList.ToArray();
             if (checkedICsName2.Length > 0)
                 checkedICsName2 = checkedICsName2.Remove(checkedICsName2.Length - 1);
             checkBoxComboBoxICsName2.Text = count.ToString() + " Selected";//checkedProd;
@@ -731,6 +785,8 @@ namespace ReaderGui
         {
             string checkedICsName3 = "";
             int count = 0;
+
+            List<string> strList = new List<string>();
             foreach (var item in checkBoxComboBoxICsName3.CheckBoxItems)
             {
                 if (item.Checked == true)
@@ -738,9 +794,11 @@ namespace ReaderGui
                     checkedICsName3 += item.Text + ";";//checkedProd + "'" + item.Text + "',";
                     
                     count++;
+                    strList.Add(item.Text);
                 }
 
             }
+            str_arr_icName_3 = strList.ToArray();
             if (checkedICsName3.Length > 0)
                 checkedICsName3 = checkedICsName3.Remove(checkedICsName3.Length - 1);
             textBoxICsName3.Text = checkedICsName3;

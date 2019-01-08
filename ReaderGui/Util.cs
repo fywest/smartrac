@@ -69,6 +69,13 @@ namespace ReaderGui
             List<string> list = new List<string>(strArray);
             return list;
         }
+
+        public static string[] strArrToStrArr(string[] strArr, string str)
+        {
+            List<string> list = new List<string>(strArr);
+            list.Add(str);
+            return list.ToArray();
+        }
     }
 
 }
