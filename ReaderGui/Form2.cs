@@ -101,20 +101,7 @@ namespace ReaderGui
             comboBoxAvailableICs.Items.AddRange(readFeigJson.feigJsonList.AvailableICs);
             comboBoxAvailableICs.SelectedIndex = 0;
 
-            //listBoxSelectModel.BeginUpdate();
 
-            //if (listBoxSelectModel.Items.Count > 0)
-            //{
-            //    listBoxSelectModel.Items.Clear();
-
-            //}
-
-            //foreach (var item in readFeigJson.feigJsonList.getModels())
-            //    listBoxSelectModel.Items.Add(item);
-
-
-            //listBoxSelectModel.EndUpdate();
-            //listBoxSelectModel.SetSelected(0, true);
         }
 
         private void InitlistBoxSelectModel()
@@ -236,6 +223,49 @@ namespace ReaderGui
             return string.Join(":", str);
         }
 
+        private void contentInit()
+        {
+            //initCheckBoxComboBoxSupportedProtocols();
+            foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
+            {
+                item.Checked = false;
+            }
+            checkBoxComboBoxSupportedProtocols.Text = "Select";
+
+            //initCheckBoxComboBoxSupportedICs();
+            foreach (var item in checkBoxComboBoxSupportedICs.CheckBoxItems)
+            {
+                item.Checked = false;
+            }
+            checkBoxComboBoxSupportedICs.Text = "Select";
+
+            //initCheckBoxComboBoxICsName1();
+            //checkBoxComboBoxICsName1.Items.Clear();
+            //checkBoxComboBoxICsName2.Items.Clear();
+            //checkBoxComboBoxICsName3.Items.Clear();
+            //checkBoxComboBoxICsName1.Items.AddRange(readFeigJson.feigJsonList.AvailableICs);
+            //checkBoxComboBoxICsName2.Items.AddRange(readFeigJson.feigJsonList.AvailableICs);
+            //checkBoxComboBoxICsName3.Items.AddRange(readFeigJson.feigJsonList.AvailableICs);
+            foreach (var item in checkBoxComboBoxICsName1.CheckBoxItems)
+            {
+                item.Checked = false;
+            }
+            checkBoxComboBoxICsName1.Text = "Select";
+
+            //initCheckBoxComboBoxICsName2();
+            foreach (var item in checkBoxComboBoxICsName2.CheckBoxItems)
+            {
+                item.Checked = false;
+            }
+            checkBoxComboBoxICsName2.Text = "Select";
+
+            //initCheckBoxComboBoxICsName1();
+            foreach (var item in checkBoxComboBoxICsName3.CheckBoxItems)
+            {
+                item.Checked = false;
+            }
+            checkBoxComboBoxICsName3.Text = "Select";
+        }
         private void contentClear()
         {
 
@@ -256,6 +286,7 @@ namespace ReaderGui
             checkBoxComboBoxICsName2.Text = "";
             checkBoxComboBoxICsName3.Text = "";
 
+            
         }
 
         //private void clearText()
@@ -275,7 +306,8 @@ namespace ReaderGui
         private void buttonAdd_Click(object sender, EventArgs e)
         {
 
-
+            //contentClear();//already clear in text change
+            
             string model_temp = str_conf_model;
             
             List<string> availableModel_list =Util.strArrayToList(readFeigJson.feigJsonList.AvailableModels);
@@ -368,6 +400,7 @@ namespace ReaderGui
         {
             
             contentClear();
+            
             //labelAdd.Text = "Now adding a new one";
             buttonAdd.Enabled = false;
             str_conf_model = textBoxFeigModel.Text.ToString();
@@ -439,6 +472,7 @@ namespace ReaderGui
                 
                 toolStripStatusLabel1.Text = "Now adding a new one";
                 buttonAdd.Enabled = true;
+                contentInit();
             }
         }
 
@@ -632,41 +666,6 @@ namespace ReaderGui
 
         }
 
-        private void allItemSelected()
-        {
-            //if (checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked == true)
-            //{
-            //    foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
-            //    {
-            //        item.Checked = true;
-            //    }
-            //    checkBoxComboBoxSupportedProtocols.Text = "ALL";
-            //}
-            //else if (checkBoxComboBoxSupportedProtocols.SelectedIndex == 0)
-            //{
-            //    foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
-            //    {
-            //        item.Checked = false;
-            //    }
-            //    checkBoxComboBoxSupportedProtocols.Text = "";
-            //}
-            //else
-            //{
-            //    string checkedProd = "";
-            //    foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
-            //    {
-            //        if (item.Checked == true)
-            //        {
-            //            checkedProd = checkedProd + "'" + item.Text + "',";
-            //        }
-            //    }
-            //    if (checkedProd.Length > 0)
-            //        checkedProd = checkedProd.Remove(checkedProd.Length - 1);
-            //    checkBoxComboBoxSupportedProtocols.Text = checkedProd;
-            //}
-
-        }
-
         private void checkBoxComboBoxSupportedICs_CheckBoxCheckedChanged(object sender, EventArgs e)
         {
             string checkedICs = "";
@@ -691,6 +690,7 @@ namespace ReaderGui
         {
             string checkedICsName1 = "";
             int count = 0;
+            //checkBoxComboBoxICsName1.Items.AddRange(checkBoxComboBoxSupportedICs.CheckBoxItems.ToArray());
             foreach (var item in checkBoxComboBoxICsName1.CheckBoxItems)
             {
                 if (item.Checked == true)
@@ -748,5 +748,41 @@ namespace ReaderGui
 
             
         }
+
+        private void allItemSelected()
+        {
+            //if (checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked == true)
+            //{
+            //    foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
+            //    {
+            //        item.Checked = true;
+            //    }
+            //    checkBoxComboBoxSupportedProtocols.Text = "ALL";
+            //}
+            //else if (checkBoxComboBoxSupportedProtocols.SelectedIndex == 0)
+            //{
+            //    foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
+            //    {
+            //        item.Checked = false;
+            //    }
+            //    checkBoxComboBoxSupportedProtocols.Text = "";
+            //}
+            //else
+            //{
+            //    string checkedProd = "";
+            //    foreach (var item in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
+            //    {
+            //        if (item.Checked == true)
+            //        {
+            //            checkedProd = checkedProd + "'" + item.Text + "',";
+            //        }
+            //    }
+            //    if (checkedProd.Length > 0)
+            //        checkedProd = checkedProd.Remove(checkedProd.Length - 1);
+            //    checkBoxComboBoxSupportedProtocols.Text = checkedProd;
+            //}
+
+        }
+
     }
 }
