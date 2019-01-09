@@ -525,6 +525,7 @@ namespace ReaderGui
             
             string checkedProtocols = "";
             int count = 0;
+            List<string> strList = new List<string>();
             foreach (var checkBoxItem in checkBoxComboBoxSupportedProtocols.CheckBoxItems)
             {
                 checkBoxItem.Checked = false;
@@ -533,10 +534,11 @@ namespace ReaderGui
                     checkBoxItem.Checked = true;
                     checkedProtocols += checkBoxItem.Text + ";";
                     count++;
+                    strList.Add(checkBoxItem.Text);
                 }
 
             }
-
+            str_arr_conf_protocols = strList.ToArray();
             if (checkedProtocols.Length > 0)
                 checkedProtocols = checkedProtocols.Remove(checkedProtocols.Length - 1);
             checkBoxComboBoxSupportedProtocols.Text = count.ToString() + " Selected";//checkedProd;
@@ -566,6 +568,7 @@ namespace ReaderGui
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
             string checkedICs = "";
             int count = 0;
+            List<string> strList = new List<string>();
             foreach (var checkBoxItem in checkBoxComboBoxSupportedICs.CheckBoxItems)
             {
                 checkBoxItem.Checked = false;
@@ -574,10 +577,11 @@ namespace ReaderGui
                     checkBoxItem.Checked = true;
                     checkedICs += checkBoxItem.Text + ";";
                     count++;
+                    strList.Add(checkBoxItem.Text);
                 }
 
             }
-
+            str_arr_conf_ICs = strList.ToArray();
             if (checkedICs.Length > 0)
                 checkedICs = checkedICs.Remove(checkedICs.Length - 1);
             checkBoxComboBoxSupportedICs.Text = count.ToString() + " Selected";//checkedProd;
@@ -591,10 +595,11 @@ namespace ReaderGui
         private void initCheckBoxComboBoxICsName1()
         {
             checkBoxComboBoxICsName1.Items.Clear();
-            checkBoxComboBoxICsName1.Items.AddRange(feigJson.SupportedICs);
+            //checkBoxComboBoxICsName1.Items.AddRange(feigJson.SupportedICs);
+            checkBoxComboBoxICsName1.Items.AddRange(str_arr_conf_ICs);
             int count = 0;
             string checkedICsName1 = "";
-            foreach (var checkBoxItem in checkBoxComboBoxICsName1.CheckBoxItems)
+            foreach (var checkBoxItem in checkBoxComboBoxICsName1.CheckBoxItems.ToList())
             {
                 //checkBoxItem.Checked = false;
                 if (feigJson.SetupCommands[0].icName.Contains(checkBoxItem.Text))
@@ -617,12 +622,14 @@ namespace ReaderGui
         private void initCheckBoxComboBoxICsName2()
         {
             checkBoxComboBoxICsName2.Items.Clear();
-            checkBoxComboBoxICsName2.Items.AddRange(feigJson.SupportedICs);
+            //checkBoxComboBoxICsName2.Items.AddRange(feigJson.SupportedICs);
+            checkBoxComboBoxICsName2.Items.AddRange(str_arr_conf_ICs);
+
             //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
             int count = 0;
             string checkedICsName2 = "";
-            foreach (var checkBoxItem in checkBoxComboBoxICsName2.CheckBoxItems)
+            foreach (var checkBoxItem in checkBoxComboBoxICsName2.CheckBoxItems.ToList())
             {
 
                 if (feigJson.SetupCommands[1].icName.Contains(checkBoxItem.Text))
@@ -643,12 +650,13 @@ namespace ReaderGui
         private void initCheckBoxComboBoxICsName3()
         {
             checkBoxComboBoxICsName3.Items.Clear();
-            checkBoxComboBoxICsName3.Items.AddRange(feigJson.SupportedICs);
+            //checkBoxComboBoxICsName3.Items.AddRange(feigJson.SupportedICs);
+            checkBoxComboBoxICsName3.Items.AddRange(str_arr_conf_ICs);
             //checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Checked=true;
             //string str=checkBoxComboBoxSupportedProtocols.CheckBoxItems[0].Text;
             int count = 0;
             string checkedICsName3 = "";
-            foreach (var checkBoxItem in checkBoxComboBoxICsName3.CheckBoxItems)
+            foreach (var checkBoxItem in checkBoxComboBoxICsName3.CheckBoxItems.ToList())
             {
 
                 if (feigJson.SetupCommands[2].icName.Contains(checkBoxItem.Text))
@@ -732,15 +740,40 @@ namespace ReaderGui
             checkBoxComboBoxSupportedICs.Text = count.ToString() + " Selected";//checkedProd;
 
             textBoxSupportedICs.Text = checkedICs;
+
+            initSetupCommand();
+
         }
 
+        private void initSetupCommand()
+        {
+            checkBoxComboBoxICsName1.Items.Clear();
+            checkBoxComboBoxICsName1.Items.AddRange(str_arr_conf_ICs);
+            checkBoxComboBoxICsName1.Text = " Selected";
+            textBoxICsName1.Clear();
+
+            checkBoxComboBoxICsName2.Items.Clear();
+            checkBoxComboBoxICsName2.Items.AddRange(str_arr_conf_ICs);
+            checkBoxComboBoxICsName2.Text = " Selected";
+            textBoxICsName2.Clear();
+
+            checkBoxComboBoxICsName3.Items.Clear();
+            checkBoxComboBoxICsName3.Items.AddRange(str_arr_conf_ICs);
+            checkBoxComboBoxICsName3.Text = " Selected";
+            textBoxICsName3.Clear();
+        }
         private void checkBoxComboBoxICsName1_CheckBoxCheckedChanged(object sender, EventArgs e)
         {
+            //checkBoxComboBoxSupportedICs.CheckBoxItems.ToList();
+            //checkBoxComboBoxICsName1.CheckBoxItems.ToList();
+            //checkBoxComboBoxICsName2.CheckBoxItems.ToList()
+            //checkBoxComboBoxICsName3.CheckBoxItems.ToList()
+            //checkBoxComboBoxICsName1.Items.AddRange();
             string checkedICsName1 = "";
             int count = 0;
             List<string> strList = new List<string>();
-            //checkBoxComboBoxICsName1.Items.AddRange(checkBoxComboBoxSupportedICs.CheckBoxItems.ToArray());
-            foreach (var item in checkBoxComboBoxICsName1.CheckBoxItems)
+            
+            foreach (var item in checkBoxComboBoxICsName1.CheckBoxItems.ToList())
             {
                 if (item.Checked == true)
                 {
@@ -760,10 +793,12 @@ namespace ReaderGui
 
         private void checkBoxComboBoxICsName2_CheckBoxCheckedChanged(object sender, EventArgs e)
         {
+            
             string checkedICsName2 = "";
             int count = 0;
             List<string> strList = new List<string>();
-            foreach (var item in checkBoxComboBoxICsName2.CheckBoxItems)
+            
+            foreach (var item in checkBoxComboBoxICsName2.CheckBoxItems.ToList())
             {
                 if (item.Checked == true)
                 {
@@ -783,11 +818,13 @@ namespace ReaderGui
 
         private void checkBoxComboBoxICsName3_CheckBoxCheckedChanged(object sender, EventArgs e)
         {
+            
             string checkedICsName3 = "";
             int count = 0;
 
             List<string> strList = new List<string>();
-            foreach (var item in checkBoxComboBoxICsName3.CheckBoxItems)
+            
+            foreach (var item in checkBoxComboBoxICsName3.CheckBoxItems.ToList())
             {
                 if (item.Checked == true)
                 {
