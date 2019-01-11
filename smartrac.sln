@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smartrac", "smartrac\smartrac.csproj", "{8AD7D158-4CF7-4BF2-9159-13F0181EEEDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Command", "Command\Command.csproj", "{688F626B-C9C6-4A86-AFBB-C1BCB8C7C69E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataConverter", "DataConverter\DataConverter.csproj", "{7FE06D88-B5A6-4249-9D6A-ED2862848173}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReaderGui", "ReaderGui\ReaderGui.csproj", "{A13691DA-DB21-4150-9355-DFB1F96ECC58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8AD7D158-4CF7-4BF2-9159-13F0181EEEDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AD7D158-4CF7-4BF2-9159-13F0181EEEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AD7D158-4CF7-4BF2-9159-13F0181EEEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AD7D158-4CF7-4BF2-9159-13F0181EEEDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{688F626B-C9C6-4A86-AFBB-C1BCB8C7C69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{688F626B-C9C6-4A86-AFBB-C1BCB8C7C69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{688F626B-C9C6-4A86-AFBB-C1BCB8C7C69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{688F626B-C9C6-4A86-AFBB-C1BCB8C7C69E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FE06D88-B5A6-4249-9D6A-ED2862848173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FE06D88-B5A6-4249-9D6A-ED2862848173}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FE06D88-B5A6-4249-9D6A-ED2862848173}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FE06D88-B5A6-4249-9D6A-ED2862848173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A13691DA-DB21-4150-9355-DFB1F96ECC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13691DA-DB21-4150-9355-DFB1F96ECC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13691DA-DB21-4150-9355-DFB1F96ECC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13691DA-DB21-4150-9355-DFB1F96ECC58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,52 @@
+{
+	"model": "PR50",
+	"SupportedProtocols": [
+		"ISO14443A",
+		"ISO14443B",
+		"ISO14443A-4",
+		"SRI",
+		"Mifare Classic",
+		"MyD",
+		"ISO15693"
+	],
+	"SupportedICs": [
+		"TAG213",
+		"NTAG210",
+		"SIC43NT",
+		"NTA888"
+	],
+	"SetupCommands": [
+		{
+			"icName": [
+				"NTAG213",
+				"NTAG210"
+			],
+			"icCommand": [
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.1\tSerialBaudRate:9600|500|0|1|0#Set Baud Rate to cRIO FPGA board",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.2\tFF 00 04(CRC:CCITT:1:-1)||1000|1000|0|1|TX1(0:0)|1|RX1(0:0)#Boot Firmware",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.3\tFF 04 06 00 07 08 00 (CRC:CCITT:1:-1)||200|200|0|1|TX1(0:0)|1|RX1(0:0)# Set Baud Rate = 460800"
+			]
+		},
+		{
+			"icName": [
+				"SIC43NT"
+			],
+			"icCommand": [
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.1\tSerialBaudRate:9600|500|0|1|0#Set Baud Rate to cRIO FPGA board",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.2\tFF 00 04(CRC:CCITT:1:-1)||1000|1000|0|1|TX1(0:0)|1|RX1(0:0)#Boot Firmware",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.3\tFF 04 06 00 07 08 00 (CRC:CCITT:1:-1)||200|200|0|1|TX1(0:0)|1|RX1(0:0)# Set Baud Rate = 460800",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.4\tSerialBaudRate:460800|500|0|1|0#Set Baud Rate to cRIO FPGA board",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.5\tFF 01 97 01 (CRC:CCITT:1:-1)|FF 00 97 00 00 77 9E|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Read Program version",
+				"Product\tProduct.Reader2.SetUp.Commands.CMD.6\tFF 01 97 FF (CRC:CCITT:1:-1)|FF 00 97 00 00 77 9E|100|100|0|1|TX1(0:0)|1|RX1(0:0)#Set \"Open Region\" (Basic command)"
+			]
+		},
+		{
+			"icName": [
+				"NTA888"
+			],
+			"icCommand": [
+				"TTTT"
+			]
+		}
+	]
+}
