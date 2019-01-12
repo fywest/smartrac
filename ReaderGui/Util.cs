@@ -9,6 +9,7 @@ namespace ReaderGui
 {
     class Util
     {
+        //public static string str_feigJsonList;
 
         public static List<string> strToList(string protocols)
         {
@@ -76,6 +77,39 @@ namespace ReaderGui
             list.Add(str);
             return list.ToArray();
         }
+        public static string str_NewFeig { get; set; } = @"{
+              'ReaderManufacturer': 'FEIG',
+              'AvailableModels': [
+                'Model'
+              ],
+              'AvailableProtocols': [
+                'Protocol'
+              ],
+             'AvailableICs': [
+                'IC'
+              ],
+              'ReaderConfig': [
+                {
+                  'Model': 'Model',
+                  'SupportedProtocols': [
+                    'Protocols'
+                  ],
+                  'SupportedICs': [
+                    'ICs'
+                  ],
+                  'SetupCommands': [
+                    {
+                      'icName': [
+                        'ICs'
+                      ],
+                      'icCommand': [
+                        'ICsCommand'
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }";
     }
 
 }

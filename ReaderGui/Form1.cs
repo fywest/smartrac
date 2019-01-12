@@ -227,7 +227,7 @@ namespace ReaderGui
             {
                 Form2 form2 = new Form2(this);
                 form2.Show();
-                
+
             }
 
         }
@@ -243,14 +243,14 @@ namespace ReaderGui
                 labelReadConfigFile.Text = "Reader Config File : " + jsonPath;
             }
 
-            
+
             InitData(false);
         }
 
         public void InitData(bool isNew)
         {
             readFeigJson = new ReadFeigJson();
-            if(isNew)
+            if (isNew)
             {
                 readFeigJson.createNewJson(jsonPath);
             }
@@ -259,28 +259,22 @@ namespace ReaderGui
                 readFeigJson.readFromFile(jsonPath);//("feig.json");
             }
 
-
-            //readFeigJson.getICsProtocolsModelList();
-            //readFeigJson.feigJsonList.getModels();
-            //readFeigJson.feigJsonList.getProtocols();
-            //readFeigJson.feigJsonList.getICs();
-
             if (checkedListBoxSelectIC.Items.Count > 0)
             {
 
                 checkedListBoxSelectIC.Items.Clear();
-                
+
             }
             if (checkedListBoxSelectReader.Items.Count > 0)
             {
                 checkedListBoxSelectReader.Items.Clear();
 
             }
-            if(!string.IsNullOrEmpty(textBoxCommand.Text))
+            if (!string.IsNullOrEmpty(textBoxCommand.Text))
             {
                 textBoxCommand.Clear();
             }
-            //MessageBox.Show("form1 here");
+
             bool isEmpty = !readFeigJson.feigJsonList.ReaderConfig.Any();
             if (isEmpty)
             {
@@ -289,7 +283,6 @@ namespace ReaderGui
             else
             {
                 labelReadConfigFile.Visible = true;
-                //checkedListBoxSelectIC.Items.AddRange(readFeigJson.ICsNameList.ToArray());
                 checkedListBoxSelectIC.Items.AddRange(readFeigJson.feigJsonList.getICs().ToArray());
 
             }

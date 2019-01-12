@@ -4,7 +4,9 @@
     "CPR40",
     "CPR74",
     "CPR50",
-    "CPR88"
+    "CPR88",
+    "CPR66",
+    "CPR99"
   ],
   "AvailableProtocols": [
     "ISO14443A",
@@ -183,6 +185,77 @@
             "55",
             "66"
           ]
+        }
+      ]
+    },
+    {
+      "Model": "CPR66",
+      "SupportedProtocols": [
+        "ISO14443A",
+        "ISO14443B",
+        "ISO14443A-4"
+      ],
+      "SupportedICs": [
+        "NTAG213",
+        "NTAG210",
+        "SIC43NT",
+        "NTA888"
+      ],
+      "SetupCommands": [
+        {
+          "icName": [
+            "NTAG213"
+          ],
+          "icCommand": [
+            "11"
+          ]
+        },
+        {
+          "icName": [
+            "NTAG210"
+          ],
+          "icCommand": [
+            "22"
+          ]
+        },
+        {
+          "icName": [
+            "NTA888"
+          ],
+          "icCommand": [
+            "33"
+          ]
+        }
+      ]
+    },
+    {
+      "Model": "CPR99",
+      "SupportedProtocols": [
+        "ISO14443A"
+      ],
+      "SupportedICs": [
+        "NTAG213"
+      ],
+      "SetupCommands": [
+        {
+          "icName": [
+            "NTAG213"
+          ],
+          "icCommand": [
+            "1"
+          ]
+        },
+        {
+          "icName": [
+            "SIC43NT"
+          ],
+          "icCommand": []
+        },
+        {
+          "icName": [
+            "NTA888"
+          ],
+          "icCommand": []
         }
       ]
     }
